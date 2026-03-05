@@ -131,17 +131,39 @@ default blue_red_combine = False
 default flour = False 
 default head_floured = False
 default torso_floured = False
-default invisible = True
-
-
+default tail_floured = False
+default invisible = False
+default hmrselected = False
+default arwselected = False
 
 screen test:
+    image "combat/av good.png":
+        pos (300, 800)
+        
+
     imagebutton:
+            pos (0, 50)
             focus_mask True
-            idle "combat/test triangle base.png"
-            hover "combat/test triangle highlight.png"
+            idle "combat/combat flr base.png"
+            hover "combat/combat flr hl.png"
             action SetVariable("flour", True)
-            
+    imagebutton:
+  
+            pos (0, 350)
+            focus_mask True
+            idle "combat/combat hmr deselected.png"
+            hover "combat/combat hmr hl.png"    
+            ##selected_idle "combat/combat hmr hl.png"  
+            action SetVariable("hmrselected", True)
+
+    imagebutton:
+
+        pos (0, 650)
+        focus_mask True
+        idle "combat/combat arw base.png"
+        hover "combat/combat arw hl.png"    
+        ##selected_idle "combat/combat hmr hl.png"  
+        action SetVariable("arwselected", True)
 
 
     imagebutton:
@@ -191,16 +213,24 @@ screen test:
 
     imagebutton:
             focus_mask True
-            action NullAction()
-            if invisible == True:
+            ##action NullAction()
+            if invisible == False:
+                if tail_floured == True:
+                    idle "combat/paragon tail flour.png"
+                    hover "combat/paragon tail flour hl.png"
+                else:
+                    idle "combat/paragon tail base.png"
+                    hover "combat/paragon tail base hl.png"
+            else:
                 idle "combat/paragon tail invis.png"
                 hover "combat/paragon tail invis hl.png"
                 selected_idle "combat/paragon tail invis hl.png"
             ## action ToggleVariable("red_btn_selected", True, False)
-            else: 
-                idle "combat/paragon tail base.png"
-                hover "combat/paragon tail base hl.png"
-                selected_idle "combat/paragon tail base hl.png"  
+        
+            if flour == True:
+                action [SetVariable("invisible", False), SetVariable("tail_floured", True)]
+            else:
+                action NullAction()
          ##   selected(red_btn_selected)
          ## if blue_btn_selected == True:
                 
