@@ -135,10 +135,12 @@ default tail_floured = False
 default invisible = False
 default hmrselected = False
 default arwselected = False
+default tailhmred = False
 
 screen test:
+    add Solid("#000")
     image "combat/av good.png":
-        pos (300, 800)
+        pos (1000, 800)
         
 
     imagebutton:
@@ -151,7 +153,7 @@ screen test:
   
             pos (0, 350)
             focus_mask True
-            idle "combat/combat hmr deselected.png"
+            idle "combat/combat hmr base.png"
             hover "combat/combat hmr hl.png"    
             ##selected_idle "combat/combat hmr hl.png"  
             action SetVariable("hmrselected", True)
@@ -174,6 +176,7 @@ screen test:
                 idle "combat/paragon head flour.png"
                 hover "combat/paragon head flour hl.png"
                # selected_idle "combat/paragon head flour hl.png"
+               
             else:
                 idle "combat/paragon head base.png"
                 hover "combat/paragon head base hl.png"
@@ -218,6 +221,9 @@ screen test:
                 if tail_floured == True:
                     idle "combat/paragon tail flour.png"
                     hover "combat/paragon tail flour hl.png"
+                    if tailhmred == True:
+                        idle "combat/paragon tail injured.png"
+                        hover "combat/paragon tail injured hl.png"
                 else:
                     idle "combat/paragon tail base.png"
                     hover "combat/paragon tail base hl.png"
@@ -226,11 +232,17 @@ screen test:
                 hover "combat/paragon tail invis hl.png"
                 selected_idle "combat/paragon tail invis hl.png"
             ## action ToggleVariable("red_btn_selected", True, False)
-        
+            action NullAction()
             if flour == True:
                 action [SetVariable("invisible", False), SetVariable("tail_floured", True)]
-            else:
-                action NullAction()
+            if hmrselected == True and tail_floured == True:
+                action [SetVariable("tailhmred", True)]
+
+                
+            
+          
+           ## else:
+             ##   action NullAction()
          ##   selected(red_btn_selected)
          ## if blue_btn_selected == True:
                 
@@ -2327,12 +2339,14 @@ label wake_vera:
         ab "Good with me, just give me a call when you're done."
         show vera neutralflipped
         vl "Right on."
+        hide vera
         "With that, she scampers off."
         "I'm left, relatively, on my lonesome."
-        "Thinking on it, when {i}was{/i} the last time I spent more than a few hours without Vera over the last few weeks."
+        "Thinking on it, when {i}was{/i} the last time I spent more than a few hours without Vera over the last few weeks?"
         "We've been traveling in close quarters and have stuck to power in numbers."
         "A break would be good-Vera probably feels the same."
-        "'Break' is a bit of an exaggheration, I'm "
+        "'Break' is a bit of an exaggheration, I'm within five minutes of her."
+        
 
             
 
