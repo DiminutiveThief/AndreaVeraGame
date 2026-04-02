@@ -2532,13 +2532,92 @@ label wake_vera:
             "Would it have been so hard for him to get his ass down here to give it a once-maybe even a twice over?"
             "Whatever. I doubt this one's gonna be too rough to handle."
             "And it's kinda nice to be back in action-properly." 
-            "Bar-guy didn't count. Paragons are a lot less tedious than humans, I've learned."
-            "There's not as much {i}mess{/i}going on with how they act."
+            "We've been stuck in stasis over the last few weeks."
+            "Bar-guy didn't count. There was too much {i}mess{/i} with him, right till the end."
             "It doesn't feel ballsy enough to stay in its hunting ground too long, so I stick to the outside of the shopping center."
-            "There isn't much of anything, "
+            "This place is beginning to die. It's not super obvious-just a few signs declaring closing sales and one too many empty lots-but when you see it, you can't unsee it."
+            "It's a pretty solid choice to find folks that won't be missed. Dunno if our guy's smart enough to think of that, though."
+            "We didn't get much about the lady that went missing. If they found anything of her's, they didn't mention it in the news articles."
+            "Could be that the cops just haven't disclosed all the info."
+            "I'm not exactly sure what I'm looking for it's more of a 'I'll know it when I see it' deal."
+            "Paragons are pretty finnicky like that."
+            "Hard not to let my mind wander with the aimlessness, though."
+            menu thinking:
+                "Think about Andrea":
+                    jump think_andrea
+                "Think about bar-guy":
+                    jump think_barguy
+                "Think about the road ahead.":
+                    jump think_roadahead
+                "Keep to the here and now.":
+                    jump hereandnow
 
+        label think_andrea:
+            "I hope the folks here actually give Andrea something to work with."
+        "It sucks to pull teeth and then find all of them are...cavities."
+        "Filled with cavities. Something like that."
+        "I'm sure she's happy I'm out of her hair, at least for a little while."
+        "She'd let things go pretty easily this morning, but that doesn't always mean much coming from her."
+        "She's real good at biting her tongue."
+        "It's probably for the best. We have enough going on without holding grudges."
+        "Besides, she can hate me all she wants, as long as she doesn't lose track of why we're here."
+        jump thinking
 
+        label think_barguy:
+            "{i}Fucking bar-guy{/i}"
+        "He should've gone down easy."
+        "I'd considered trying to chat him up, but that would've definitely drawn too many eyes."
+        "I wound up hedging my bets on him being the type to get piss-drunk-college-ish age, shitty letter jacket, just a little too eager-and it'd paid off."
+        "I followed him for ten blocks, maybe, and he didn't have a clue."
+        "Not a fucking thought in his stupid little head till I got him right in the ribs."
+        "He could've just left it there, but humans are real bad at just giving up." 
+        "Nah, he screamed. Tried to clock me in the face."
+        "Didn't work, but it meant I had to jam a crossbow bolt in his throat and hope they'd do their {i}thing{/i} enough to cauterize it."
+        "I don't wanna think about what would've happened if they didn't."
+        "{i}Messy, messy, messy.{i}"
+        "I'll keep it in mind for next time."
+        "Wouldn't hurt if Andrea did her part in it, too."
+        jump thinking
 
+        label think_roadahead:
+            "So, we find this one, then what next?"
+        "It hinges on Dominic having anything {i}useful{/i} to tell us."
+        "Sloane seems sure, but Sloane's never second guessed herself in her life."
+        "I don't have my hopes up."
+        "Not like he'll have some magic fix for Andrea. At best, we're getting another bread crumb."
+        "I'm sure she knows that too."
+        "We're not finding anything definitive before Burn comes calling again."
+        "That, I'm sure of."
+        jump thinking
+
+        label hereandnow:
+            "That's enough ruminating."
+            "Eye on the prize. It already feels like I'm being absorbed by the vague suburban malaise in the air."
+            "The parking lot itself doesn't have signs of anything, so I head to the thin tree line surrounding it."
+        "Something about it pisses me off. Like it's reeeeally trying to convince you there's any life to this place."
+        "It better be worth my while."
+        "I take it slow, keeping close to the ground."
+        "Maybe there's a conspicuous burrow, or something."
+        menu check_treeline:
+            "Check the trees.":
+                jump check_trees:
+            "Check the mulch.":
+                jump check_mulch
+            "Eat one of the leaves.":
+                jump eat_leaf
+
+        label check_trees:
+            "The trees aren't tall enough to provide much cover."
+            "And there's no scratch marks or anything in the bark."
+            "Not there."
+            jump check_treeline
+
+        label check_mulch:
+
+        label eat_leaf:
+            "I've never willingly tasted a Paragon, but I've been in the game long enough to accidentally get mouthfuls of stuff I probably shouldn't."
+            "I'd recognize it."
+            "I grab a handful of leaves and shove them in my mouth."
 
             
 
