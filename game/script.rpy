@@ -11,6 +11,7 @@ define sl =  Character("Sloane", callback = name_callback, cb_name = "sloane", c
 define w =  Character("Waiter")
 define unknown =  Character("Burn", callback = name_callback, cb_name = "??", color="E0DEDE")
 define dm = Character("Dominic")
+define tn = Character("Teen")
 image vera happy = At('testvera', sprite_highlight('vera'))
 image andrea happy = At('testandrea', sprite_highlight('andrea'))
 define al = Character("Alex")
@@ -1501,7 +1502,7 @@ label wake_vera:
     label autopsy:
         "It's a scan of an autopsy. It says its from the day before yesterday."
         "It gives the details of one Robin Clarke: Male, 35 years old, six feet."
-        "It says he was found dead in the bathroom of his home by his wife."
+        "It says he was found dead by the side of the road, around the same area."
         "Body was mangled significantly and found in a state of-quote-partial dissolution."
         "The notes mention that it was covered in cuts reminiscent of bite marks, but further testing would be needed to match them to any specific species."
         jump evidence
@@ -2336,17 +2337,208 @@ label wake_vera:
         vl "I think talking to Sloane drained me for the last day or two."
         "That's a surprise. It's not often that Vera latches onto something for so long."
         "Grudge or not."
-        ab "Good with me, just give me a call when you're done."
+        ab "Yeah, just give me a call when you're done."
         show vera neutralflipped
         vl "Right on."
         hide vera
         "With that, she scampers off."
         "I'm left, relatively, on my lonesome."
         "Thinking on it, when {i}was{/i} the last time I spent more than a few hours without Vera over the last few weeks?"
-        "We've been traveling in close quarters and have stuck to power in numbers."
+        "We've been traveling in pretty close quarters."
         "A break would be good-Vera probably feels the same."
-        "'Break' is a bit of an exaggheration, I'm within five minutes of her."
+        "'Break' is a bit of an exaggheration, I'm within five minutes of her and it's not really down time."
+        "But, I'm alone in my thoughts, for better or worse."
+        "Better find something useful to fill my time with."
+        "Vera said she wanted to handle more on the ground work, and wants me to see if anyone's a witness."
+        "It's probably for the best I act as the face here. Doesn't mean I have to limit myself to it though."
+        "So, what first?"
+        menu:
+            "Flag down a strip-mall-goer":
+                jump flagdown
+            "Look around":
+                jump lookaround 
+
+
+        label flagdown:
+            "Time to flex those people skills."
+            "I'm excited to talk to someone who's somewhere in the field of normal, even if it means having to tiptoe around some stuff."
+            "My best bet is one of the workers here."
+            "The place in closest proximity is the UuaUua's."
+            "It's a rest-stop-slash-gas-station. It's been a while since I've been to one."
+            "Has good hoagies."
+            menu:
+                "Approach the UuaUua's.":
+                    jump UuaUuas
+
+        label UuaUuas:
+            scene uuauua
+            show andrea body neutral at left
+            ##sfx jingle
+            "It's identical to every other one I've been to."
+            "Bunch of shelves, food-type area near the back."
+            "It's manned by a beleagured, hooded-eye teenager."
+            "I wince internally, hope I don't make things worse for too long."
+            "I wait for them to finish talking to the customer in front of me."
+            ab "Hey, uh, do you have a minute?"
+            #show employee
+            tn "Hi."
+            "..."
+            tn "Yes."
+            "They don't look mad, just disappointed."
+            show andrea body happy
+            ab "Thank you. I'm just doing an assignment for my...journalism, course."
+            "Yeah, that sounds about right."    
+            ab "It's about the disappearence earlier. Have you heard about it?"
+            tn "Oh..."
+            tn "Yeah, I think."
+            tn "It's the lady that got, like, murdered, right?"
+            show andrea body stern
+            ab "I don't think she was murdered, it's still a disappearence for now."
+            ab "At least I'm pretty sure. I haven't looked into it much."
+            tn "Ohh...right."
+            tn "Yeah."
+            tn "It was another dude who died."
+            "She already knows about that, cool. I won't have to loop it in."
+            "I nod."
+            show andrea body neutral
+            ab "I heard about that too, I'm kinda curious. But, I'm looking into Ms. Planchart's-"
+            tn "Who?"
+            ab "The woman that went missing."
+            tn "Ohhh...okay."
+            ab "I'm looking into her disappearence. I was wondering if you knew anything. Like, did you talk to her?"
+            ab "See anything weird around?"
+            "It's hard to navigate a case with more normal folks."
+            "I have to talk around the murder monster bits. You can't lead with anything specific."
+            tn "I don't think I've met her. I mean, I dunno. I don't really ask people's names."
+            tn "And weird? Weird, how?"
+            "My point exactly. I have to nudge towards the question, without stepping over the threshold into sounding like a freak."
+            $ askedanimal = False
+            $ askedmess = False
+            label teengirl:
+                if askedanimal == True and askedmess == True:
+                    jump afterteen
+            menu:
         
+                "Weird how?"
+
+                "Animals" if askedanimal == False :
+                    jump weirdanimals
+                "Messes." if askedmess == False:
+                    jump weirdmesses
+                
+
+            label weirdanimals:
+                $ askedanimal = True
+                show andrea body neutral
+                
+                if askedmess == True:
+                    ab "One more thing."
+                    ab "Has there been any reports of animals around?"
+                ab "We're thinking it could be-or there's a theory that it could be some sort of animal attack."
+                tn "Like a raccoon?"
+                show andrea body stern
+                ab "I was thinking more like a coyote."
+                ab "...Have you seen any particularly big raccoons around?"
+                tn "No."
+                ab "So, no animals?"
+                tn "No."
+                "..."
+                "...."
+                tn "Wait, yeah-sort of. Does it count if I've only heard of one."
+
+                ab "Sure." 
+                tn "I think Tammy, Tammy's my manager, she's not in, 'cause she's having a kid."
+                tn "Anyway. Tammy said that the nightshift janitor told {i}her{/i} that he saw something while he was taking out the trash."
+                tn "I think it was like...in the grass."
+                tn "It was...watching him? Or he thought it was."
+                tn "I dunno if he was making it up. He's, like....old. I think he's thirty, or something."
+                ab "Mhm."
+                "Some part of me withers away."
+                tn "So, he went inside pretty quick. But he said-or Tammy said, that he said-it was long."
+                ab "Long?"
+                tn "{i}Yeah.{/i}"
+                "She makes a face."
+                tn "Hot dog style."
+                "That's something, at least. Even if it's through several layers removed."
+                "It shows up at night and it's 'long'."
+                tn "S'that all?"
+                jump teengirl
+
+            label weirdmesses:
+                $ askedmess = True
+                if askedanimal == True:
+                    ab "One more thing."
+                    ab "Any weird messes or debris around?"
+                ab "Has the garbage been rifled through."
+                ab "Or some kind of substances?"
+                tn "'Substances'-like-"
+                "She leans a little closer."
+                tn "Drugs? Are you a cop?"
+                tn "'Cause you have to tell me if you're a cop."
+                show andrea body stern
+                ab "No. Not a cop."
+                "Do I look like a cop?"
+                show andrea body happy
+                ab "Again, just doing a school project."
+                tn "Oh...okay..."
+                "She leans away."
+                "At least she drops it quickly."
+                ab "I mean just, weird spills. Powder, that stuff."
+                show andrea body neutral
+                tn "I think the garbage has been fine."
+                tn "But I think Tammy-that's my manager-"
+                if askedanimal == True:
+                    ab "Yup, you said."
+                    tn "Oh, right."
+                tn "Tammy said that there was some kind of...oil spill? Dunno, some kind of thing...spilled."
+                tn "It stained the pavement near the back exit."
+                tn "She was annoyed, 'cause we might need to get it painted."
+                ab "You think I could check it out?"
+                tn "I mean. I can't stop you from going in the back."
+                tn "It's not, like. Blood."
+                ab "That's good."
+                "Some kind of weird stain. It could be nothing, but sometimes Paragon's have biological...weirdness, to them."
+                "From what I get, it's not really analagous to proper animals."
+                "They don't even need the seven essential capacities for life. It's messed up."
+                tn "That it?"
+                jump teengirl
+                
+            label afterteen:
+                ab "Yup, that's it for me."
+                ab "Appreciate the help, I've been really stressed for this assignment."
+                show andrea body happy
+                ab "It, uh, means a lot."
+                tn "Alright."
+                "..."
+                "...."
+                tn "Do you wanna buy something?"
+                "Y'know, yeah, I do."
+                "I deserve it."
+                "Again, good hoagies."
+                "I'll give Vera a call to see if she wants something, too."
+                "Hopefully she's been pulling her weight enough to earn it."
+                "I pull my phone out."
+                "{i}Beep, boop, beep, boop, ring-ring.{/i}"
+            scene outside with Fade(0.5, 0.5, 1.0)
+            show vera body shirt3 neutral2 at right
+            "I watch Andrea walk off further into the strip mall."
+            "I'm glad she agreed to do the interview-y portion of investigating."   
+            "It's a pain in the ass trying to pry info out of people."
+            "They always pry back, or start freaking out, or get pissy."
+            "Especially if they aren't in the loop."
+            "'Cause they have some kinda sense that you're not telling them the whole truth, but can't pin it."
+            "Defenses go up. And now you're playing deescalator."
+            "Not that my part in this is gonna be a cakewalk, either. The fucking wacko didn't give us much to work with in terms of where the Paragon could be buckling down."
+            "Would it have been so hard for him to get his ass down here to give it a once-maybe even a twice over?"
+            "Whatever. I doubt this one's gonna be too rough to handle."
+            "And it's kinda nice to be back in action-properly." 
+            "Bar-guy didn't count. Paragons are a lot less tedious than humans, I've learned."
+            "There's not as much {i}mess{/i}going on with how they act."
+            "It doesn't feel ballsy enough to stay in its hunting ground too long, so I stick to the outside of the shopping center."
+            "There isn't much of anything, "
+
+
+
 
             
 
