@@ -2519,8 +2519,9 @@ label wake_vera:
                 "Hopefully she's been pulling her weight enough to earn it."
                 "I pull my phone out."
                 "{i}Beep, boop, beep, boop, ring-ring.{/i}"
+        label switch_vera_pov:
             scene outside with Fade(0.5, 0.5, 1.0)
-            show vera body shirt3 neutral2 at right
+            show vera body shirt3 neutral2 at center
             "I watch Andrea walk off further into the strip mall."
             "I'm glad she agreed to do the interview-y portion of investigating."   
             "It's a pain in the ass trying to pry info out of people."
@@ -2567,13 +2568,13 @@ label wake_vera:
             "{i}Fucking bar-guy{/i}"
         "He should've gone down easy."
         "I'd considered trying to chat him up, but that would've definitely drawn too many eyes."
-        "I wound up hedging my bets on him being the type to get piss-drunk-college-ish age, shitty letter jacket, just a little too eager-and it'd paid off."
+        "I wound up hedging my bets on him being the type to get piss-drunk-college-ish age, shitty leather jacket, just a little too eager-and it'd paid off."
         "I followed him for ten blocks, maybe, and he didn't have a clue."
         "Not a fucking thought in his stupid little head till I got him right in the ribs."
         "He could've just left it there, but humans are real bad at just giving up." 
         "Nah, he screamed. Tried to clock me in the face."
-        "Didn't work, but it meant I had to jam a crossbow bolt in his throat and hope they'd do their {i}thing{/i} enough to cauterize it."
-        "I don't wanna think about what would've happened if they didn't."
+        "Didn't work, but it meant I had to jam a crossbow bolt in his throat and hope it'd do its {i}thing{/i} enough to cauterize it."
+        "I don't wanna think about what would've happened if it didn't."
         "{i}Messy, messy, messy.{i}"
         "I'll keep it in mind for next time."
         "Wouldn't hurt if Andrea did her part in it, too."
@@ -2594,13 +2595,13 @@ label wake_vera:
             "That's enough ruminating."
             "Eye on the prize. It already feels like I'm being absorbed by the vague suburban malaise in the air."
             "The parking lot itself doesn't have signs of anything, so I head to the thin tree line surrounding it."
-        "Something about it pisses me off. Like it's reeeeally trying to convince you there's any life to this place."
+        "Something about it pisses me off. Like it's reeeeally trying to convince you there's any life to it."
         "It better be worth my while."
         "I take it slow, keeping close to the ground."
         "Maybe there's a conspicuous burrow, or something."
         menu check_treeline:
             "Check the trees.":
-                jump check_trees:
+                jump check_trees
             "Check the mulch.":
                 jump check_mulch
             "Eat one of the leaves.":
@@ -2612,16 +2613,97 @@ label wake_vera:
             "Not there."
             jump check_treeline
 
-        label check_mulch:
+       
+
 
         label eat_leaf:
             "I've never willingly tasted a Paragon, but I've been in the game long enough to accidentally get mouthfuls of stuff I probably shouldn't."
             "I'd recognize it."
             "I grab a handful of leaves and shove them in my mouth."
+            "It takes a couple of chews of wet, pulpy mush before I confirm there's nothing off about it."
+            "Before I can think better of it, I swallow it."
+            "It's not the glossy, spiky kind, so it's probably fine."
+            "So, leaves are normal."
+            jump check_treeline
 
-            
 
-
+        label check_mulch:
+            "I crouch low and begin rifling through the mulch."
+        "It's the sneaky kind so maybe it, like, burrows?"
+        "Or just stays close to the ground, that's more likely."
+        "{i}Squelch.{/i}"
+        "My hand catches on something sticky."
+        "I gingerly pull it out and find that there's some sort of weird, chunky substance clinging to it."
+        "I inspect it in the sun."
+        "It's transluscent, with this purple-ish sheen."
+        show vera body shirt3 annoyed at center
+        vl "Fuck!"
+        "There's a bizarre moment where I think it might've bitten me. But, no, it's {i}burning{/i}."
+        "It's like I got lemon juice poured on a cut."
+        "I pull my sleeve over my hand and tear it off before it can get any worse."
+        "Shit, I need somewhere to put it."
+        "I awkwardly fumble my free hand along the litter on the ground."
+        vl "Gotcha."
+        "It finds purchase on what I realize is an empty soda bottle, which I grab onto, then jam whatever evil-goo-thing this is into it."
+        "It takes some manuevering with sleeves over both my hands, but I manage to before it can do any more damage."
+        "At least to my skin. The tips of my sleeves have little holes burnt into them."
+        "Ugh. Later Vera problem."
+        "I examine the little bastard through the plastic."
+        "It's more solid than I first gave it credit for."
+        "The slime  is more of an exterior (exoskeleton? Not really, 'cause it's not hard) coat."
+        "It surrounds a center of meat, that looks a little like freezer burnt steak."
+        show vera body shirt3 neutral at center
+        "{i}Nice{/i}. I've actually got something good here."
+        "There isn't anyway to close the bottle, so I just scrunch in the top so it creates some sort of seal."
+        "{i}Ring, ring.{/i}"
+        "A buzzing from my pocket interrupts my thoughts."
+        "Right on time. I answer it."
+        vl "Hey Andy."
+        ab "Hey, what's up? How's searching going?"
+        "Her voice is low, just above a whisper."
+        "Might be trying to keep folks from overhearing."
+        show vera body shirt3 neutral at center      
+        vl "Pretty awesome, actually."
+        ab "Oh?"
+        "It's nice to hear the anticipation in her voice."
+        vl "Yeah, think I found a piece of it. Donovan is probably gonna shit himself."
+        ab "Ew-...do you mean Dominic?"
+        vl "Yeah, him too."
+        ab "Still gross, dude. Anyway."
+        ab "The chic at the UaUa's mentioned some weird stuff that's been happening nearby."
+        ab "I'm not sure if it's one hundred percent Paragon related, but it checks out. You might have a better idea than me, though."
+        vl "We should meet back up, where are you now?"
+        "I sometimes forget she's technically only been in the game for a year or so. She's taken to this life pretty well."
+        "Like a flame, even."
+        ab "The UaUa's, I'm gonna circle around back-apparently, there's some kind of weird stain."
+        vl "Ooo, scary. Hey-can you get me a hoagie?"
+        "Guess crawling around the parking lot worked up an appetite."
+        ab "Mmm. Maybe."
+        ab "If you ask nicely."
+        show vera body shirt3 angry at center
+        vl "Really? What if I'm {i}starving{/i}?"
+        vl "And I never get my food because you're being too pedantic?"
+        ab "Do you even know what pedantic means?"
+        vl "Now you're insulting me? Insulting the intelligence of a dying woman?"
+        vl "This is terrible. {i}You're{/i} terrible."
+        ab "So, no please?"
+        vl "Ugh."
+        vl "..."
+        vl "..."
+        vl "Can you please get me a hoagie?"
+        show vera body shirt3 annoyed at center
+        ab "I'll think about it. See ya."
+        "She hangs up before I can get a response in."
+        "{i}Ugh{/i}. Better head over to see if her better nature has won over."
+        scene back_UaUa with Fade(0.5, 0.5, 1.0)
+        show andrea body neutral at right
+        "It takes a few minutes for Vera to get around the back."
+        "I await her with hoagies in hand. I'll let her off easy this time."
+        show vera bodyflip shirt3flip happyflipped at left
+        vl "Aww, you shouldn't have"
+        ab "I {i}shouldn't{/i}."
+        "I hand her's over. No lettuce, extra cheese, concerning amount of onions."
+        
         
 
         
