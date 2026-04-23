@@ -2158,8 +2158,8 @@ label wake_vera:
         "They range from 'some sort of goo thing' to 'big monster the size of a small monster'."
         "I can piece it together well enough though: based on the injuries, it might emit or have a second skin of some sort of toxic-ish material."
         "The last known location of the victim, was somewhere in a town nearby."
-        "It's not that bulky and it seems to have an ambush hunting style. It could try and be reforming."
-        "That last part's the most concerning one."
+        "It's not that bulky and it seems to have an ambush hunting style."
+        "So, either it's  naturally on the smaller side, or it's trying to reform."
         dm "Make sense?"
         "He leans over, just from the side of us."
         show vera neutral2
@@ -2695,16 +2695,81 @@ label wake_vera:
         ab "I'll think about it. See ya."
         "She hangs up before I can get a response in."
         "{i}Ugh{/i}. Better head over to see if her better nature has won over."
-        scene back_UaUa with Fade(0.5, 0.5, 1.0)
+        label reuniteandy:
+            scene back_UaUa with Fade(0.5, 0.5, 1.0)
         show andrea body neutral at right
         "It takes a few minutes for Vera to get around the back."
         "I await her with hoagies in hand. I'll let her off easy this time."
         show vera bodyflip shirt3flip happyflipped at left
         vl "Aww, you shouldn't have"
-        ab "I {i}shouldn't{/i}."
+        show vera neutralflipped
+        show andrea body happy
+        ab "Aww, I {i}shouldn't{/i}."
+        show andrea neutral
         "I hand her's over. No lettuce, extra cheese, concerning amount of onions."
+        "Mine's clearly the superior one, my main indulgence is olives."
+        ab "So, what'd you find?"
+        "She pauses midway through unwrapping her food to dig around in her pocket."
+        vl "Check it."
+        "I oblige."
+        "It's some sort of slimy, iridescent substance."
+        "Safe bet that it isn't natural."   
+        "I wrack my brain for possibilities."   
+        ab "Do you think this is part of it? Like, it got snagged off."
+        vl "Mmm-"
+        "She puts a finger up, indicating she'll respond after swallowing her mouthful."
+        vl "That's my best guess. I think this part is too dinky to reform all the way."
+        vl "Probably just got caught on a tree branch, this thing seems all...gelatinous and shit."
+        ab "It matches up with what Dominic said, he thinks its trying to piece itself back together."
+        "There's not a lot of universal truths between Paragons. This is an exception."
+        "They're really bad at dying. Even if you chop them up, if there's still enough of their bodily functions left, they try and stick themselves back together."
+        "What actually counts for 'bodily functions' varies. There's an annoying trial and error to it."
+        vl "Maybe one of its victims put up a fight, or maybe it's just real clumsy."
+        vl "Aaanyway, my guess is it retreated somewhere near the outskirts of the lot."
+        vl "What about you-what am I supposed to be looking at?"
+        ab "Here."
+        "I gesture down."
+        "It's like the cashier had said. There's a set of white splotches along the asphalt. The contrast is stark, like its' been acid washed."
+        ab "She also said that the janitor saw...something, when taking out the trash."
+        vl "{i}Nice{/i}, so we have some sort of trail."
+        "She makes a vague gesture from where I assume she went, to back here."
+        vl "Definitely goo-ey, definitely acidy-"
+        ab "Acidic."
+        vl "Yeah, that."
+        "This is less treading new ground and more confirming what we already suspected."
+        "It's still reassuring, and having some possible ambush path is good."
+        vl "Any idea why the janitor guy didn't get attacked?"
+        ab "No clue. Could be a preference of victim."
+        show vera neutral2flipped
+        vl "Likes 'em young."
+        "She nods her head sagely."
+        "I don't know where she got the idea of the hypothetical janitor being old."
+        vl "So...now we kill it, yeah?"
+        "Vera leans back against the wall and takes another bite of hoagie."
+        "She's never {i}really{/i} still, but I can tell when something has her extra buzzed."
+        ab "Once we get a more solid plan."
+        show vera annoyedflip
+        vl "I know, that's with the territory."
+        vl "There's not a lot {i}to{/i} plan. We either track it down or wait it out."
+        "I weigh my options."
+        ab "My votes on waiting. I don't think it's a good idea to fight it on it's own turf."
+        ab "We can stakeout here."
+        "Stakeouts are nice. They're a classic."
+        "It's a familiar kind of 'boring'. The building dread that comes with it isn't too bad to stomach."
+        vl "We're probably gonna have to stay up for a {i}while{/i}. This things a real night owl."
+        vl "Plenty of time to take in the scenery, right?"
+        ab "Yeah, get a real whiff of that strip mall air."
+        "I can't decide whether these places freak me out, or kind of comfort me."
+        "No matter where I go, it's the exact same."
+        "Just swap out the UaUa's for whatever the local convenience-store-rest-stop is local to the area."
+        "On one hand, it's uncanny. On the other, it's reliable."
+        vl "Least the food is good-hey, are you gonna try your's?"
+        ab "Oh shit, yeah."
+        "I take a bite of mine. She's right, pretty good. There's a good mix of flavors without being too cluttered."
+        vl "The next place is on me."
         
-        
+
+
 
         
         label combat:
