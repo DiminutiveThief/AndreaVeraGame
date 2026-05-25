@@ -136,13 +136,16 @@ default tail_floured = False
 default invisible = True
 default hmrselected = False
 default arwselected = False
+default something_selected = False
 default tailhmred = False
 default torsohmred = False
-
-screen test:
-    add Solid("#000")
-    image "combat/av good.png":
-        pos (1000, 800)
+default andrea_vera = "combat/av good.png"
+screen combat:
+   
+    add "combat/combat bg grayscale.png"
+    add andrea_vera:
+        pos (1200, 800)
+    
         
 
     imagebutton:
@@ -150,15 +153,18 @@ screen test:
             focus_mask True
             idle "combat/combat flr base.png"
             hover "combat/combat flr hl.png"
-            action SetVariable("flour", True)
+            selected_idle "combat/combat flr hl.png"
+            selected (flour == True)
+            action [ToggleVariable("flour"), SetVariable("arwselected", False), SetVariable("hmrselected", False), ToggleVariable ("something_selected")]
     imagebutton:
   
             pos (0, 350)
             focus_mask True
             idle "combat/combat hmr base.png"
             hover "combat/combat hmr hl.png"    
-            ##selected_idle "combat/combat hmr hl.png"  
-            action SetVariable("hmrselected", True)
+            selected_idle "combat/combat hmr hl.png"  
+            action [ToggleVariable("hmrselected"), SetVariable("arwselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
+            selected (hmrselected == True)
 
     imagebutton:
 
@@ -166,55 +172,63 @@ screen test:
         focus_mask True
         idle "combat/combat arw base.png"
         hover "combat/combat arw hl.png"    
-        ##selected_idle "combat/combat hmr hl.png"  
-        action SetVariable("arwselected", True)
+        selected_idle "combat/combat arw hl.png"  
+        action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
+        selected (arwselected == True)
+
+
 
 
     imagebutton:
         focus_mask True
     
         if invisible == False:
-            if head_floured == True:
-                idle "combat/paragon head flour.png"
-                hover "combat/paragon head flour hl.png"
+           # if head_floured == True:
+            #    idle "combat/paragon head flour.png"
+             #   hover "combat/paragon head flour hl.png"
                # selected_idle "combat/paragon head flour hl.png"
                
-            else:
-                idle "combat/paragon head base.png"
-                hover "combat/paragon head base hl.png"
+           # else:
+            idle "combat/paragon head base.png"
+            hover "combat/paragon head base hl.png"
                # selected_idle "combat/paragon head base hl.png"
         else: 
             idle "combat/paragon head invisible.png"
             hover "combat/paragon head invis hl.png"
            # selected_idle "combat/paragon head invis hl.png"
-           
-        if flour == True:
-            action [SetVariable("invisible", False), SetVariable("head_floured", True), Jump("correct")]
-        else:
+        if something_selected == True:   
+            if flour == True:
+                action [SetVariable("invisible", False), SetVariable("head_floured", True), Jump("correct")]
+            else:
+                action Jump("wrong1")
+        else: 
             action NullAction()
     imagebutton:
         focus_mask True
         if invisible == False:
-            if torso_floured == True:
-                idle "combat/paragon torso flour.png"
-                hover "combat/paragon torso flour hl.png"
+           # if torso_floured == True:
+            #    idle "combat/paragon torso flour.png"
+             #   hover "combat/paragon torso flour hl.png"
               #  selected_idle "combat/paragon torso flour hl.png"
             
-            else:
-                idle "combat/paragon torso base.png"
-                hover "combat/paragon torso base hl.png"
-               # selected_idle "combat/paragon torso base hl.png"
+           # else:
+            idle "combat/paragon torso base.png"
+            hover "combat/paragon torso base hl.png"
+            # selected_idle "combat/paragon torso base hl.png"
         else:
             idle "combat/paragon torso invis.png"
             hover "combat/paragon torso invis hl.png"
            # selected_idle "combat/paragon invis hl.png"
         ##action ToggleVariable("blue_btn_selected", True,False)
         ##selected(blue_btn_selected)
-        action NullAction()
-        if flour == True:
-            action [SetVariable("invisible", False), SetVariable("torso_floured", True), Jump("correct")]
-        if hmrselected == True and torso_floured == True:
-                action [SetVariable("torsohmred", True)]
+        
+        if something_selected == True:   
+            if flour == True:
+                action [SetVariable("invisible", False), SetVariable("head_floured", True), Jump("correct")]
+            else:
+                action Jump("wrong1")
+        else: 
+            action NullAction()
         #if green_btn_selected:
             #       action Jump("incorrect")    
 
@@ -222,25 +236,26 @@ screen test:
             focus_mask True
             ##action NullAction()
             if invisible == False:
-                if tail_floured == True:
-                    idle "combat/paragon tail flour.png"
-                    hover "combat/paragon tail flour hl.png"
-                    if tailhmred == True:
-                        idle "combat/paragon tail injured.png"
-                        hover "combat/paragon tail injured hl.png"
-                else:
-                    idle "combat/paragon tail base.png"
-                    hover "combat/paragon tail base hl.png"
+               # if tail_floured == True:
+                #    idle "combat/paragon tail flour.png"
+                 #   hover "combat/paragon tail flour hl.png"
+                 #   if tailhmred == True:
+                  #      idle "combat/paragon tail injured.png"
+                   #     hover "combat/paragon tail injured hl.png"
+               # else:
+                idle "combat/paragon tail base.png"
+                hover "combat/paragon tail base hl.png"
             else:
                 idle "combat/paragon tail invis.png"
                 hover "combat/paragon tail invis hl.png"
                 selected_idle "combat/paragon tail invis hl.png"
             ## action ToggleVariable("red_btn_selected", True, False)
-            action NullAction()
+            
+            ##action NullAction()
             if flour == True:
                 action [SetVariable("invisible", False), SetVariable("tail_floured", True), Jump("correct")]
-            if hmrselected == True and tail_floured == True:
-                action [SetVariable("tailhmred", True)]
+            else:
+                action NullAction()
 
                 
             
@@ -256,7 +271,97 @@ screen test:
             
         
 
+screen combat2:
 
+    add "combat/combat bg grayscale.png"
+    add andrea_vera:
+        pos (1200, 800)
+    
+        
+
+    imagebutton:
+            pos (0, 50)
+            focus_mask True
+            idle "combat/combat flr base.png"
+            hover "combat/combat flr hl.png"
+            selected_idle "combat/combat flr hl.png"
+            selected (flour == True)
+            action [ToggleVariable("flour"), SetVariable("arwselected", False), SetVariable("hmrselected", False), ToggleVariable ("something_selected")]
+    imagebutton:
+  
+            pos (0, 350)
+            focus_mask True
+            idle "combat/combat hmr base.png"
+            hover "combat/combat hmr hl.png"    
+            selected_idle "combat/combat hmr hl.png"  
+            action [ToggleVariable("hmrselected"), SetVariable("arwselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
+            selected (hmrselected == True)
+
+    imagebutton:
+
+        pos (0, 650)
+        focus_mask True
+        idle "combat/combat arw base.png"
+        hover "combat/combat arw hl.png"    
+        selected_idle "combat/combat arw hl.png"  
+        action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
+        selected (arwselected == True)
+
+
+    imagebutton:
+        focus_mask True
+
+        idle "combat/paragon head flour.png"
+        hover "combat/paragon head flour hl.png"
+        # selected_idle "combat/paragon head flour hl.png"
+        if something_selected == True:
+            action Jump ("wrong2")
+        else:
+            action NullAction()
+    imagebutton:
+        focus_mask True
+        idle "combat/paragon torso flour.png"
+        hover "combat/paragon torso flour hl.png"
+          
+
+        if something_selected == True:
+           action Jump ("wrong2")
+        else:
+            action NullAction()
+        #if green_btn_selected:
+            #       action Jump("incorrect")    
+
+    imagebutton:
+        
+       
+        focus_mask True
+        if tailhmred == True:
+            idle "combat/paragon tail injured.png"
+            hover "combat/paragon tail injured hl.png"
+        
+        else:
+            idle "combat/paragon tail flour.png"
+            hover "combat/paragon tail flour hl.png"
+       
+        if something_selected == True:
+            if hmrselected == True and tailhmred == False:
+                
+                action [SetVariable("tailhmred", True),Jump("hit_tail")]
+            if arwselected == True and tailhmred == True:
+                action Jump("finishedCombat")
+            
+            else: 
+                action Jump("wrong2")
+        
+        else:
+            action NullAction()
+
+            
+
+            
+
+                
+            
 
 screen bathroomintro:
     imagemap:
@@ -2911,56 +3016,90 @@ label wake_vera:
 
     
     label combat:
-
         
-        default health = 3
-        default monster = 3
         
-        if health == 0:
-            "You lose."
+     #   default health = 3
+      #  default monster = 3
         
-        if monster == 0:
-            "You win."
+       # if health == 0:
+        #    "You lose."
         
+        #if monster == 0:
+         #   "You win."
+        
+        scene combat bg grayscale
         "Alright, time to go."
         "..."
-        show screen test
         "Woah! Looks like there's a lot going on here."
         "Maybe we should take it easy, yeah?"
         "This thing's invisible, so, we need to find a way to mitigate that before we can get any sort of shot in."
-        call screen test
+        call screen combat
         
+            
         
         
         
      
-    label incorrect:
-        "Not quite."
-        $ green_btn_selected = False
-        $ health -= 1
+ #   label incorrect:
+  #      "Not quite."
+   #     $ green_btn_selected = False
+    #    $ health -= 1
         
-        $ combat_round += 1
-        jump combat
+        ##$ combat_round += 1
+     #   jump combat
 
     label correct:
+        hide screen combat
+        $ flour = False
+        $ arwselected = False
+        $ flour = False
+        $ hmrselected = False
+        
         "There we go."
         "Now, we don't have a lot of time before it makes its move."
         "So, what do we go for?"
-        $ time = 5
-        $ timer_range = 5
+        $ something_selected = False
+      #  $ time = 5
+       # $ timer_range = 5
 
-        $ timer_jump = 'round2'
+        #$ timer_jump = 'round2'
+        hide screen combat
+        call screen combat2
+       # show screen countdown
+        
 
-        show screen countdown
-        call screen test
-
-    label well:
-        "That didn't work."
-    label round2:
-        "Shoulda been quicker."
+    label wrong1:
+        scene combat bg grayscale
+        $ something_selected = False
+        "Oo, not really."
+        "Let's try again."
+        "As a heads up, next mess up miiight get you busted."
+        call screen combat
+    label wrong2:
+        $ andrea_vera = "av bad"
+        $ something_selected = False
+        $ arwselected = False
+        $ flour = False
+        $ hmrselected = False
+        "told you"
+        
+        call screen combat2
      
 
+    label hit_tail:
 
+        $ flour = False
+        $ hmrselected = False
+        "Got it!"
+        "The thing's leaking it's...juice all over the place. If only we had something conductive."
+        call screen combat2
+
+    label finishedCombat:
+        "Yipee!"
+        "we did it!"
+
+
+        
 
 
 
