@@ -133,10 +133,11 @@ default flour = False
 default head_floured = False
 default torso_floured = False
 default tail_floured = False
-default invisible = False
+default invisible = True
 default hmrselected = False
 default arwselected = False
 default tailhmred = False
+default torsohmred = False
 
 screen test:
     add Solid("#000")
@@ -188,7 +189,7 @@ screen test:
            # selected_idle "combat/paragon head invis hl.png"
            
         if flour == True:
-            action [SetVariable("invisible", False), SetVariable("head_floured", True)]
+            action [SetVariable("invisible", False), SetVariable("head_floured", True), Jump("correct")]
         else:
             action NullAction()
     imagebutton:
@@ -198,6 +199,7 @@ screen test:
                 idle "combat/paragon torso flour.png"
                 hover "combat/paragon torso flour hl.png"
               #  selected_idle "combat/paragon torso flour hl.png"
+            
             else:
                 idle "combat/paragon torso base.png"
                 hover "combat/paragon torso base hl.png"
@@ -208,10 +210,11 @@ screen test:
            # selected_idle "combat/paragon invis hl.png"
         ##action ToggleVariable("blue_btn_selected", True,False)
         ##selected(blue_btn_selected)
+        action NullAction()
         if flour == True:
-            action [SetVariable("invisible", False), SetVariable("torso_floured", True)]
-        else:
-            action NullAction()
+            action [SetVariable("invisible", False), SetVariable("torso_floured", True), Jump("correct")]
+        if hmrselected == True and torso_floured == True:
+                action [SetVariable("torsohmred", True)]
         #if green_btn_selected:
             #       action Jump("incorrect")    
 
@@ -235,7 +238,7 @@ screen test:
             ## action ToggleVariable("red_btn_selected", True, False)
             action NullAction()
             if flour == True:
-                action [SetVariable("invisible", False), SetVariable("tail_floured", True)]
+                action [SetVariable("invisible", False), SetVariable("tail_floured", True), Jump("correct")]
             if hmrselected == True and tail_floured == True:
                 action [SetVariable("tailhmred", True)]
 
@@ -2807,9 +2810,10 @@ label wake_vera:
         vl "Fair enough."
         "Is what she settles on instead."
         "There's the quiet again."
+        default spied = False
         menu silence:
 
-            "'I spy with my little eye....'":
+            "'I spy with my little eye....'" if spied == False:
                 jump ispytwo
             "About the road ahead.":
                 jump roadahead
@@ -2817,6 +2821,7 @@ label wake_vera:
                 jump letquiet
 
         label ispytwo:
+            $ spied = True
             "I toss my wrapper into the trash and clear my throat."
         "Without looking at her, I ask:"
         show andrea neutral
@@ -2861,54 +2866,99 @@ label wake_vera:
         vl "Bullshit, I got it."
         "There's a pregnant pause."
         "She walks a languid circuit around the lot."
+        "I almost cut her off there."
+        show vera neutralflipped
+        vl "Okay. This one's it."
+    label random_guess:
+        default randnum = 0
+        $ randnum = renpy.random.randint(1,2)
+
+    if randnum == 1:
+        jump guess_right
+
+    if randnum == 2:
+        jump guess_wrong
+
+    
+    label guess_right:
+        vl "{i}That.{/i}"
+    "She points an accusatory finger at the wad of gum."
+    show andrea happy
+    ab "Well, shit."
+    ab "You got it."
+    vl "Hey, don't sound so surprised."
+    ab "I'm not, promise."
+    vl "That was a tricky one."
+    vl "I'll give you a reaaaal nasty one next time I go."
+
+    label guess_wrong:
+        vl "I got it, you're pulling a fast one on me."
+        "She points her thumb towards herself with enough force that I worry she'll poke out her good eye."
+        show vera happyflipped
+        vl "My scar, yeah?"
+        "I can keep a straight face for all of five seconds, before a laugh escapes me."
+        show andrea happy
+        ab "No-{i}stupid{i}."
+        ab "It's gum, come on. Don't be conceited."
+        show vera angry
+        vl "It's a fair guess! You're always staring at me so, like-"
+        "She throws her hands in the air."
+        ab "I don't, that's weird."
+        vl "{i}Yeah, okay.{/i}"
 
 
 
 
-
+    
+    label combat:
 
         
-        label combat:
-
-            
-            default health = 3
-            default monster = 3
-            
-            if health == 0:
-                "You lose."
-            
-            if monster == 0:
-                "You win."
-           
-            "Alright, time to go."
-            "..."
-            call screen test
-            
-            #$ time = 3
-            #$ timer_range = 3
-            #$ timer_jump = 'incorrect'
-            #show screen countdown
-            
-            #"..."
-        label incorrect:
-            "Not quite."
-            $ green_btn_selected = False
-            $ health -= 1
-           
-            ##$ combat_round += 1
-            jump combat
-
-        label correct:
-            #hide screen countdown
-            "Great job, you don't die."
-            $ monster -= 1
-            ##$ combat_round += 1
-            jump combat
-
-        label round2:
-            "Okay, we made it."
-            "..."
+        default health = 3
+        default monster = 3
         
+        if health == 0:
+            "You lose."
+        
+        if monster == 0:
+            "You win."
+        
+        "Alright, time to go."
+        "..."
+        show screen test
+        "Woah! Looks like there's a lot going on here."
+        "Maybe we should take it easy, yeah?"
+        "This thing's invisible, so, we need to find a way to mitigate that before we can get any sort of shot in."
+        call screen test
+        
+        
+        
+        
+     
+    label incorrect:
+        "Not quite."
+        $ green_btn_selected = False
+        $ health -= 1
+        
+        $ combat_round += 1
+        jump combat
+
+    label correct:
+        "There we go."
+        "Now, we don't have a lot of time before it makes its move."
+        "So, what do we go for?"
+        $ time = 5
+        $ timer_range = 5
+
+        $ timer_jump = 'round2'
+
+        show screen countdown
+        call screen test
+
+    label well:
+        "That didn't work."
+    label round2:
+        "Shoulda been quicker."
+     
 
 
 
@@ -2921,6 +2971,6 @@ label wake_vera:
 
 
 
-        return
-            
-            
+    return
+        
+        
