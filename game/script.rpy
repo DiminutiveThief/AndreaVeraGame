@@ -2735,9 +2735,11 @@ label wake_vera:
         "She makes a vague gesture from where I assume she went, to back here."
         vl "Definitely goo-ey, definitely acidy-"
         ab "Acidic."
+        show vera annoyedflip
         vl "Yeah, that."
         "This is less treading new ground and more confirming what we already suspected."
         "It's still reassuring, and having some possible ambush path is good."
+        show vera neutral2flipped
         vl "Any idea why the janitor guy didn't get attacked?"
         ab "No clue. Could be a preference of victim."
         show vera neutral2flipped
@@ -2756,6 +2758,7 @@ label wake_vera:
         ab "We can stakeout here."
         "Stakeouts are nice. They're a classic."
         "It's a familiar kind of 'boring'. The building dread that comes with it isn't too bad to stomach."
+        "Honestly, it feels kinda small."
         vl "We're probably gonna have to stay up for a {i}while{/i}. This things a real night owl."
         vl "Plenty of time to take in the scenery, right?"
         ab "Yeah, get a real whiff of that strip mall air."
@@ -2763,11 +2766,104 @@ label wake_vera:
         "No matter where I go, it's the exact same."
         "Just swap out the UaUa's for whatever the local convenience-store-rest-stop is local to the area."
         "On one hand, it's uncanny. On the other, it's reliable."
+        show vera neutralflipped
         vl "Least the food is good-hey, are you gonna try your's?"
         ab "Oh shit, yeah."
-        "I take a bite of mine. She's right, pretty good. There's a good mix of flavors without being too cluttered."
+        "I take a bite of mine. She's right, pretty good. There's a good mix of flavors without them vying for control too much."
         vl "The next place is on me."
-        
+        show andrea annoyed
+        ab "Sure it is."
+        show vera annoyedflip
+        vl "Cross my heart, promise."
+        show vera neutral2flipped
+        show andrea neutral
+        "I expect some sort of follow up, but she's too focused on stuffing her face."
+        "S'fine with me. I'll take a non-awkward silence."
+        "It lasts all the way to the end of our 'meal'-until Vera finishes inhaling the thing and I get full halfway."
+        vl "Was getting info annoying?"
+        show andrea offput
+        ab "Eh. Mostly just {i}weird.{/i}"
+        ab "It was this, like, high schooler? Maybe early college kid."
+        ab "I dunno."
+        show andrea neutral   
+        ab "She wasn't being difficult, she just didn't know much. Or care."
+        vl "{i}Really?{/i}"
+        vl "I thought this thing would be a hit among the youths. Freaky murder right on their back porch?"
+        ab "Don't say youths. She made me feel old enough."
+        ab "But, I mean, I didn't expect her to be jazzed, just like-scared, at least?"
+        show vera neutralflipped
+        vl "{i}I'd{/i} be jazzed."
+        vl "Something to spice up the student life."
+        ab "That's awesome, Vera."
+        show vera happyflipped
+        vl "It spiced up {i}our's{/i}, didn't it?"
+        vl "Not-this one, but, y'know."
+        show andrea sad
+        ab "Mmm..."
+        ab "Dunno if that's the word I'd use."
+        "'Student life' is kind of an exaggeration. Halfway into an associates doesn't count for much. Even less for her."
+        show vera neutral2flipped
+        "She opens her mouth to say something, but pauses before she can make it all the way."
+        vl "Fair enough."
+        "Is what she settles on instead."
+        "There's the quiet again."
+        menu silence:
+
+            "'I spy with my little eye....'":
+                jump ispytwo
+            "About the road ahead.":
+                jump roadahead
+            "Let it sit.":
+                jump letquiet
+
+        label ispytwo:
+            "I toss my wrapper into the trash and clear my throat."
+        "Without looking at her, I ask:"
+        show andrea neutral
+        ab "...Something, pink."
+        "It's hard to find something that's not the same, washed out grey, but my eye catches on a piece of gum stuck to the side of a dumpster."
+        show vera annoyedflip
+        vl "Huh?"
+        vl "Oh-shit, hm."
+        "She's quick on the uptake."    
+        show vera neutral2flipped
+        vl "Pink?"
+        ab "That's what I said."
+        "She looks around with an offputting intensity."
+        "Like she's some kind of sight hound."
+        vl "The graffiti there?"
+        "She gestures at the adjacent wall."
+        "There's some kind of long wornout obscenity plastering it, rendered in what could be considered pink."
+        ab "Nope."
+        show vera annoyedflip
+        vl "{i}Shit.{/i}"
+        "She begins doing her rounds around the lot."
+        "I don't feel that bad-she'd pick something just as banal."
+        vl "Oh! Ladybug."
+        "It takes me a second to realize what she's pointing at."
+        show andrea annoyed
+        ab "...The weevil?"
+        ab "It's not a-...it's not even red."
+        "I don't know how you could make that mixup even if you don't know the name of the species."
+        "They're compleltely different."
+        vl "It's close enough, red-pink, ladybug-weevil."
+        ab "Not really, it's like...like saying raccoons and walruses are the same because they're both carnivores."
+        "Insects aren't really organized the same way as mammals are, so it's not a one to one, but she's not ready to have that conversation."
+        ab "And, again, it's not even pink."
+        vl "{i}Okay!{/i} Sorry."
+        show vera sadflipped
+        vl "It's not the...weevil."
+        show andrea neutral
+        ab "Any other guesses?"
+        show vera neutral2flipped
+        vl "Mmm...."
+        ab "You can always give up."
+        vl "Bullshit, I got it."
+        "There's a pregnant pause."
+        "She walks a languid circuit around the lot."
+
+
+
 
 
 
