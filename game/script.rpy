@@ -343,18 +343,22 @@ screen combat2:
             idle "combat/paragon tail flour.png"
             hover "combat/paragon tail flour hl.png"
        
+        action NullAction()
+        
         if something_selected == True:
-            if hmrselected == True and tailhmred == False:
-                
-                action [SetVariable("tailhmred", True),Jump("hit_tail")]
             if arwselected == True and tailhmred == True:
                 action Jump("finishedCombat")
+
+            if hmrselected == True and tailhmred == False:
             
-            else: 
-                action Jump("wrong2")
+            
+                action [SetVariable("tailhmred", True), Jump("hit_tail"), print ("hammertail")]
         
-        else:
-            action NullAction()
+      ##  else:
+        ##    action Jump("wrong2")
+        
+      
+            
 
             
 
@@ -2916,12 +2920,13 @@ label wake_vera:
         "Is what she settles on instead."
         "There's the quiet again."
         default spied = False
+        default roadspoken = False
         menu silence:
 
             "'I spy with my little eye....'" if spied == False:
                 jump ispytwo
-            "About the road ahead.":
-                jump roadahead
+            "Push the topic." if roadspoken == False:
+                jump reminisce
             "Let it sit.":
                 jump letquiet
 
@@ -3005,12 +3010,181 @@ label wake_vera:
         show andrea happy
         ab "No-{i}stupid{i}."
         ab "It's gum, come on. Don't be conceited."
-        show vera angry
+        show vera angryflipped
         vl "It's a fair guess! You're always staring at me so, like-"
         "She throws her hands in the air."
         ab "I don't, that's weird."
         vl "{i}Yeah, okay.{/i}"
+        show vera neutralflipped
+        "Now it's {i}her{/i} who stares at me for a good, few moments."
+        ab "...What?"
+        show andrea stern 
+        vl "What yourself."
+        jump silence
+    label reminisce:
+        show andrea neutral
+        $ roadspoken = True
+        ab "You think you'd wanna go back?"
+        ab "After things quiet down, maybe. Or, like, in theory."
+        show vera neutral2flipped
+        vl "Ehh..."
+        vl "Probably not."
+        vl "It kinda feels like playing pretend at real life."
+        vl "What's, like...History of Psychology 101 gonna do for me."
+        "She pauses."
+        vl "What about you?"
+        vl "You were more into it."
+        ab "For the one we were in, yeah."
+        "What class was it again? Something...science. Not physics. Maybe some sort of chemistry or environmental science thing."
+        ab "I think I'd like it more once I got to pick more of them out."
+        vl "Which ones?"
+        show vera happyflipped
+        vl "{i}Like a film class?{/i}"
+        show andrea offput 
+        ab "Ew, no."
+        ab "Probably, like..."
+        default bio_or_history = 0
+        $ bio_or_history = renpy.random.randint(1,2)
+        if bio_or_history == 1:
+            jump bio
+        if bio_or_history == 2:
+            jump history
+        label bio:
+            "Right, it was biology."
+            ab "Biology, maybe a higher level."
+            vl "That makes sense. I think."
+            vl "What do you even {i}do{/i} in bio though?"
+            vl "I keep hearing it's hard."
+            ab "Vera, we took the same class on it."
+            show vera neutral2flipped
+            vl "Ohh...yeah, huh."
+            vl "Proves my point."
+            ab "Not medical, probably, something more outdoorsy."
+            "I think I've had enough of being cooped up in the last few weeks to last a lifetime."
+            vl "Make that a goalpost, then. Once we get all this done and over with, you can go turn over logs and scrounge around."
+            ab "Good call."
+            jump silence
+        label history:
+            "I think this is one of the ones I never got to."
+            ab "Maybe history?"
+            ab "I'm not the biggest buff, but I think I could be tided over."
+            show vera neutral2flipped
+            vl "That's weirdly specific."
+            vl "I always found it kinda stuffy."
+            vl "Everytime I got shuffled around they made me take some new kind. I think I got a sample of half the globe."
+            ab "You have any favorites?"
+            "Before she can open her mouth, I add."
+            ab "Pretend I have you at gun point."
+            show vera annoyedflip
+            vl "Jeez, didn't realize this was that important to you."
+            "She scrunches her face in thought."
+            vl "Greek, I think. If I had to choose."
+            vl "Mythology was fun."
+            vl "Makes me wonder if all the stuff they thought they saw was actually Paragon shit."
+            "It makes sense, but I don't know enough to call it one way or another."
+            ab "Maybe it'd be more of my thing if I took it now, then."
+            jump silence
 
+        label letquiet:
+            "I leave it at that."
+            "No one gets on us for loitering and the wait feels calming, rather than tense."
+            "Or it does, up until something hits me."
+            show andrea stern
+            ab "{i}Shit.{/i}"
+            vl "Huh?"
+            show vera annoyedflip
+            ab "The cashier girl, we have to make sure she's not there when the thing comes over."
+            vl "{i}Shit.{/i}"
+            vl "Alright, well. That'll be a pain."
+            vl "Maybe we can scare her off."
+            vl "She hasn't seen me. Maybe if I act all crazy, she'll ditch."
+            ab "She seemed pretty unphased by all of this, I don't think it'll work."
+            ab "Besides, if she starts telling her two strangers were threatening her right before there's some kind of incident, it'll make things difficult."
+            vl "Fair, fair."
+            ab "Not like we can give her a {i}real{/i} heads up, either."
+            "Vera taps her foot in thought."
+            vl "And we can't just let her get got."
+            "She looks to me, like she's hoping I'll disagree."
+            ab "Yeah."
+            vl "Maybe we can say we're actually undercover cops."
+            vl "It's a double lie-...after the whole 'college student report' thing."
+            ab "You'd probably have more luck with that."
+            "I'm hesitant to let her take the wheel, but she hasn't been seen yet. And the girl doesn't seem eager to stick around."
+            show vera neutral2flipped 
+            vl "Sure. Just leave it to me."
+            show andrea neutral
+            ab "By all means, then."
+            "I gesture towards the front entrance of the UuaUua's and she obliges."
+            "It's still empty, aside from the cashier. Lucky us."
+            show vera neutralflipped
+            vl "{i}That's her?{/i}"
+            "Vera mouths."
+            "I nod."
+            vl "Hey!"
+            "She waves and makes her way over to the register."
+            tn "Hi."
+            vl "You work here, right?"
+            tn "Yeah."
+            "She stares blankly for a few moments, then taps her uniform."
+            vl "{i}Cool, okay.{/i}"
+            show vera neutral2flipped
+            vl "Sorry, I'm gonna have to ask you to leave."
+            tn "Why?"
+            vl "There's a whole situation. You know, with the murders and everything?"
+            vl "We're actually investigating it."
+            vl "So we need civillians to leave."
+            tn "Are you doing that research thing with her?"    
+            "She points at me."
+            vl "Oh, that part was a lie. We're with the department."
+            "Which department is anyone's guess."
+            tn "Huh?"
+            tn "But you said you weren't a cop."
+            tn "You can't lie about that."
+            show andrea neutral
+            ab "You {i}can{/i} actually. Sorry, uh, about that."
+            "The silver lining here is that this will be a learning experience for her."
+            tn "{i}What?{/i}"
+            "It's the most emotion I've seen her show in the few moments that I've known her."
+            show vera sadflipped
+            vl "Yeahh, sorry. You're gonna have to head out. You can come back tomorrow."
+            vl "And let anyone coming in later know that too."
+            vl "It's your day off. Have fun."
+            show vera happyflipped
+            vl "Congrats."
+            "This is all hinging on her not asking for any sort of verification."
+            "{i}Please don't ask for verification, please don't ask for verification.{/i}"
+            tn "Thanks. Okay. Gotcha."
+            "Her movements are robotic as she steps out from behind the counter."
+            tn "So, like-...are you gonna put up tape, and stuff?"
+            vl "Yeah we just have it in the-..."
+            ab "Police car."
+            vl "Mhm."
+            tn "...Okay."
+            "And, with a jingle of the door, she's gone."
+            "I wait for her figure to disappear from view."
+            ab "That's gonna be a problem later."
+            vl "Oh, yeah, absolutely."
+            vl "I kept a pretty good cover though, right?"
+            "She holds out her hand for a high five."
+            ab "Mmm..."
+            show andrea happy
+            "I make a show of considering it."
+            vl "Come on, don't leave me hanging."
+            ab "Alright. You didn't botch anything."
+            "I slap her hand."
+            vl "{i}Now{/i}, we wait."
+            ab "Yeah, just let me get my hammer."
+            "I wasn't about to carry that thing around on me, it doesn't really mesh well with keeping a low profile."
+            "There isn't much hint that this thing has any kind of chitin or armor, so the good ol' smash should do it some good."
+            "When I return, I see that Vera has taken a shopping basket and propped the back door open."
+            show vera neutralflipped
+            vl "Gives us a good view-"
+            "She says in response to my raised eyebrow."
+            "I lean against the door, while she slumps to the ground."
+            "With the cashier situation resolved, I'm back to letting my worry simmer to a boiling point."
+            "The sky washes out, then relights in warm orange, then dulls into a dark blue."
+            vl "See anything?"
+            ab "I've got the same view as you."
 
 
 
@@ -3027,7 +3201,7 @@ label wake_vera:
         #if monster == 0:
          #   "You win."
         
-        scene combat bg grayscale
+        scene  combat comp invis
         "Alright, time to go."
         "..."
         "Woah! Looks like there's a lot going on here."
@@ -3050,6 +3224,7 @@ label wake_vera:
 
     label correct:
         hide screen combat
+        scene combat comp flour
         $ flour = False
         $ arwselected = False
         $ flour = False
@@ -3069,13 +3244,17 @@ label wake_vera:
         
 
     label wrong1:
-        scene combat bg grayscale
+        scene combat comp invis
         $ something_selected = False
+        $ arwselected = False
+        $ flour = False
+        $ hmrselected = False
         "Oo, not really."
         "Let's try again."
         "As a heads up, next mess up miiight get you busted."
         call screen combat
     label wrong2:
+        scene combat comp injured
         $ andrea_vera = "av bad"
         $ something_selected = False
         $ arwselected = False
@@ -3088,6 +3267,8 @@ label wake_vera:
 
     label hit_tail:
 
+        $ something_selected = False
+        $ arwselected = False
         $ flour = False
         $ hmrselected = False
         "Got it!"
