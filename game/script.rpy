@@ -12,8 +12,8 @@ define w =  Character("Waiter")
 define unknown =  Character("Burn", callback = name_callback, cb_name = "??", color="E0DEDE")
 define dm = Character("Dominic")
 define tn = Character("Teen")
-image vera happy = At('testvera', sprite_highlight('vera'))
-image andrea happy = At('testandrea', sprite_highlight('andrea'))
+##image vera happy = At('testvera', sprite_highlight('vera'))
+##image andrea happy = At('testandrea', sprite_highlight('andrea'))
 define al = Character("Alex")
 
 
@@ -113,7 +113,29 @@ layeredimage sloane:
             "images/Sprites/Sloane/s stern new.png"
         attribute curious:
             "images/Sprites/Sloane/s curious new.png"
-       
+
+screen tips_screen:
+    text "Ohh the creature."
+
+screen attack_examine:
+    imagebutton:
+        sensitive examine_button_enabled 
+        pos (1050, 450)
+        focus_mask True
+        idle "combat/examine.png"
+        hover "combat/examine select.png"
+        if full_examined == False:
+            action Jump ("examine_first")
+        else:
+            action Jump ("examine_done")
+
+    imagebutton:
+        sensitive attack_button_enabled
+        pos (250, 450)
+        focus_mask True
+        idle "combat/attack.png"
+        hover "combat/attack select.png"
+        action [Jump("combats"), Hide("attack_examine")]     
 screen theBody:
    
     imagemap:
@@ -128,8 +150,11 @@ screen theBody2:
         hotspot (326, 509, 258, 131) action Jump ("throat_body")
         hotspot (587, 799, 454, 257) action Jump ("torso_body")
 default red_btn_selected = False
+default attackChance = 0
+default next_round = "null"
 default blue_red_combine = False
 default flour = False 
+default based = False
 default head_floured = False
 default torso_floured = False
 default tail_floured = False
@@ -139,16 +164,31 @@ default arwselected = False
 default something_selected = False
 default tailhmred = False
 default torsohmred = False
+default base_tail = "combat/paragon tail base.png"
+default base_tail_hl = "combat/paragon tail base hl.png"
+default base_torso = "combat/paragon tail base.png"
+default base_torso_hl = "combat/paragon tail base hl.png"
+default base_head = "combat/paragon tail base.png"
+default base_head_hl = "combat/paragon tail base hl.png"
 default andrea_vera = "combat/av good.png"
+default flour_found = False
+default full_examined = False
+default enabled = True
+default examine_button_enabled = False
+default attack_button_enabled = False
+default paragon_enabled = False
 screen combat:
    
     add "combat/combat bg grayscale.png"
+
+
     add andrea_vera:
         pos (1200, 800)
     
         
-
-    imagebutton:
+    if flour_found:
+        imagebutton:
+            sensitive flour_found
             pos (0, 50)
             focus_mask True
             idle "combat/combat flr base.png"
@@ -157,7 +197,7 @@ screen combat:
             selected (flour == True)
             action [ToggleVariable("flour"), SetVariable("arwselected", False), SetVariable("hmrselected", False), ToggleVariable ("something_selected")]
     imagebutton:
-  
+            sensitive enabled
             pos (0, 350)
             focus_mask True
             idle "combat/combat hmr base.png"
@@ -167,7 +207,7 @@ screen combat:
             selected (hmrselected == True)
 
     imagebutton:
-
+        sensitive enabled
         pos (0, 650)
         focus_mask True
         idle "combat/combat arw base.png"
@@ -175,27 +215,41 @@ screen combat:
         selected_idle "combat/combat arw hl.png"  
         action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
         selected (arwselected == True)
+    #imagebutton:
+       # sensitive examine_button_enabled 
+       # pos (500, 800)
+        #focus_mask True
+       # idle "combat/examine.png"
+       # hover "combat/examine select.png"
+        #action Jump ("examine_first")
+   # imagebutton:
+    #    sensitive enabled
+     #   focus_mask True
+      #  idle "combat/attack.png"
+       # hover "combat/attack select.png"
+        #action NullAction ()
 
 
 
 
     imagebutton:
+        sensitive paragon_enabled
         focus_mask True
     
         if invisible == False:
-           # if head_floured == True:
-            #    idle "combat/paragon head flour.png"
-             #   hover "combat/paragon head flour hl.png"
-               # selected_idle "combat/paragon head flour hl.png"
+            if head_floured == True:
+                idle "combat/paragon head flour.png"
+                hover "combat/paragon head flour hl.png"
+                selected_idle "combat/paragon head flour hl.png"
                
-           # else:
-            idle "combat/paragon head base.png"
-            hover "combat/paragon head base hl.png"
-               # selected_idle "combat/paragon head base hl.png"
+            else:
+                idle "combat/paragon head base.png"
+                hover "combat/paragon head base hl.png"
+                selected_idle "combat/paragon head base hl.png"
         else: 
             idle "combat/paragon head invisible.png"
             hover "combat/paragon head invis hl.png"
-           # selected_idle "combat/paragon head invis hl.png"
+            selected_idle "combat/paragon head invis hl.png"
         if something_selected == True:   
             if flour == True:
                 action [SetVariable("invisible", False), SetVariable("head_floured", True), Jump("correct")]
@@ -204,27 +258,28 @@ screen combat:
         else: 
             action NullAction()
     imagebutton:
+        sensitive paragon_enabled
         focus_mask True
         if invisible == False:
-           # if torso_floured == True:
-            #    idle "combat/paragon torso flour.png"
-             #   hover "combat/paragon torso flour hl.png"
-              #  selected_idle "combat/paragon torso flour hl.png"
+           if torso_floured == True:
+                idle "combat/paragon torso flour.png"
+                hover "combat/paragon torso flour hl.png"
+                selected_idle "combat/paragon torso flour hl.png"
             
-           # else:
-            idle "combat/paragon torso base.png"
-            hover "combat/paragon torso base hl.png"
-            # selected_idle "combat/paragon torso base hl.png"
+           else:
+                idle "combat/paragon torso base.png"
+                hover "combat/paragon torso base hl.png"
+                selected_idle "combat/paragon torso base hl.png"
         else:
             idle "combat/paragon torso invis.png"
             hover "combat/paragon torso invis hl.png"
-           # selected_idle "combat/paragon invis hl.png"
+            selected_idle "combat/paragon invis hl.png"
         ##action ToggleVariable("blue_btn_selected", True,False)
         ##selected(blue_btn_selected)
         
         if something_selected == True:   
             if flour == True:
-                action [SetVariable("invisible", False), SetVariable("head_floured", True), Jump("correct")]
+                action [SetVariable("invisible", False), SetVariable("torso_floured", True), Jump("correct")]
             else:
                 action Jump("wrong1")
         else: 
@@ -233,18 +288,19 @@ screen combat:
             #       action Jump("incorrect")    
 
     imagebutton:
+            sensitive paragon_enabled
             focus_mask True
             ##action NullAction()
             if invisible == False:
-               # if tail_floured == True:
-                #    idle "combat/paragon tail flour.png"
-                 #   hover "combat/paragon tail flour hl.png"
-                 #   if tailhmred == True:
-                  #      idle "combat/paragon tail injured.png"
-                   #     hover "combat/paragon tail injured hl.png"
-               # else:
-                idle "combat/paragon tail base.png"
-                hover "combat/paragon tail base hl.png"
+                if tail_floured == True:
+                    idle "combat/paragon tail flour.png"
+                    hover "combat/paragon tail flour hl.png"
+                    if tailhmred == True:
+                        idle "combat/paragon tail injured.png"
+                        hover "combat/paragon tail injured hl.png"
+                else:
+                    idle "combat/paragon tail base.png"
+                    hover "combat/paragon tail base hl.png"
             else:
                 idle "combat/paragon tail invis.png"
                 hover "combat/paragon tail invis hl.png"
@@ -279,16 +335,9 @@ screen combat2:
     
         
 
+
     imagebutton:
-            pos (0, 50)
-            focus_mask True
-            idle "combat/combat flr base.png"
-            hover "combat/combat flr hl.png"
-            selected_idle "combat/combat flr hl.png"
-            selected (flour == True)
-            action [ToggleVariable("flour"), SetVariable("arwselected", False), SetVariable("hmrselected", False), ToggleVariable ("something_selected")]
-    imagebutton:
-  
+            sensitive enabled
             pos (0, 350)
             focus_mask True
             idle "combat/combat hmr base.png"
@@ -298,7 +347,7 @@ screen combat2:
             selected (hmrselected == True)
 
     imagebutton:
-
+        sensitive enabled
         pos (0, 650)
         focus_mask True
         idle "combat/combat arw base.png"
@@ -310,20 +359,30 @@ screen combat2:
 
     imagebutton:
         focus_mask True
-
-        idle "combat/paragon head flour.png"
-        hover "combat/paragon head flour hl.png"
-        # selected_idle "combat/paragon head flour hl.png"
+        sensitive paragon_enabled
+        if head_floured == True:
+            idle "combat/paragon head flour.png"
+            hover "combat/paragon head flour hl.png"
+            selected_idle "combat/paragon head flour hl.png"
+        else:
+            idle "combat/paragon head base.png"
+            hover "combat/paragon head base hl.png"
+            selected_idle "combat/paragon head base hl.png"
         if something_selected == True:
             action Jump ("wrong2")
         else:
             action NullAction()
     imagebutton:
         focus_mask True
-        idle "combat/paragon torso flour.png"
-        hover "combat/paragon torso flour hl.png"
-          
-
+        sensitive paragon_enabled
+        if torso_floured:
+            idle "combat/paragon torso flour.png"
+            hover "combat/paragon torso flour hl.png"
+            selected_idle "combat/paragon torso flour hl.png"
+        else: 
+            idle "combat/paragon torso base.png"
+            hover "combat/paragon torso base hl.png"
+            selected_idle "combat/paragon base flour hl.png"
         if something_selected == True:
            action Jump ("wrong2")
         else:
@@ -333,26 +392,19 @@ screen combat2:
 
     imagebutton:
         
-       
+        sensitive paragon_enabled
         focus_mask True
-        if tailhmred == True:
-            idle "combat/paragon tail injured.png"
-            hover "combat/paragon tail injured hl.png"
-        
-        else:
-            idle "combat/paragon tail flour.png"
-            hover "combat/paragon tail flour hl.png"
-       
+ 
+        idle base_tail
+        hover base_tail_hl
+        selected_idle base_tail_hl
         action NullAction()
         
         if something_selected == True:
             if arwselected == True and tailhmred == True:
-                action Jump("finishedCombat")
-
+                action Jump("finishedcombat")
             if hmrselected == True and tailhmred == False:
-            
-            
-                action [SetVariable("tailhmred", True), Jump("hit_tail"), print ("hammertail")]
+                action [SetVariable("base_tail", "combat/paragon tail injured.png"), SetVariable ("base_tail_hl", "combat/paragon tail injured hl.png"), SetVariable("tailhmred", True), Jump("hit_tail")]
         
       ##  else:
         ##    action Jump("wrong2")
@@ -1419,7 +1471,7 @@ label wake_vera:
     scene diner
     "The drive over is shorter than the last. Most of the time is spent finding a place to park."
     "The Honey Tiger Diner is probably the most put-together amenity we've seen over the last two weeks."
-    "Even if it's not anything fancy (Sloane has standards, but she's not shilling out for us) the fact that the sign on the top isn't trying to extricate itself from the wall and the windows aren't cobwebbed is good enough."
+    "Even if it's not anything fancy- Sloane has standards, but she's not shilling out for us. the fact that the sign on the top isn't trying to extricate itself from the wall and the windows aren't cobwebbed is good enough."
     "There's a {i}ding{/i} as we go through the door."
     "Sloane is sitting in a middle booth. It doesn't look like she's ordered yet."
     "She waves us over. There's just the slightest drag to Vera's footsteps."
@@ -3115,8 +3167,10 @@ label wake_vera:
             show andrea neutral
             ab "By all means, then."
             "I gesture towards the front entrance of the UuaUua's and she obliges."
+        
             "It's still empty, aside from the cashier. Lucky us."
-            show vera neutralflipped
+            show vera bodyflip shirt3flip neutralflipped at left
+            show andrea body neutral at right
             vl "{i}That's her?{/i}"
             "Vera mouths."
             "I nod."
@@ -3172,19 +3226,122 @@ label wake_vera:
             vl "Come on, don't leave me hanging."
             ab "Alright. You didn't botch anything."
             "I slap her hand."
-            vl "{i}Now{/i}, we wait."
-            ab "Yeah, just let me get my hammer."
-            "I wasn't about to carry that thing around on me, it doesn't really mesh well with keeping a low profile."
-            "There isn't much hint that this thing has any kind of chitin or armor, so the good ol' smash should do it some good."
-            "When I return, I see that Vera has taken a shopping basket and propped the back door open."
+            show andrea neutral
+            ab "Do you think it'll come through the back, or the front?"
+            vl "We should split up, it'll cover our bases."
+            show andrea stern   
+            ab "Dunno how much I like that idea."
+            ab "We still don't have an idea of how much of a threat it is, exactly."
+            show vera annoyedflip
+            vl "We sort of do, we know it's not a big deal."    
+            vl "And the back and front are, like, thirty seconds apart if you book it."
+            ab "If it's as sneaky as we think it is, it could pick us off without the other noticing."
+            vl "{i}Or{/i} it could give us a better range of where it could be."
+            ab "I guess."
             show vera neutralflipped
-            vl "Gives us a good view-"
-            "She says in response to my raised eyebrow."
-            "I lean against the door, while she slumps to the ground."
-            "With the cashier situation resolved, I'm back to letting my worry simmer to a boiling point."
-            "The sky washes out, then relights in warm orange, then dulls into a dark blue."
-            vl "See anything?"
-            ab "I've got the same view as you."
+            vl "You'll be fiiiine Andy."
+            vl "You're a big girl, you can-"
+            show andrea angry   
+            ab "Don't patronize me."
+            show vera neutral2flipped
+            vl "Right, right."
+            vl "Sorry."
+            vl "I still do think it's the better call."
+            vl "Maybe we can keep that guy open, so we're in eyeshot."  
+            "She points over her shoulder to the door to the backroom."
+            show andrea stern
+            ab "Makes sense."
+            ab "I guess."
+            vl "You don't sound super sure."
+            "I'm not. It's not just this Paragon I'm worried about."
+            show andrea sad
+            ab "It's just the first time with-since..."
+            "Since everything with Burn."
+            "I haven't been on a hunt with it in the backseat."
+            "It'd promised to only bother me when 'needed', but it doesn't work on normal logic."
+            "Based on Vera's expression, I can tell she knows what I'm getting at-..."
+            show andrea stern
+            ab "It's fine, nevermind. It's not that big a deal."
+            "-Not that it'd matter to her. She's already fed up with my reservations."
+            vl "Okay, got it."
+            "She's eager as ever to avoid the topic."
+            vl "Wanna take the back, or the front?"
+            define moveinoutfade = ComposeTransition(dissolve, before=moveoutleft, after=moveinright)  
+            menu: 
+                "Back":
+                    jump back_room
+                "Front":
+                    jump front_room
+
+
+
+        
+
+        label back_room:
+                
+            ab "I can take the back."
+            "Maybe the quiet will be nice."
+            vl "M'kay!"
+            vl "I'll scream if it gets me."
+            vl "Or if the cops come."
+            show andrea neutral
+            ab "You do that."
+            show vera neutralflipped
+            "With a wave, she's off."
+            hide vera
+            with moveinoutfade
+            "I head to the back."
+            show combat bg grayscale
+            "It's a little offputting."
+            "Rows and rows of frozen hot dogs and gas station snacks and unlabeled boxes."
+            "The offensive scent of whatever they use to wipe this place down."
+            "The best I can do for this place is try to keep collateral to a minimum."
+            "It's the price for taking it on inside, instead of fighting it on its own turf."
+            "I prop open the door to the outside and slide down to the ground."
+            "Now we wait."
+            "The sky washes out into light blue, then glows into yellow, then dies back down into grey."
+            "The dumpsters box the tangle of trees in on either side."
+            "Based on what I know about it, I'm not going to be seeing it."
+            "I do my best to listen in."
+            "It's just the last sounds of bird call, almost drowned out by the sound of the road."
+            "Maybe I should do something to get it's attention."
+            menu:
+                "Throw a food container.":
+                    jump food_container
+                "Yell.":
+                    jump yell
+
+            label food_container:
+                "Paragons don't usually care for human food...right?"
+                "But, noise is noise."
+                "I grab for the closest thing around me, which is a container of fries."
+                "I throw it, full force, into the dark."
+            
+            label yell:
+                "I cup my hands to my mouth and yell:"
+                python:
+                    yell = renpy.input("What do I yell?", length=32)
+                "[yell]!"
+                "The night air swallows my voice eagerly."
+                "I lean forward to hear if anything caught it."
+                
+
+            label front_room:
+                
+                ab "I can take the front."
+                "It'll be good to keep an eye out on if anyone parks."
+                vl "M'kay!"
+                vl "I'll scream if it gets me."
+                vl "Or if the cops come."
+                show andrea neutral
+                ab "You do that."
+                show vera neutralflipped
+                "With a wave, she's off."
+                hide vera
+                with moveinoutfade
+
+
+            
 
 
 
@@ -3199,19 +3356,73 @@ label wake_vera:
         #    "You lose."
         
         #if monster == 0:
+
          #   "You win."
+        $ default_combat_round = 1
+        $ enabled = False
+        show screen attack_examine 
         
-        scene  combat comp invis
         "Alright, time to go."
         "..."
         "Woah! Looks like there's a lot going on here."
         "Maybe we should take it easy, yeah?"
         "This thing's invisible, so, we need to find a way to mitigate that before we can get any sort of shot in."
-        call screen combat
+        "Hm, what could be around here?"
+        "Click the EXAMINE button, to look around the scene."
+        $ examine_button_enabled  = True
+        call screen attack_examine
         
             
+    label examine_first:
+        scene combat bg grayscale
+        "Hm, what could be around here?"
         
+        menu:
+            "flour":
+                jump label_flour
+
+
+    label label_flour:
         
+        $ attackChance = renpy.random.randint(1,2)
+        $ full_examined = True
+        "I'll give you this one for free, maybe it'll be useful."
+        
+        "Now lets use it."
+        $ flour_found = True
+        "-Err, wait!"
+        "The creature rears up and-"
+        show screen combat
+        "Whips forward, the edges of its scaled tail scraping against your face."
+        "As a heads up, this can happen on occasion."
+        "You can see the indication riiiight at the bottom."
+        #show screen combat
+        $ andrea_vera = "combat/av bad.png"
+        window hide 
+        pause
+        "And if it's really bad, it gets like this."
+        $ andrea_vera = "combat/av terrible.png"
+        window hide 
+        pause
+       ## show screen combat
+        window show
+        "I'll give you this free one, though."
+        $ andrea_vera = "combat/av good.png"
+        window hide 
+        pause
+        "For now, the chance is fifty-fifty and happens after everytime you do something."
+        "So, use your turns conservatively!"
+        "Anyway-"
+        
+        $ attack_button_enabled = True
+        $ examine_button_enabled  = False
+        hide screen combat
+        "Now's your chance to strike."
+        "Click ATTACK."
+        call screen attack_examine
+        
+
+
         
      
  #   label incorrect:
@@ -3223,17 +3434,19 @@ label wake_vera:
      #   jump combat
 
     label correct:
-        hide screen combat
-        scene combat comp flour
+        show screen combat
+        $ flour_found = False
+        $ paragon_enabled = False
+       ## scene combat comp flour
         $ flour = False
         $ arwselected = False
         $ flour = False
         $ hmrselected = False
-        
-        "There we go."
-        "Now, we don't have a lot of time before it makes its move."
-        "So, what do we go for?"
         $ something_selected = False
+        "There we go."
+        "Now, it'll take its turn for realsies."
+        jump combat_roll
+        
       #  $ time = 5
        # $ timer_range = 5
 
@@ -3244,7 +3457,7 @@ label wake_vera:
         
 
     label wrong1:
-        scene combat comp invis
+      #  scene combat comp invis
         $ something_selected = False
         $ arwselected = False
         $ flour = False
@@ -3254,7 +3467,7 @@ label wake_vera:
         "As a heads up, next mess up miiight get you busted."
         call screen combat
     label wrong2:
-        scene combat comp injured
+       # scene combat comp injured
         $ andrea_vera = "av bad"
         $ something_selected = False
         $ arwselected = False
@@ -3266,27 +3479,87 @@ label wake_vera:
      
 
     label hit_tail:
-
+        show screen combat2
         $ something_selected = False
         $ arwselected = False
         $ flour = False
         $ hmrselected = False
+        $ enabled = False
+        $ paragon_enabled = False
         "Got it!"
         "The thing's leaking it's...juice all over the place. If only we had something conductive."
+        "Now for it's turn."
+        jump combat_roll
+
+    label round_3:
+        $ paragon_enabled = True    
+        $ enabled = True
         call screen combat2
+  
+    label combats:
+        if default_combat_round == 1:
+            jump round_1
+        elif default_combat_round == 2:
+            jump round_2
+        elif default_combat_round == 3:
+            jump round_3
+        elif default_combat_round == 4:
+            $ paragon_enabled = True
+            $enabled = True
+            call screen combat2
 
-    label finishedCombat:
-        "Yipee!"
-        "we did it!"
+    label round_1:
+        show screen combat
+        "Click on the flour object you want to use, then part of the monster."
+        $ flour_found = True
+        $ paragon_enabled = True
+        call screen combat
 
+    label combat_roll:
+        $ attackChance = renpy.random.randint(1,2)
+        if attackChance == 1:
+            jump attacked
+        if attackChance == 2:
+            jump not_attacked
 
+    label attacked:
+       
+       
+        "The thing rears up, raking its claws across your chest."
+        $ default_combat_round +=1
+        if andrea_vera == "combat/av good.png":
+            $ andrea_vera = "combat/av bad.png"
+
+            jump combats
+        elif andrea_vera == "combat/av bad.png":
+            $ andrea_vera = "combat/av terrible.png"
+            jump combats
+        elif andrea_vera == "combat/av terrible.png":
+            jump game_over
+    label not_attacked:
+        "The thing misses, best to get it over with, still."
+        $ default_combat_round +=1
+        jump combats
+    label round_2:
         
+        show screen combat2
+        $ paragon_enabled = False
+        $ enabled = False
+        $ flour_found = False
+        $ examine_button_enabled = True
+        "Rough one, right?"
+        "You should probably try going for it, just my hint."
+        "Look for some part of it that's big and hammerable."
+        hide screen combat2
+        $ default_combat_round +=1
+        call screen attack_examine 
+        
+    label finishedcombat:
+        "Yipee!"
 
-
-
-
-
-
+    label examine_done:
+        "Looks like we've already found everything here!"
+        call screen attack_examine
 
 
 
