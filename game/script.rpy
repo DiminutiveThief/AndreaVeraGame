@@ -10,16 +10,40 @@ define vl = Character("Vera", callback = name_callback, cb_name = "vera", color=
 define sl =  Character("Sloane", callback = name_callback, cb_name = "sloane", color="#9cc7e4")
 define w =  Character("Waiter")
 define unknown =  Character("Burn", callback = name_callback, cb_name = "??", color="E0DEDE")
+define unknown2 = Character("???", callback=name_callback, cb_name = "???", color="#4E575DFF")
 define dm = Character("Dominic")
 define tn = Character("Teen")
 ##image vera happy = At('testvera', sprite_highlight('vera'))
 ##image andrea happy = At('testandrea', sprite_highlight('andrea'))
-define al = Character("Alex")
+define al = Character("Avery", callback = name_callback, cb_name = "avery")
 
 
 
 
-  
+layeredimage avery:
+    at sprite_highlight ('avery')
+    group body:
+        attribute body:
+            "images/Sprites/Avery/averybase.png"
+    group face:
+        attribute neutral:
+            "images/Sprites/Avery/avery neutral one.png"
+        attribute neutral2:
+            "images/Sprites/Avery/avery neutral two.png"
+        attribute angry:
+            "images/Sprites/Avery/avery angry.png"
+        attribute embarrassed:
+            "images/Sprites/Avery/avery embarrassed.png"
+        attribute happy:
+            "images/Sprites/Avery/avery happy.png"
+        attribute sad:
+            "images/Sprites/Avery/avery sad.png"
+        attribute thinking:
+            "images/Sprites/Avery/avery thinking.png"
+        attribute worried:
+            "images/Sprites/Avery/avery worried.png"
+        
+
 layeredimage andrea:
     ##at sprite_highlight ('frances_unknown')
     at sprite_highlight ('andrea')
@@ -215,19 +239,6 @@ screen combat:
         selected_idle "combat/combat arw hl.png"  
         action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
         selected (arwselected == True)
-    #imagebutton:
-       # sensitive examine_button_enabled 
-       # pos (500, 800)
-        #focus_mask True
-       # idle "combat/examine.png"
-       # hover "combat/examine select.png"
-        #action Jump ("examine_first")
-   # imagebutton:
-    #    sensitive enabled
-     #   focus_mask True
-      #  idle "combat/attack.png"
-       # hover "combat/attack select.png"
-        #action NullAction ()
 
 
 
@@ -2176,6 +2187,7 @@ label wake_vera:
         "It's the type where every one of them has a garage and a backyard large enough to have a playground."
         "I drive slowly, looking at the numbers rendered in golden script over each doorway."
         "5321...5319...5317–"
+    
         ab "5315. Here."
         "The house is unremarkable. It doesn't even have any tacky lawn decorations to distinguish it from its fellows."
         vl "Do we park in the driveway or..."
@@ -2183,27 +2195,41 @@ label wake_vera:
         ab "Better do it curbside."
         "I pull over nearby then head out, Vera following suit."
         "I ring the doorbell once, twice, before I get an answer."
-        play sound "DoorOpen.mp3"
-        # show alex body neutral
-        unknown "Oh, hey!"
-        unknown "You're with Sloane, right?"
-        show andrea body happy
+        label doms_place:
+            play sound "DoorOpen.mp3"
+        show avery body neutral:
+            xalign 1.3
+            yalign 1.0
+
+        unknown2 "Oh, hey!"
+        show avery neutral2
+        unknown2 "You're with Sloane, right?"
+        show andrea body happy:
+            xalign 0.2
+            yalign 1.0 
+            xzoom -1.0
         ab "That's us."
         "Vera gives a half hearted wave next to me."
         ab "Are you Dominic?"
         "I'm a little thrown by their appearence."
         "They look young for a researcher, but what do I know."
-        unknown "Oh, nah, I'm Avery."
+        show avery body happy
+        unknown2 "Oh, nah, I'm Avery."
         al "I'm Dominic's apprentice. He's in the back right now."
         al "You guys can come in. I'll get him."
-        # show alex body embarassed
-        show vera body happy
+        
+        show vera body shirt3 happy at left
         vl "Awesome. Thanks a bunch."
+        hide avery with dissolve
+        scene insidedomhouse with dissolve
         "They step aside and oblige."
         "The living room we're greeted with doesn't seem to have been prepared for company."
         "There's a suggestion of a couch beneath a layer of discarded clothing. Boxes and various knick knacks litter the floor."
-        "Nothing food or anything else organic, though-thank God."
+        "No food or anything else organic, though-thank God."
         "Avery clicks their tongue."
+        show avery body embarrassed:
+            xalign 1.3
+            yalign 1.0
         al "Sorry about the mess."
         al "I'll..."
         "They scamper over to the couch, gathers up an armful of clothing, and deposits into a mound I assume must've once been a laundry hamper."
@@ -2211,22 +2237,27 @@ label wake_vera:
         vl "It's all good."
         "Vera takes it as an invitation to sit."
         vl "You can go ahead and get your guy."
-        show andrea body happy
+        show andrea body happy:
+            xalign 0.4
+            yalign 1.0 
+            xzoom -1.0
         ab "Yeah, don't worry. You should see the van."
         "When they don't say otherwise, I join Vera on the couch."
         "They give an awkward laugh."
         al "Gotcha, no problem."
         "They disappear into the hallway."
+        hide avery with dissolve
         "Once they're out of view, Vera turns to me."
         show vera body shirt3 neutral2
         vl "You know, the car's not nearly as bad as this."
-        show andrea neutral
+        show andrea neutral:
+            xzoom 1.0
         ab "I was just trying to pacify him. It'd suck if he was on edge the whole time."
         "She leans back."
         vl "It's kinda weird for an academic type to have an apprentice."
         vl "Not like {i}bad{/i} weird, I just haven't heard about it much."
         ab "Really?"
-        "Vera's had her skin in the game longer than me. Even if we both went through the whole mentorship process, I'm not sure of the nitty-gritty of it."
+        "Vera has had her skin in the game longer than me. Even if we both went through the whole mentorship process, I'm not sure of the nitty-gritty of it."
         vl "Yeah, I mean. Maybe Dominic's one of those...sleeper nerds."
         ab "{i}Huh?{/i}"
         "Maybe it's some terminology I haven't heard."
@@ -3194,7 +3225,7 @@ label wake_vera:
             tn "Huh?"
             tn "But you said you weren't a cop."
             tn "You can't lie about that."
-            show andrea neutral
+            show andrea stern
             ab "You {i}can{/i} actually. Sorry, uh, about that."
             "The silver lining here is that this will be a learning experience for her."
             tn "{i}What?{/i}"
@@ -3210,7 +3241,9 @@ label wake_vera:
             tn "Thanks. Okay. Gotcha."
             "Her movements are robotic as she steps out from behind the counter."
             tn "So, like-...are you gonna put up tape, and stuff?"
+            show vera neutral2flipped
             vl "Yeah we just have it in the-..."
+            show andrea neutral
             ab "Police car."
             vl "Mhm."
             tn "...Okay."
@@ -3223,6 +3256,7 @@ label wake_vera:
             ab "Mmm..."
             show andrea happy
             "I make a show of considering it."
+            show vera annoyedflip
             vl "Come on, don't leave me hanging."
             ab "Alright. You didn't botch anything."
             "I slap her hand."
@@ -3241,7 +3275,7 @@ label wake_vera:
             show vera neutralflipped
             vl "You'll be fiiiine Andy."
             vl "You're a big girl, you can-"
-            show andrea angry   
+            show andrea annoyed   
             ab "Don't patronize me."
             show vera neutral2flipped
             vl "Right, right."
@@ -3291,7 +3325,8 @@ label wake_vera:
             hide vera
             with moveinoutfade
             "I head to the back."
-            show combat bg grayscale
+            scene combat bg grayscale
+            show andrea body neutral at left
             "It's a little offputting."
             "Rows and rows of frozen hot dogs and gas station snacks and unlabeled boxes."
             "The offensive scent of whatever they use to wipe this place down."
@@ -3316,7 +3351,8 @@ label wake_vera:
                 "But, noise is noise."
                 "I grab for the closest thing around me, which is a container of fries."
                 "I throw it, full force, into the dark."
-            
+                "I wait with baited breath for any kind of reaction."
+                jump after_outside
             label yell:
                 "I cup my hands to my mouth and yell:"
                 python:
@@ -3324,8 +3360,100 @@ label wake_vera:
                 "[yell]!"
                 "The night air swallows my voice eagerly."
                 "I lean forward to hear if anything caught it."
+                "..."
+                "Nothing-...maybe nothing."
+                jump after_outside
                 
-
+            label after_outside:
+                "Nothing turns into a maybe."
+                # insert a noise
+                show andrea body scared
+                "Turns into a definitely."
+                "It's a different noise everytime."
+                "Screeches that dig nails into my mind. Segmented chitin bumping against itself."
+                "This one's new."
+                "There's the suggestion of movement, but no source."
+                #insert skittering.
+                "{i}Alright, okay.{/i}"
+                "I have to get it in here."
+                "It has to see me at this point, right?"
+                "No way it'd resist a good meal. A pulsing little morsel of soul, standing stock still right in front of it."
+                "It's gone silent. Surveying, maybe?"
+                "Or it's fled, and I fucked up my chance."
+                # skitter
+                "An explosion of movement in front of me."
+                
+                ab "Shit!"
+                show andrea body scared 
+                define quick_time = True
+                if quick_time == True:
+                    $ timer_range = 3
+                    $ timer_jump = 'fend_it_off_bad'
+                    $ time = 3
+                    show screen countdown
+                    menu:
+                        "Block with the hammer.":
+                            jump fend_it_off
+                else:
+                    jump fend_it_off
+            label fend_it_off:
+                hide screen countdown
+                "The rush of air is coming from above."
+                "I grab onto the handle of my hammer with both arms and force it up."
+                "A crushing weight bears down on it."
+                "My arms scream, knees threatening to buckle."
+                show andrea angry
+                ab "{i}Vera!{/i}"
+                "Between my yell and the sound of its myriad footsteps, there's no way she doesn't hear."
+                "She's got the keener ear between the pair of us."
+                "My attention's torn away from her as there's another shove from above."
+                if quick_time == True:
+                    $ timer_range = 3
+                    $ timer_jump = 'push_down_bad'
+                    $ time = 3
+                    show screen countdown
+                    menu:
+                        "Move out of the way":
+                            jump dodge_out
+            label dodge_out:
+                hide screen countdown
+                "I stumble away before it succeeds in pressing me all the way down."
+                show andrea offput
+                "It catches itself on the ground with a dull {i}thud{/i}."
+                "A cloud of dust renders its silouhette briefly."
+                "Some multi-legged, serpentine thing. Something drags on the ground behind it."
+                "{i}Where is she?{/i}"
+                "Another woosh of air towards me."
+                "This time, from the ground."
+                "I'm not fast enough, shit."
+                if quick_time == True:
+                    
+                    $ timer_range = 0.5
+                    $ timer_jump = '"run"'
+                    $ time = 0.5
+                    menu:
+                        "Run.":
+                            jump run
+                    show screen countdown
+            label run:
+                # arrow noise
+                "Metal meets metal above me."
+                "A spark of brilliant blue illuminates the backroom, just for a second."
+                vl "I'm coming, I'm coming!"
+                show vera bodyflip shirt3flip annoyedflip at right
+                "Vera takes position a few steps behind me."
+                vl "Where is it?"
+                show andrea angry
+                ab "{i}Invisible.{/i}"
+                show vera angryflipped
+                vl "Damn it. Right!"
+                ab "Let's do something about it."
+                jump combat
+                
+            label fend_it_off_bad:
+                "Bleh."
+            label push_down_bad:
+                "Bleh."
             label front_room:
                 
                 ab "I can take the front."
@@ -3348,7 +3476,7 @@ label wake_vera:
     
     label combat:
         
-        
+        scene combat bg grayscale
      #   default health = 3
       #  default monster = 3
         
@@ -3360,6 +3488,7 @@ label wake_vera:
          #   "You win."
         $ default_combat_round = 1
         $ enabled = False
+        
         show screen attack_examine 
         
         "Alright, time to go."
