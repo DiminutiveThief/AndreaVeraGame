@@ -3,7 +3,7 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-
+fffff
 
 define ab = Character("Andrea", callback = name_callback, cb_name = "andrea", color="#d63e0c")
 define vl = Character("Vera", callback = name_callback, cb_name = "vera", color="#9cc7e4")
