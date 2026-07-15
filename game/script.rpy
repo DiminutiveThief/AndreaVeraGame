@@ -11,7 +11,7 @@ define sl =  Character("Sloane", callback = name_callback, cb_name = "sloane", c
 define w =  Character("Waiter")
 define unknown =  Character("Burn", callback = name_callback, cb_name = "??", color="E0DEDE")
 define unknown2 = Character("???", callback=name_callback, cb_name = "???", color="#4E575DFF")
-define dm = Character("Dominic")
+define dm = Character("Dominic", callback = name_callback, cb_name = "dominic", color="#d63e0c")
 define tn = Character("Teen")
 ##image vera happy = At('testvera', sprite_highlight('vera'))
 ##image andrea happy = At('testandrea', sprite_highlight('andrea'))
@@ -19,7 +19,24 @@ define al = Character("Avery", callback = name_callback, cb_name = "avery")
 
 
 
-
+layeredimage dominic:
+    at sprite_highlight ('dominic')
+    group body:
+        attribute body:
+            "images/Sprites/Dominic/dominic base.png"
+    group face:
+            attribute happy:
+                "images/Sprites/Dominic/dominic happy.png"
+            attribute angry:
+                "images/Sprites/Dominic/dominic angry.png"
+            attribute sad:
+                "images/Sprites/Dominic/dominic sad.png"
+            attribute neutral:
+                "images/Sprites/Dominic/dominic neutral.png"
+            attribute thinking:
+                "images/Sprites/Dominic/dominic thinking.png"
+            attribute excited:
+                "images/Sprites/Dominic/dominic angry.png"
 layeredimage avery:
     at sprite_highlight ('avery')
     group body:
@@ -997,7 +1014,7 @@ label clean:
     "In our dilligence to clean up our tracks, we chipped away at the built up grime clinging to the area."
     "Vera says something about beginning to counteract some of our misdeeds with Good Samaritan points that I only half hear."
     stop sound
-    scene hotel1
+    scene hotel1 with fade
    
     "When we leave the bathroom, it's four in the morning."
     "It's the time of year where the sky's already begun to lighten and the first notes of birdsong start up."
@@ -4068,7 +4085,7 @@ label wake_vera:
         vl "And they just kinda stare up at you? And you know you can squish 'em so easy."
         show vera neutral2
         vl "And you know you shouldn't, but also you just kinda wanna-"
-        show 
+        #show 
         "She clasps her hands together."
         show vera angry
         vl "And it's {i}so{/i} annoying, 'cause they're sitting there, and they don't even know."
