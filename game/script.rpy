@@ -4099,6 +4099,9 @@ label wake_vera:
         show andrea offput
         ab "But not-"
         "We reach the car and I unlock it."
+        scene car bg aznight with fade
+        show andrea offput at left
+        show vera neutral2 at right
         ab "Just weird. You have to know that too."
         "She slips in beside me and leans back in the seat."
         vl "I know. I didn't think you'd get it."
@@ -4110,7 +4113,7 @@ label wake_vera:
         vl "Guess he was naiive, or whatever."
         show vera annoyed
         vl "He'll bite it at some point. I can feel it."
-        show andrea neutral
+        show andrea stern
         ab "'Cause you think he's not prepped properly?"
         vl "Yeah, that. Also, it's just kinda stupid to think you can be in this line of work without getting your hands dirty."
         show vera sad
@@ -4124,15 +4127,57 @@ label wake_vera:
         "Getting Vera to change her mind about anything once she's set on it is like pulling teeth."
         ab "I know, I know."
         "I don't want to agree just to pacify her, but I'm not about to lecture her, either."
+        show andrea neutral
         ab "...Let's just take what we can get. Neither of them are your problem anymore."
         "She presses her hands into her eyes."
         vl "Mhm, yeah."
         vl "You're right."
-        vl "Can we turn on the AC for a bit?"
-        
-
-
-
+        show vera neutral2
+        vl "We should probably park somewhere else."
+        vl "We'll get weird looks if we stay here over night."
+        "We're of the same mind- I'm already starting the car."
+        #show menu, music?
+        "I drive for a bit - half an hour - then pull into the first rest stop I see."
+        "Vera passes out a few minutes after I stop."
+        "For a light sleeper, she can pass out basically anywhere."
+        hide vera with fade
+        "I let the car run a little longer, trying to make as much use of the AC as I can, then turn it off."
+        "Its death leaves me with nothing besides the buzz of cicadas and Vera's breathing for company."
+        "As tired as I am, you'd think it'd be easier to fall asleep."
+        "I should practice what I told Vera and just let this lead give me some peace of mind."
+        "Even if it's self-delusion, it's not too bad in small doses."
+        "But, I'm restless."
+        "We're at the whims of some weirdo again."
+        "We could just be sent on another errand run before we get anything useful."
+        "It wouldn't as bad if I didn't have that {i}thing{/i} pacing around the back of my mind."
+        "I don't know when Burn's better nature will rear its head again."
+        "Every delay is another invitation for it to demand tribute."
+        "I'm lucky it hasn't taken my attempts to seperate us as a slight."
+        "Maybe it has that little faith in me."
+        "I lean the car seat back as far as I can."
+        "I'll prove it wrong- I {i}have{/i} to."
+        "{i}Thick, pooling blood. Stinking corpse flesh. The last gasps of air spasming through the body in a death rattle.{/i}"
+        "I won't let Vera throw some poor idiot in front of me like she's a cat depositing roadkill on their door step, then wondering why they aren't eating."
+        "This won't be a dead end."
+        "I'll get something out of Rina."
+        "I stop my train of thought at that."
+        "Nothing past that is worth mulling over."
+        "{i}Tiger, Tiger, burning bright.{/i}"
+        #add driving dsfx
+        scene scene car bg azday with fade
+        show andrea body neutral at left with fade
+        "The next day goes by quickly, so does the day after that."
+        "It's just road, and road, and road."
+        "The endless expanse of highway, only broken up by exits or signage."
+        "I keep an ear out for any reports on the radio about what happened at the UaUa's."
+        "If there's anything, it's not important enough to make it past state lines."
+        "We {i}did{/i} do a decent job at clean up."
+        "We reach Nevada about three days in. Our exit takes us into rocky lowland, dotted with sagebrush, thats gradually joined by juniper pine."
+        "Vera says something at some point about wishing Dominic's buddy had decided to hide out in Las Vegas instead of the middle of nowhere, but I don't mind."
+        "Even if I moved around a lot as a kid (perks of being a military brat), it was never by car."
+        "Taking in the scenery doubles as an indulgence and a sanity check."
+        "Noting every rise and dip in incline and keeping an eye out for flashes of feathers fluttering through the withered bush, stops my focus from drifting."
+        ""
     label examine_done:
         "Looks like we've already found everything here!"
         call screen attack_examine
