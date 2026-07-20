@@ -17,7 +17,25 @@ define tn = Character("Teen")
 ##image andrea happy = At('testandrea', sprite_highlight('andrea'))
 define al = Character("Avery", callback = name_callback, cb_name = "avery")
 
+transform vera_spot:
+    xalign 0.1
+    yalign 1.0
 
+transform vera_car:
+    xalign 0.9
+    yalign 1.0
+
+transform andrea_shotgun:
+    xalign 0.8
+    yalign 1.0
+
+transform andrea_car:
+    xalign -0.1
+    xzoom -1.0
+    yalign 1.0
+
+transform night_filter:
+    matrixcolor BrightnessMatrix(-0.1) * TintMatrix ("#7C8587")
 
 layeredimage dominic:
     at sprite_highlight ('dominic')
@@ -649,7 +667,7 @@ label start:
         "...guh...Guh..."
         "The raised mass of burnt tissue around his throat quivers."
         "It sounds like ground meat being pressed through a narrow tunnel."
-        show andrea body scared at left
+        show andrea body scared at right
         ab "{i}Fuck!{/i}"
         play sound "towelrackfall.mp3"
         "I stumble backwards into one of the towel racks, sending the crashing contents to the ground."
@@ -690,7 +708,7 @@ label start:
             "He threatens to slide farther into the bathtub, his head lolling against the wall."
             "Its head. Its head. Not his."
             "Its head."
-            show andrea body sad at left
+            show andrea body sad at right
             "I stand up, willing my knees to comply."
             "His eyes–its eyes–the eyes of the soon-to-be corpse follow me all the way up."
             "This thing really is handy."
@@ -708,7 +726,7 @@ label start:
             "..."
             "I'm going to throw up."
             "The wave of vertigo sends the sledgehammer to the floor and me scrambling out of the door."
-            scene hotel1
+            scene hotel1 with fade
             stop sound 
             play audio "DoorClose.mp3"
             "I clumsily throw it shut behind me."
@@ -727,7 +745,7 @@ label start:
         show andrea body scared at right
         "I can't see the time but I get the message."
         "I don't have time for this."
-        show vera body shirt1 annoyed at left
+        show vera body shirt1 annoyed at vera_spot
         vl "Jesus, Andy."
         "Across the room, Vera looks over from her bed."
         vl "I heard something falling. What happened?"
@@ -876,11 +894,11 @@ label start:
             "What's left in its wake looks like the pulp of an overripe fruit. I can see the suggestion of hair, of eyes, of bones."
             "Part of me had hoped that if I destroyed someone thoroughly enough, they'd cross the threshold from human to meat."
             "They don't. They linger in the door frame."
-            show andrea body scared at left 
+            show andrea body scared at right 
             ab "{i}There{/i}."
             "I finally manage to grind out."
             ab "I did it. You happy?"
-            show andrea body scaredEC at left
+            show andrea body scaredEC at right
             ab "That enough?"
             "I place my hand on the edge of the bathtub. I don't quite know what to do with it."
             "I don't know what it wants me to do from here or how things work now."
@@ -989,7 +1007,7 @@ label clean:
     "I'm just about done dousing the rag in bleach, when the door cracks open."
     play sound "DoorOpen.mp3"
 
-    show vera body shirt1 neutral2 at left
+    show vera body shirt1 neutral2 at vera_spot
     vl "There we go. Knew you could do it."
     "She looks at the now-corpse appraisingly."
     vl "Got him in one, huh?"
@@ -1018,7 +1036,7 @@ label clean:
    
     "When we leave the bathroom, it's four in the morning."
     "It's the time of year where the sky's already begun to lighten and the first notes of birdsong start up."
-    show vera body shirt1 neutral2 at left
+    show vera body shirt1 neutral2 at vera_spot
     show andrea body sad at right
     vl "Let's go. Don't wanna linger."
     ab "Right."
@@ -1027,13 +1045,13 @@ label clean:
 
         "Vera grabs the dufflebag."
     "We leave the keys on the unmanned front desk down the hall and make our way out to the parking lot."
-    "We've been calling it 'the' van or 'our' van. It's really {i}my{/i} van. I got it on my dime: for suspiciously cheap"
+    "We've been calling it 'the' van or 'our' van. It's really {i}my{/i} van. I got it on my dime: for suspiciously cheap."
     "I really don't want to know what it's been through before I got it, but it's getting the job done."
     "It's nondescript, durable, and has plenty of storage space."
     "If things get real rough, we can even spend the night inside."
-    show vera body shirt1 neutral at right
+    show vera body shirt1 neutral at right with MoveTransition (0.1)
+    show andrea body neutral at andrea_shotgun with MoveTransition (0.1)
     vl "Shotgun!"
-    show andrea body neutral at left
 
     ab "Aw, damn, you beat me to it."
     "I say, as if letting her drive was a possibility."
@@ -1044,10 +1062,8 @@ label clean:
     "I coax the car feebly to life, but it's steady enough once we get on the road."
     play sound "CarAmbient.mp3" loop
     scene car bg aznight
-    show vera body shirt1 neutral at right
-    show andrea body neutral at left:
-        xalign -0.1
-        xzoom -1.0
+    show vera bodyflip shirt1flip neutralflipped at vera_car
+    show andrea body neutral at andrea_car
 
     "This time of night, it may as well be a graveyard."
     "I can count the number of other drivers on one hand and all the buildings merge together into one looming grey mass."
@@ -1064,8 +1080,8 @@ menu:
 
 
 label end:   
-    show andrea body sad at left
-    show vera shirt1 neutral at right    
+    show andrea body sad at andrea_car
+    show vera shirt1flip neutralflipped at vera_car    
     vl "So..."
     "It's a real occasion that Vera's at a loss for words."
     vl "We should get off a couple exits down, probably stop there somewhere."
@@ -1077,7 +1093,7 @@ label end:
     vl "Oh yeah, one hundred percent."
     vl "But she likes us."
     ab "She likes {i}me{/i}."
-    show vera annoyed
+    show vera annoyedflip
     "Vera scoffs."
     vl "Semantics. Anyway."
     vl "She won't ask too many questions as long as we're on top of it."
@@ -1087,11 +1103,11 @@ label end:
     "..."
     vl "Or die, I guess."
     ab "Don't say that."
-    show vera body shirt1 happy
+    show vera bodyflip shirt1flip happyflipped
     vl "I'm not saying we'll do that. It's just always a possibility."
     vl "Anytime you do anything, technically."
     ab "Do that on your own time, then."
-    show vera annoyed
+    show vera annoyedflip
     vl "What if I did, huh?"
     vl "What if we got into a pile up right now and I died-"
     ab "That wouldn't be good."
@@ -1106,7 +1122,7 @@ label end:
     "..."
     ab "Yeah, sure, alright."
     ab "That'd be awesome, Vera."
-    show vera neutral2
+    show vera neutral2flipped
     vl "That's cold."
     "..."
     vl "What were we on about again?"
@@ -1184,11 +1200,11 @@ label end:
         vl "'Cause I knew you were chicken shit."
         "I release a sharp sigh."
         ab "You sure it wasn't because you were getting bored?"
-        show vera body shirt1 neutral 
+        show vera bodyflip shirt1flip neutralflipped
         vl "That wasn't {i}not{/i} part of it."
         vl "Three birds with one stone."
         ab "What's the third one?"
-        show vera neutral2 
+        show vera neutral2flipped
         vl "Guy was an asshole, remember?"
         vl "Don't even have to be bogged down by guilt if we're doing a public service."
         "Right. Sure."
@@ -1196,11 +1212,11 @@ label end:
         "It's better for both of us to take Vera at her word."
         ab "You didn't really answer, though. Are you good?"
         vl "Right now, I'm tired."
-        show vera annoyed
+        show vera annoyedflip
         vl "And I wish this car had better AC."
         vl "And I wish we weren't in bumfuck Arizona."
         vl "But besides that, I'm good."
-        show andrea neutral 
+        show andrea body neutral
         ab "Cool, just wanted to make sure."
         "Vera's built for this more than I am."
         "And even if she wasn't, I don't know how honest she'd be."
@@ -1221,7 +1237,7 @@ label end:
         ab "Okay, uh-..."
         "I keep my eyes peeled for any signs."
         "One comes into view after a few minutes."
-        show vera neutral 
+        show vera neutralflipped
         vl "Waffle Home?"
         ab "Right, there's like a million of those out here."
         vl "I'm not going there."
@@ -1230,7 +1246,7 @@ label end:
         "I've seen her eat food off the floor."
         vl "You don't wanna know what happened the last time I went into a Waffle Home."
         ab "Well, now I do."
-        show vera neutral2 
+        show vera neutral2flipped
         vl "I was never the same afterwards."
         vl "I don't think your fragile heart could handle it, Andy."
         "I glance at her out of the corner of my eye."
@@ -1248,7 +1264,7 @@ label end:
         "She's quick on the uptake, though."
         vl "That stop light, the one we just passed."
         ab "Bingo. Your turn."
-        show vera neutral 
+        show vera neutralflipped
         vl "M'kay..."
         vl "I spy, with my little eye..."
         vl "Something black."
@@ -1269,13 +1285,13 @@ label end:
                 jump picked_asphalt
     label picked_asphalt:
         ab "The asphlat-the one on the road, I mean."
-        show vera annoyed
+        show vera annoyedflip
         vl "{i}No.{\i} That's, like, the lamest option."
         vl "Try again."
         jump look
     label picked_sky:
         ab "No moon out, basically opaque."
-        show vera annoyed
+        show vera annoyedflip
         vl "No, it's a dark indigo at best."
         vl "Maybe with hints of grey, if you squint."
         vl "Try again."
@@ -1285,7 +1301,7 @@ label end:
         "It'd been there when I got the car."
         "I've tried the whole gambit to get it off: bleach, car cleaner, even trying to scrape it off."
         "I don't even know what it is."
-        show vera body happy
+        show vera bodyflip happyflipped
         vl "Yeah!"
         vl "That's it."
         ab "That thing's probably a hazard."
@@ -1312,7 +1328,7 @@ label after_car:
     vl "You think Sloane cares about when we come in?"
     ab "No, as long as it's not too late."
     ab "Don't think anyone's snapped up the job that quick."
-    show vera annoyed shirt1 body at left
+    show vera annoyed shirt1 body at vera_spot
     vl "Good, because I'm not getting up before eleven."
     "I mumble in agreement as I get ready for bed."
     "Tired sucks, but tired also means I'm too foggy to dwell."
@@ -1330,7 +1346,7 @@ label after_car:
     "My body wakes up before I do."
     "By the time I'm cognizant, I'm already sitting up ram-rod straight."
     "My heart's only now retreating from my throat."
-    show andrea body neutral at left
+    show andrea body neutral at right
     "The edge of whatever dream lodged it up there fades out."
     "The sky outside is turning from orange to a grayish-blue, so it can't be {i}that{/i} early."
     "Looks like Vera got her wish."
@@ -1408,7 +1424,7 @@ label wake_vera:
     "As soon as I touch her shoulder, she jerks awake."
     "Her eyes snap wide open, before narrowing into annoyance."
     scene hotel_2
-    show vera body shirt2 annoyed at left
+    show vera body shirt2 annoyed at vera_spot
     show andrea body neutral at right
     vl "Ugh..."
     "She makes a sound like a car backfiring."
@@ -1437,7 +1453,7 @@ label wake_vera:
     ab "I don't want it to come to that."
     vl "It won't! Probably."
     vl "That's why we're having this conversation."
-    show vera body shirt2 happy at left
+    show vera body shirt2 happy at vera_spot
     vl "We'll handle things as they come, Andy, my dear."
     "She claps my shoulder."
     "I gingerly lean away."
@@ -1463,7 +1479,7 @@ label wake_vera:
     sl "..It {i}is{/i} both of you, right?"
     ab "Yeah, Vera's around."
     "Vera tilts her head back to look at me."
-    show vera body shirt2 neutral at left
+    show vera body shirt2 neutral at vera_spot
     vl "Is she asking about me?"
     "She mouths."
     hide vera
@@ -1477,7 +1493,7 @@ label wake_vera:
     "There's a pause."
     sl "Tell Vera hello for me."
     "There's the click of a receiver dropping."
-    show vera body shirt2 neutral2 at left
+    show vera body shirt2 neutral2 at vera_spot
     vl "So?"
     ab "Sloane says hello."
     ab "And she wants to meet up in an hour. Looks like the job's still open."
@@ -1501,7 +1517,7 @@ label wake_vera:
     hide vera
     label sloane_diner:
         "We dont have to worry about breakast, so we get out quick."
-    scene diner
+    scene diner with fade
     "The drive over is shorter than the last. Most of the time is spent finding a place to park."
     "The Honey Tiger Diner is probably the most put-together amenity we've seen over the last two weeks."
     "Even if it's not anything fancy- Sloane has standards, but she's not shilling out for us. the fact that the sign on the top isn't trying to extricate itself from the wall and the windows aren't cobwebbed is good enough."
@@ -1841,7 +1857,7 @@ label wake_vera:
             "It feels like biting into flesh that's been left to boil until it's melted into pulpy meat."
             jump ash_food
         label ash_food:
-            show andrea body scared 
+            show andrea body scared
             "The food turns to ash in my mouth."
             "In one frenetic motion, I grab my napkin and spit into it. I stand up bolt upright, my sinews yanked to attention."
             show sloane body stern
@@ -1852,19 +1868,20 @@ label wake_vera:
             ab "Food's burnt."
             "I can see Vera's grip tense around her fork."
             "Not a conversation I'm excited for."
-            show andrea body scared 
             ab "I'm gonna-bathroom, I'll be right back."
-            hide vera 
-            hide sloane
+            
+            hide andrea body scared with moveoutright
+            scene diner with fade
             "I don't bother asking where it is, I can figure it out."
             "I can feel stares trailing me as I move."
             "Or maybe I don't. Fuck, maybe I'm just losing my grip."
             "I follow the sign to the back of the restaurant and go in."
             stop music
             play sound "DoorOpen.mp3"
+            scene diner at night_filter
             "It's blissfully empty."
             "I screw my eyes shut and bring my hands to my face, nails scratching at the scalp."
-            show andrea body scaredEC at left
+            show andrea body scaredEC
             "I keep my mouth locked firmly tight. I don't know whether it's vomit or a sob or a scream that's climbing up my throat."
             "I can't be doing this, not here."
             "This is fucked, I'm fucked. This isn't a luxury I can afford."
@@ -1898,26 +1915,30 @@ label wake_vera:
             "I'm used to using it to stay calm when something's about to bite my head off."
             "But, I'll welcome it now, anyhow."
             "Not quite a comfort, but verging on one."
-            show andrea body scared at right
+            show andrea body scared
             "I pry my eyelids open."
             "My hearts' stopped syncopating, and I will my hands into stillness after a few stern glares."
             "There. Managable."
             "Enough to go back out and finish whatever pleasantries it'll take to get out of here, then deal with whatever Vera inevitably latches on to."
-            show sloane body stern:
+            scene diner with fade
+            
+            "By the time I make it back to the table, my back's straight and I've swapped out the bile climbing up my throat for idle conversation."
+            show andrea body neutral with MoveTransition(0.8, enter=offscreenright):
+                xalign 0.9
+                yalign 1.0
+            show sloane body stern with dissolve:
                 xzoom -1.0
                 xalign -0.1
                 yalign 1.0
-            show vera bodyflip shirt2flip neutral2flipped:
+            show vera bodyflip shirt2flip neutral2flipped with dissolve: 
                 xalign 0.98
                 yalign 1.0
-            show andrea body neutral:
-                xalign 0.9
-                yalign 1.0
-            "By the time I make it back to the table, my back's straight and I've swapped out the bile climbing up my throat for idle conversation."
             "Neither Sloane nor Vera put much effort into hiding the fact they're suspicious, but don't stop me when I pivot away."
+            
             "The twenty minutes until we get our check go by quickly."
-            show andrea body sad at right
+            show andrea body sad
             "Sloane wishes us good luck on the job and hopes our-"
+            show sloane smile
             sl "-newfound freedom serves us well."
             "I thank her for the meal. She leaves."
             "The waiter asks if we want to take the food to go, and Vera answers 'yes' before I can decline."  
@@ -1928,9 +1949,9 @@ label wake_vera:
 
             label car_argument:
                 stop music
-            scene carbgazday
-            show andrea body sad at right
-            show vera body shirt2 annoyed at left
+            scene carbgazday with fade
+            show andrea body sad at andrea_car
+            show vera bodyflip shirt2flip annoyedflip at vera_car
             vl "Andy."
             "She begins slowly."
             show andrea body annoyed 
@@ -1941,7 +1962,7 @@ label wake_vera:
             "She grabs my hand before I can take it out of park."
             show andrea body angry 
             ab "Hey, what the fuck?"
-            show vera body shirt2 angry 
+            show vera bodyflip shirt2flip angryflipped
             vl "I asked you a question."
             ab "Nothing. {i}Nothing's{/i} up."
             vl "Nothing my ass-"
@@ -1982,23 +2003,32 @@ label wake_vera:
             show andrea body scared
             ab "It's been a day-{i}less{/i}than a day."
             ab "I don't know how you expect me to-what?-walk it off."
+            show andrea body angry
             ab "At least pretend to care."
             "Vera clicks her tongue."
             vl "You barely did anything."
             "She leans in closer. It's somewhere between a confession and a dare."
+            show vera bodyflip shirt2flip angryflipped with move:
+                xoffset -100
             vl "{i}I{/i} found him."
+            show vera angryflipped with MoveTransition(0.1):
+                xoffset -200
             vl "{i}I{/i} took him out."
+            show vera angryflipped with MoveTransition(0.1):
+                xoffset -300
             vl "{i}I{/i} did it even when he begged for his stupid little life like a dog."
+            show vera angryflipped with MoveTransition(0.1):
+                xoffset -400
             vl "{i}I{/i} dragged him halfway across town because I knew {i}you{/i} couldn't do it."
             ab "Don't act like this is about me."
             "Another scratch of laughter."
-            show vera body shirt2 neutral2
+            show vera bodyflip shirt2flip neutralflipped
             vl "It's always about you! This entire damn thing is about you."
             vl "It's your deal. It's your hit list. Your lifeline."
             ab "I'm just your excuse to do whatever you want, hurt whoever you want."
             ab "Easy execution block right in front of you."
             ab "Me dying was probably the best thing to happen to you."
-            show vera body shirt2 neutral
+            show vera bodyflip shirt2flip neutralflipped
             vl "Tell me to leave then."
             "Her hand hovers over the car door; a threat."
             vl "Kick me out of this car."
@@ -2007,8 +2037,10 @@ label wake_vera:
             ab "Don't-..."
             vl "No, go on."
             vl "You don't need me around. You can take care of yourself just fine. You're way stronger now."
+            show vera bodyflip shirt2flip happyflipped with move:
+                xoffset -500
             "Another hairbreadth closer."
-            show vera body shirt2 happy
+            
             vl "Right?"
             "I almost answer reflexively."
             "Oblige her. Throw her bag at her in agreement. {i}'Like hell I need you.'{/i}"
@@ -2023,7 +2055,7 @@ label wake_vera:
             ab "Fuck you."
             vl "You could do this without me, but you won't. You don't have the guts."
             vl "Or you don't think you do. Whatever."
-            show vera body shirt2 annoyed
+            show vera bodyflip shirt2flip annoyedflip
             vl "Yeah, you caught me. I don't care about whoever you turned into mincemeat."
             "Of course she was just placating me about who he was. She probably didn't even get his name before cutting his throat."
             vl "Maybe I liked cutting him up. Maybe I didn't. Maybe you're going to spend your entire life being haunted by guilt."
@@ -2032,7 +2064,7 @@ label wake_vera:
             show andrea body annoyed
             ab "You know it won't listen."
             "I'm latching onto a rhetorical. I just want to do something besides sit mutely like I'm a child being given a lecture."
-            show vera body shirt2 neutral2
+            show vera bodyflip shirt2flip neutral2flipped
             vl "Feel however bad you want. Cry yourself to sleep. Bottle it up. You're good at that."
             vl "Just don't let it screw us over. You got a chance most people didn't it and it'd be stupid if you wasted it-because you couldn't keep it together over breakfast and someone got too curious."
             vl "What happened sucks. Not fair. Etcetera etcetera, But it did so-..."
@@ -2041,7 +2073,8 @@ label wake_vera:
             show andrea body sad 
             ab "I {i}am{/i} dealing with it."
             ab "Maybe if you give me more than twelve hours, I'll save some more face."
-            show vera body shirt2 sad
+            show vera bodyflip shirt2flip sadflipped at vera_car with move:
+                xoffset 0
             vl "Okay."
             "A stalemate is the closest thing to an admission of guilt I'll get from her."
             play sound "audio/CarStartSFX.mp3"
@@ -2053,6 +2086,7 @@ label wake_vera:
             "Something that comes before I've beat the last bits of guilt out of myself."
             "..."
             label chapter_1:
+            scene carbgazday with fade
             hide andrea
             hide vera
             "We drive for a while."
