@@ -726,7 +726,7 @@ label start:
             "..."
             "I'm going to throw up."
             "The wave of vertigo sends the sledgehammer to the floor and me scrambling out of the door."
-            scene hotel1
+            scene hotel1 with fade
             stop sound 
             play audio "DoorClose.mp3"
             "I clumsily throw it shut behind me."
@@ -1045,7 +1045,7 @@ label clean:
 
         "Vera grabs the dufflebag."
     "We leave the keys on the unmanned front desk down the hall and make our way out to the parking lot."
-    "We've been calling it 'the' van or 'our' van. It's really {i}my{/i} van. I got it on my dime: for suspiciously cheap"
+    "We've been calling it 'the' van or 'our' van. It's really {i}my{/i} van. I got it on my dime: for suspiciously cheap."
     "I really don't want to know what it's been through before I got it, but it's getting the job done."
     "It's nondescript, durable, and has plenty of storage space."
     "If things get real rough, we can even spend the night inside."
@@ -1517,7 +1517,7 @@ label wake_vera:
     hide vera
     label sloane_diner:
         "We dont have to worry about breakast, so we get out quick."
-    scene diner
+    scene diner with fade
     "The drive over is shorter than the last. Most of the time is spent finding a place to park."
     "The Honey Tiger Diner is probably the most put-together amenity we've seen over the last two weeks."
     "Even if it's not anything fancy- Sloane has standards, but she's not shilling out for us. the fact that the sign on the top isn't trying to extricate itself from the wall and the windows aren't cobwebbed is good enough."
@@ -1868,10 +1868,10 @@ label wake_vera:
             ab "Food's burnt."
             "I can see Vera's grip tense around her fork."
             "Not a conversation I'm excited for."
-            show andrea body scared 
             ab "I'm gonna-bathroom, I'll be right back."
-            hide vera 
-            hide sloane
+            
+            hide andrea body scared with moveoutright
+            scene diner with fade
             "I don't bother asking where it is, I can figure it out."
             "I can feel stares trailing me as I move."
             "Or maybe I don't. Fuck, maybe I'm just losing my grip."
@@ -1920,22 +1920,25 @@ label wake_vera:
             "My hearts' stopped syncopating, and I will my hands into stillness after a few stern glares."
             "There. Managable."
             "Enough to go back out and finish whatever pleasantries it'll take to get out of here, then deal with whatever Vera inevitably latches on to."
-            scene diner
-            show sloane body stern:
+            scene diner with fade
+            
+            "By the time I make it back to the table, my back's straight and I've swapped out the bile climbing up my throat for idle conversation."
+            show andrea body neutral with MoveTransition(0.8, enter=offscreenright):
+                xalign 0.9
+                yalign 1.0
+            show sloane body stern with dissolve:
                 xzoom -1.0
                 xalign -0.1
                 yalign 1.0
-            show vera bodyflip shirt2flip neutral2flipped:
+            show vera bodyflip shirt2flip neutral2flipped with dissolve: 
                 xalign 0.98
                 yalign 1.0
-            show andrea body neutral:
-                xalign 0.9
-                yalign 1.0
-            "By the time I make it back to the table, my back's straight and I've swapped out the bile climbing up my throat for idle conversation."
             "Neither Sloane nor Vera put much effort into hiding the fact they're suspicious, but don't stop me when I pivot away."
+            
             "The twenty minutes until we get our check go by quickly."
             show andrea body sad
             "Sloane wishes us good luck on the job and hopes our-"
+            show sloane smile
             sl "-newfound freedom serves us well."
             "I thank her for the meal. She leaves."
             "The waiter asks if we want to take the food to go, and Vera answers 'yes' before I can decline."  
@@ -1946,7 +1949,7 @@ label wake_vera:
 
             label car_argument:
                 stop music
-            scene carbgazday
+            scene carbgazday with fade
             show andrea body sad at andrea_car
             show vera bodyflip shirt2flip annoyedflip at vera_car
             vl "Andy."
@@ -2000,17 +2003,26 @@ label wake_vera:
             show andrea body scared
             ab "It's been a day-{i}less{/i}than a day."
             ab "I don't know how you expect me to-what?-walk it off."
+            show andrea body angry
             ab "At least pretend to care."
             "Vera clicks her tongue."
             vl "You barely did anything."
             "She leans in closer. It's somewhere between a confession and a dare."
+            show vera bodyflip shirt2flip angryflipped with move:
+                xoffset -100
             vl "{i}I{/i} found him."
+            show vera angryflipped with MoveTransition(0.1):
+                xoffset -200
             vl "{i}I{/i} took him out."
+            show vera angryflipped with MoveTransition(0.1):
+                xoffset -300
             vl "{i}I{/i} did it even when he begged for his stupid little life like a dog."
+            show vera angryflipped with MoveTransition(0.1):
+                xoffset -400
             vl "{i}I{/i} dragged him halfway across town because I knew {i}you{/i} couldn't do it."
             ab "Don't act like this is about me."
             "Another scratch of laughter."
-            show vera bodyflip shirt2flip neutral2flipped
+            show vera bodyflip shirt2flip neutralflipped
             vl "It's always about you! This entire damn thing is about you."
             vl "It's your deal. It's your hit list. Your lifeline."
             ab "I'm just your excuse to do whatever you want, hurt whoever you want."
@@ -2025,8 +2037,10 @@ label wake_vera:
             ab "Don't-..."
             vl "No, go on."
             vl "You don't need me around. You can take care of yourself just fine. You're way stronger now."
+            show vera bodyflip shirt2flip happyflipped with move:
+                xoffset -500
             "Another hairbreadth closer."
-            show vera bodyflip shirt2flip happyflipped
+            
             vl "Right?"
             "I almost answer reflexively."
             "Oblige her. Throw her bag at her in agreement. {i}'Like hell I need you.'{/i}"
@@ -2059,7 +2073,8 @@ label wake_vera:
             show andrea body sad 
             ab "I {i}am{/i} dealing with it."
             ab "Maybe if you give me more than twelve hours, I'll save some more face."
-            show vera bodyflip shirt2flip sadflipped
+            show vera bodyflip shirt2flip sadflipped at vera_car with move:
+                xoffset 0
             vl "Okay."
             "A stalemate is the closest thing to an admission of guilt I'll get from her."
             play sound "audio/CarStartSFX.mp3"
