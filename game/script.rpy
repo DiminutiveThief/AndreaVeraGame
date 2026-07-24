@@ -3,7 +3,7 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-fff
+
 
 define ab = Character("Andrea", callback = name_callback, cb_name = "andrea", color="#d63e0c")
 define vl = Character("Vera", callback = name_callback, cb_name = "vera", color="#9cc7e4")
@@ -36,6 +36,8 @@ transform andrea_car:
 
 transform night_filter:
     matrixcolor BrightnessMatrix(-0.1) * TintMatrix ("#7C8587")
+transform alt_hotel:
+    matrixcolor BrightnessMatrix(-0.13) * TintMatrix ("#eac0c0")
 
 layeredimage dominic:
     at sprite_highlight ('dominic')
@@ -4210,8 +4212,22 @@ label wake_vera:
         "Vera says something at some point about wishing Dominic's buddy had decided to hide out in Las Vegas instead of the middle of nowhere, but I don't mind."
         "Even if I moved around a lot as a kid (perks of being a military brat), it was never by car."
         "Taking in the scenery doubles as an indulgence and a sanity check."
-        "Noting every rise and dip in incline and keeping an eye out for flashes of feathers fluttering through the withered bush, stops my focus from drifting."
-        ""
+        "Noting every rise and dip in incline and keeping an eye out for flashes of feathers fluttering through the withered bush stops my focus from drifting."
+        "Our exit arrives with so little fanfare that I almost miss it."
+        "The road cracks and becomes pockmarked with rock as I turn onto it."
+        "I vice grip the wheel of our little ship in the night, like it'll do anything."
+        "We pull into the first motel we find. I'm not trusting any rest stop this far out."
+        label before_husk_hotel :
+            scene hotel1 at alt_hotel
+            "..."
+            "Vera's voice drags me out of a dreamless sleep."
+            vl "-hey."
+            "I groan and turn onto my side."
+            "Three days of almost straight driving have congealed with the lingering effects of the fight to weigh down my body like tar."
+        "This motel is one of the better ones we've hit."
+        "The blankets aren't too scratchy. "
+
+
     label examine_done:
         "Looks like we've already found everything here!"
         call screen attack_examine
