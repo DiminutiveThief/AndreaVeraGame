@@ -1774,7 +1774,7 @@ label wake_vera:
             jump vera_lookover
        
         label vera_lookover:
-            show vera bodyflip shirt2flip happyflipped at right
+            show vera bodyflip shirt2flip happyflipped
             vl "Ooh, looks good."
             "Vera peers over my shoulder."
             "Instinctively, I pull my plate away."
@@ -1924,15 +1924,16 @@ label wake_vera:
             "Enough to go back out and finish whatever pleasantries it'll take to get out of here, then deal with whatever Vera inevitably latches on to."
             scene diner with fade
             
+            
             "By the time I make it back to the table, my back's straight and I've swapped out the bile climbing up my throat for idle conversation."
             show andrea body neutral with MoveTransition(0.8, enter=offscreenright):
                 xalign 0.9
                 yalign 1.0
-            show sloane body stern with dissolve:
+            show sloane body stern:
                 xzoom -1.0
                 xalign -0.1
                 yalign 1.0
-            show vera bodyflip shirt2flip neutral2flipped with dissolve: 
+            show vera bodyflip shirt2flip neutral2flipped: 
                 xalign 0.98
                 yalign 1.0
             "Neither Sloane nor Vera put much effort into hiding the fact they're suspicious, but don't stop me when I pivot away."
