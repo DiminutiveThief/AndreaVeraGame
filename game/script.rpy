@@ -1874,7 +1874,8 @@ label wake_vera:
             
             hide andrea body scared with moveoutright
             scene diner with fade
-            "I don't bother asking where it is, I can figure it out."
+            label bathroom_diner:
+                "I don't bother asking where it is, I can figure it out."
             "I can feel stares trailing me as I move."
             "Or maybe I don't. Fuck, maybe I'm just losing my grip."
             "I follow the sign to the back of the restaurant and go in."
@@ -1884,10 +1885,38 @@ label wake_vera:
             "It's blissfully empty."
             "I screw my eyes shut and bring my hands to my face, nails scratching at the scalp."
             show andrea body scaredEC
+            scene diner at night_filter:
+                blur 4
+                pause 0.3
+                blur 5
+                pause 0.3
+                blur 6
+                pause 0.3
+                blur 5
+                pause 0.3
+                blur 4
+                pause 0.3
+    
+                repeat 
+            show andrea body scaredEC
             "I keep my mouth locked firmly tight. I don't know whether it's vomit or a sob or a scream that's climbing up my throat."
             "I can't be doing this, not here."
             "This is fucked, I'm fucked. This isn't a luxury I can afford."
             "I cup a handful of water and throw it in my face."
+            scene diner at night_filter:
+                blur 8
+                pause 0.2
+                blur 9
+                pause 0.2
+                blur 10
+                pause 0.2
+                blur 9
+                pause 0.2
+                blur 8
+                pause 0.2
+    
+                repeat 
+            show andrea body scaredEC
             "It's lukewarm. My free hand tightens on the sink."
             "Can't get my head straight; can't keep a face up for Sloane; can't choke down goddamn food."
             "Can't bash in a skull without Vera dropping it in my lap like a cat bringing in roadkill."
@@ -1897,6 +1926,20 @@ label wake_vera:
             "I don't need to; I already know what it thinks."
             "{i}Stupid little girl.{/i}"
             "{i}Ungrateful coward.{/i}"
+            scene diner at night_filter:
+                blur 9
+                pause 0.2
+                blur 10
+                pause 0.2
+                blur 11
+                pause 0.2
+                blur 10
+                pause 0.2
+                blur 9
+                pause 0.2
+    
+                repeat 
+            show andrea body scaredEC
             "It might push its deadline up just to spite me."
             "Not that it'd call it spite."
             "It's always motivation with it. Encouragement. A test. The chance to be something better."
@@ -1908,15 +1951,59 @@ label wake_vera:
             "I just need a second."
             "I don't have a cigarette on me, so it's the next-best thing."
             ab "{i}Tyger, Tyger...{/i}"
+            scene diner at night_filter:
+                blur 8
+                pause 0.2
+                blur 9
+                pause 0.2
+                blur 10
+                pause 0.2
+                blur 9
+                pause 0.2
+                blur 8
+                pause 0.2
+    
+                repeat 
+            show andrea body scaredEC
             "I feel myself mumble out the words more than I hear myself say them."
             "Eighteen years and twelve grades of English, I have no idea why this is the thing I kept from it."
             ab "{i}Burning bright.{/i}"
+            scene diner at night_filter:
+                blur 4
+                pause 0.3
+                blur 5
+                pause 0.3
+                blur 6
+                pause 0.3
+                blur 5
+                pause 0.3
+                blur 4
+                pause 0.3
+    
+                repeat 
+            show andrea body scaredEC
             "The stanza's woven itself into the grooves of my muscle memory."
             "It's a ritual, habit, whatever."
             "It gives me something to do, keeps me grounded with a rhythm."
             "I'm used to using it to stay calm when something's about to bite my head off."
             "But, I'll welcome it now, anyhow."
+            scene diner at night_filter:
+                blur 1
+                pause 0.3
+                blur 2
+                pause 0.3
+                blur 3
+                pause 0.3
+                blur 2
+                pause 0.3
+                blur 1
+                pause 0.3
+    
+                repeat 
+            show andrea body scaredEC
             "Not quite a comfort, but verging on one."
+            show andrea body scared
+            scene diner at night_filter
             show andrea body scared
             "I pry my eyelids open."
             "My hearts' stopped syncopating, and I will my hands into stillness after a few stern glares."
@@ -4219,15 +4306,29 @@ label wake_vera:
         "I vice grip the wheel of our little ship in the night, like it'll do anything."
         "We pull into the first motel we find. I'm not trusting any rest stop this far out."
         label before_husk_hotel :
+            
+            scene hotel1 at alt_hotel: 
+                blur 3
+                pause 0.6
+                blur 4
+                pause 0.6
+               
+                repeat 
             scene hotel1 at alt_hotel
             "..."
             "Vera's voice drags me out of a dreamless sleep."
             vl "-hey."
+            show vera body shirt3 neutral at vera_spot:
+                blur 1
             "I groan and turn onto my side."
             "Three days of almost straight driving have congealed with the lingering effects of the fight to weigh down my body like tar."
         "This motel is one of the better ones we've hit."
-        "The blankets aren't too scratchy. "
-
+        "The blankets aren't too scratchy and the AC sputters on without issue."
+        "And there's a coffee machine: the smell in the air tells me Vera put something on."
+        ab "Give me a sec."
+        show vera neutral
+        
+        
 
     label examine_done:
         "Looks like we've already found everything here!"
