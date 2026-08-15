@@ -12,32 +12,14 @@ define w =  Character("Waiter")
 define unknown =  Character("Burn", callback = name_callback, cb_name = "??", color="E0DEDE")
 define unknown2 = Character("???", callback=name_callback, cb_name = "???", color="#4E575DFF")
 define dm = Character("Dominic", callback = name_callback, cb_name = "dominic", color="#d63e0c")
+define hk = Character("Rina", callback = name_callback, cb_name = "rina", color="#51408e")
+
 define tn = Character("Teen")
 ##image vera happy = At('testvera', sprite_highlight('vera'))
 ##image andrea happy = At('testandrea', sprite_highlight('andrea'))
 define al = Character("Avery", callback = name_callback, cb_name = "avery")
 
-transform vera_spot:
-    xalign 0.1
-    yalign 1.0
 
-transform vera_car:
-    xalign 0.9
-    yalign 1.0
-
-transform andrea_shotgun:
-    xalign 0.8
-    yalign 1.0
-
-transform andrea_car:
-    xalign -0.1
-    xzoom -1.0
-    yalign 1.0
-
-transform night_filter:
-    matrixcolor BrightnessMatrix(-0.1) * TintMatrix ("#7C8587")
-transform alt_hotel:
-    matrixcolor BrightnessMatrix(-0.13) * TintMatrix ("#eac0c0")
 
 layeredimage dominic:
     at sprite_highlight ('dominic')
@@ -175,44 +157,7 @@ layeredimage sloane:
         attribute curious:
             "images/Sprites/Sloane/s curious new.png"
 
-screen tips_screen:
-    text "Ohh the creature."
 
-screen attack_examine:
-    imagebutton:
-        sensitive examine_button_enabled 
-        pos (1050, 450)
-        focus_mask True
-        idle "combat/examine.png"
-        hover "combat/examine select.png"
-        if full_examined == False:
-            action Jump ("examine_first")
-        else:
-            action Jump ("examine_done")
-
-    imagebutton:
-        sensitive attack_button_enabled
-        pos (250, 450)
-        focus_mask True
-        idle "combat/attack.png"
-        hover "combat/attack select.png"
-        if tutorial_done == False:
-            action [Jump("combats"), Hide("attack_examine")]     
-        else: 
-            action [Jump("post_tutorial_combat"), Hide("attack_examine")]    
-screen theBody:
-   
-    imagemap:
-        ground "Background/longuevest.png"    
-        hover "Background/vesthighlight.png"  
-        hotspot (650, 459, 195, 203) action Jump ("body")
-screen theBody2:
-    imagemap:
-        ground "Background/Body BG SC1.png"
-        hover "Background/Body Part HL1.png"
-        hotspot (225, 144, 381, 303) action [Play ("sound", "EyeTouch.mp3"), Jump ("eyes_body")]
-        hotspot (326, 509, 258, 131) action [Play ("sound", "Neck.mp3"), Jump ("throat_body")]
-        hotspot (587, 799, 454, 257) action [Play ("sound", "BodyTouch.mp3"), Jump ("torso_body")]
 default red_btn_selected = False
 default attackChance = 0
 default next_round = "null"
@@ -243,350 +188,7 @@ default examine_button_enabled = False
 default attack_button_enabled = False
 default paragon_enabled = False
 default andrea_vera_health = "good"
-screen combat:
-   
-    add "combat/combat bg grayscale.png"
 
-
-    add andrea_vera:
-        pos (1200, 800)
-    
-        
-    if flour_found:
-        imagebutton:
-            sensitive flour_found
-            pos (0, 50)
-            focus_mask True
-            idle "combat/combat flr base.png"
-            hover "combat/combat flr hl.png"
-            selected_idle "combat/combat flr hl.png"
-            selected (flour == True)
-            action [ToggleVariable("flour"), SetVariable("arwselected", False), SetVariable("hmrselected", False), ToggleVariable ("something_selected")]
-    imagebutton:
-            sensitive enabled
-            pos (0, 350)
-            focus_mask True
-            idle "combat/combat hmr base.png"
-            hover "combat/combat hmr hl.png"    
-            selected_idle "combat/combat hmr hl.png"  
-            action [ToggleVariable("hmrselected"), SetVariable("arwselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
-            selected (hmrselected == True)
-
-    imagebutton:
-        sensitive enabled
-        pos (0, 650)
-        focus_mask True
-        idle "combat/combat arw base.png"
-        hover "combat/combat arw hl.png"    
-        selected_idle "combat/combat arw hl.png"  
-        action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
-        selected (arwselected == True)
-
-
-
-
-    imagebutton:
-        sensitive paragon_enabled
-        focus_mask True
-    
-        if invisible == False:
-            if head_floured == True:
-                idle "combat/paragon head flour.png"
-                hover "combat/paragon head flour hl.png"
-                selected_idle "combat/paragon head flour hl.png"
-               
-            else:
-                idle "combat/paragon head base.png"
-                hover "combat/paragon head base hl.png"
-                selected_idle "combat/paragon head base hl.png"
-        else: 
-            idle "combat/paragon head invisible.png"
-            hover "combat/paragon head invis hl.png"
-            selected_idle "combat/paragon head invis hl.png"
-        if something_selected == True:   
-            if flour == True:
-                action [SetVariable("invisible", False), SetVariable("head_floured", True), Jump("correct")]
-            else:
-                action Jump("wrong1")
-        else: 
-            action NullAction()
-    imagebutton:
-        sensitive paragon_enabled
-        focus_mask True
-        if invisible == False:
-           if torso_floured == True:
-                idle "combat/paragon torso flour.png"
-                hover "combat/paragon torso flour hl.png"
-                selected_idle "combat/paragon torso flour hl.png"
-            
-           else:
-                idle "combat/paragon torso base.png"
-                hover "combat/paragon torso base hl.png"
-                selected_idle "combat/paragon torso base hl.png"
-        else:
-            idle "combat/paragon torso invis.png"
-            hover "combat/paragon torso invis hl.png"
-            selected_idle "combat/paragon invis hl.png"
-        ##action ToggleVariable("blue_btn_selected", True,False)
-        ##selected(blue_btn_selected)
-        
-        if something_selected == True:   
-            if flour == True:
-                action [SetVariable("invisible", False), SetVariable("torso_floured", True), Jump("correct")]
-            else:
-                action Jump("wrong1")
-        else: 
-            action NullAction()
-        #if green_btn_selected:
-            #       action Jump("incorrect")    
-
-    imagebutton:
-            sensitive paragon_enabled
-            focus_mask True
-            ##action NullAction()
-            if invisible == False:
-                if tail_floured == True:
-                    idle "combat/paragon tail flour.png"
-                    hover "combat/paragon tail flour hl.png"
-                    if tailhmred == True:
-                        idle "combat/paragon tail injured.png"
-                        hover "combat/paragon tail injured hl.png"
-                else:
-                    idle "combat/paragon tail base.png"
-                    hover "combat/paragon tail base hl.png"
-            else:
-                idle "combat/paragon tail invis.png"
-                hover "combat/paragon tail invis hl.png"
-                selected_idle "combat/paragon tail invis hl.png"
-            ## action ToggleVariable("red_btn_selected", True, False)
-            
-            ##action NullAction()
-            if flour == True:
-                action [SetVariable("invisible", False), SetVariable("tail_floured", True), Jump("correct")]
-            else:
-                action NullAction()
-
-                
-            
-          
-           ## else:
-             ##   action NullAction()
-         ##   selected(red_btn_selected)
-         ## if blue_btn_selected == True:
-                
-            #   if green_btn_selected:
-            #      action Jump("incorrect")
-                
-            
-        
-
-screen combat2:
-
-    add "combat/combat bg grayscale.png"
-    add andrea_vera:
-        pos (1200, 800)
-    
-        
-
-
-    imagebutton:
-            sensitive enabled
-            pos (0, 350)
-            focus_mask True
-            idle "combat/combat hmr base.png"
-            hover "combat/combat hmr hl.png"    
-            selected_idle "combat/combat hmr hl.png"  
-            action [ToggleVariable("hmrselected"), SetVariable("arwselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
-            selected (hmrselected == True)
-
-    imagebutton:
-        sensitive enabled
-        pos (0, 650)
-        focus_mask True
-        idle "combat/combat arw base.png"
-        hover "combat/combat arw hl.png"    
-        selected_idle "combat/combat arw hl.png"  
-        action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
-        selected (arwselected == True)
-
-
-    imagebutton:
-        focus_mask True
-        sensitive paragon_enabled
-        if head_floured == True:
-            idle "combat/paragon head flour.png"
-            hover "combat/paragon head flour hl.png"
-            selected_idle "combat/paragon head flour hl.png"
-        else:
-            idle "combat/paragon head base.png"
-            hover "combat/paragon head base hl.png"
-            selected_idle "combat/paragon head base hl.png"
-        if something_selected == True:
-            action Jump ("wrong2")
-        else:
-            action NullAction()
-    imagebutton:
-        focus_mask True
-        sensitive paragon_enabled
-        if torso_floured:
-            idle "combat/paragon torso flour.png"
-            hover "combat/paragon torso flour hl.png"
-            selected_idle "combat/paragon torso flour hl.png"
-        else: 
-            idle "combat/paragon torso base.png"
-            hover "combat/paragon torso base hl.png"
-            selected_idle "combat/paragon base flour hl.png"
-        if something_selected == True:
-           action Jump ("wrong2")
-        else:
-            action NullAction()
-        #if green_btn_selected:
-            #       action Jump("incorrect")    
-
-    imagebutton:
-        
-        sensitive paragon_enabled
-        focus_mask True
- 
-        idle base_tail
-        hover base_tail_hl
-        selected_idle base_tail_hl
-        action NullAction()
-        
-        if something_selected == True:
-            if arwselected == True and tailhmred == True:
-                action Jump("finishedcombat")
-            if hmrselected == True and tailhmred == False:
-                action [SetVariable("base_tail", "combat/paragon tail injured.png"), SetVariable ("base_tail_hl", "combat/paragon tail injured hl.png"), SetVariable("tailhmred", True), Jump("hit_tail")]
-        
-      ##  else:
-        ##    action Jump("wrong2")
-        
-      
-            
-
-            
-
-            
-
-                
-            
-
-screen bathroomintro:
-    imagemap:
-        ground "Background/Bathroom/bathroom body items final.png"
-        hover "Background/Bathroom/bathroom body hl hammer no hl tint.png"
-        hotspot (508, 502, 361, 217) action Jump ("test_body")
-
-screen bathroom1:
-    imagemap:
-        ground "Background/BathRoom/bathroom body items final.png"
-        hover "Background/BathRoom/bathroom body only items hl.png" 
-        hotspot (257, 184, 60, 138) action Jump ("shampoo")
-        hotspot (1561, 219, 363, 215) action Jump ("towels")   
-        hotspot (1517, 462, 258, 430) action Jump ("sledgehammer")
-screen hotel_2:
-    imagemap:
-        ground "Background/bluehotelplain.png"
-        hover "Background/bluehotelverahl(1).png"
-        hotspot (1759, 460, 134, 85) action Jump ("crossword_puzzle")
-        hotspot (186, 3, 171, 327) action Jump ("sight_see")
-        hotspot (615, 221, 548, 244) action Jump ("wake_vera")
-screen test2:
-    modal False
-    image "token_1(1).png"
-screen crossword:
-    
-    add "Background/CrossWord/CrosswordUi.png"
-    textbutton "Go Back":
-        text_size 100
-        xalign 0.2
-        action Jump("hotel_2_stop")
-
-    imagebutton:
-        if box1Filled == True:
-                sensitive False
-        focus_mask True
-        idle "Background/CrossWord/Down1.png"
-        hover "Background/CrossWord/Down1Hover.png"
-        insensitive "Background/CrossWord/1DownInsensitive.png"
-        action [SetVariable("correctAnswer", "shrink"), Jump("type_in")]
-    imagebutton:
-        if box2Filled == True:
-            sensitive False
-        focus_mask True
-        idle "Background/CrossWord/Down2.png"
-        hover "Background/CrossWord/Down2Hover.png"
-        insensitive "Background/CrossWord/FilledDown2.png"
-        action [SetVariable("correctAnswer", "bohr"), Jump("type_in")]
-    imagebutton:
-        if box3DownFilled == True:
-                sensitive False
-        focus_mask True
-        idle "Background/CrossWord/Down3.png"
-        hover "Background/CrossWord/Down3Hover.png"
-        insensitive "Background/CrossWord/3DownFilled.png"
-        action [SetVariable("correctAnswer", "hope"), Jump("type_in")]
-    imagebutton:
-        if boxAcrossFilled == True:
-                sensitive False
-        focus_mask True
-        idle "Background/CrossWord/Across1(1).png"
-        hover "Background/CrossWord/AcrossHover.png"
-        insensitive "Background/CrossWord/AcrossFilled.png"
-        action [SetVariable("correctAnswer", "throwup"), Jump("type_in")]
-    
-    
-        
-screen cleaning_time:
-    add "Background/BathRoom/full br no body no highlight final.png"
-    if brush_grabbed == False:
-        imagebutton:
-            focus_mask True
-            idle "Background/BathroomClean/mop map.png"
-            hover "Background/BathroomClean/mop map hl.png"
-            action Jump("brush_grab")
-    if bleach_grabbed == False:
-        imagebutton:
-            focus_mask True
-            idle "Background/BathroomClean/spray bottle map.png"
-            hover "Background/BathroomClean/spray bottle hl.png"
-            action Jump ("bleach_grab")
-    if towels_grabbed == False:
-        imagebutton:
-            focus_mask True
-            idle "Background/BathroomClean/towel map.png"
-            hover "Background/BathroomClean/towel map hl.png"
-            action Jump ("towels_grab")
-       
-screen hit_body:
-    add "Background/BathRoom/bathroom body no hammer.png"
-    if hammer_grabbed == False:
-        imagebutton:
-            focus_mask True
-            idle "Background/justhammer.png"
-            hover "Background/justhammerhl.png"
-            action Jump ("hitBody")
-init:
-            $ timer_range = 0
-            $ timer_jump = 0
-            $ time = 0
-
-transform alpha_dissolve:
-    alpha 0.0
-    linear 0.5 alpha 1.0
-    on hide:
-        linear 0.5 alpha 0
-screen countdown:
-    timer 0.01 repeat True action If(time>0, true=SetVariable('time', time -0.01), false=[Hide('countdown'), Jump(timer_jump)])
-    bar value time range timer_range xalign 0.5 yalign 0.1 xmaximum  300 at alpha_dissolve
-
-
-screen kill_him:
-    imagemap:
-        ground "Background/BathRoom/bathroom body no hammer.png"
-        hover "Background/BathRoom/bathroom bg only body hl no hammer.png"
-        hotspot (508, 502, 361, 217) action Jump ("smash_head")
 label start:
    ## default combat_round = 1
 
@@ -3941,8 +3543,8 @@ label wake_vera:
         "Vera yanks me back to reality."
         show andrea sad at right
         ab "Guess not."
-        "My hammer is a lot less messythan before."
-        "Seems it was slipperier than a person."
+        "My hammer is a lot less messy than before."
+        "People aren't as slippery."
         ab "You think it's dead enough?"
         vl "Mmm..."
         "She's soaked in sweat and her breathing is heavy."
@@ -4158,18 +3760,18 @@ label wake_vera:
         dm "It should be in the cabinet there-"
         dm "Rina Becker was her name."
         al "On it."
-        "Avery slips off the chair with his usual urgency."
+        "Avery slips off the chair with their usual urgency."
         "As we wait, Vera joins me against the wall."
         "She leans against my side and sighs."
         vl "The drives gonna be a pain."
         "She mutters."
         vl "I hope the lady gives us more than another goose chase."
         show andrea neutral
+        "I lean against her in turn."
         ab "C'mon, it's something."
-        ab "Let me have this."
         vl "{i}Hmrgh...{/i}"
-        vl "Just annoying."
-        vl "And I'm tired."
+        vl "I'm just tired of running around."
+        vl "And just normal-tired."
         ab "Same."
         "It's like being reminded of your breathing. I only register it now that Vera has pointed it out."
         "My eyes sit heavy in my sockets and a dull ache pulses through my muscles."
@@ -4232,19 +3834,19 @@ label wake_vera:
         "I resist the urge to roll my eyes."
         "This again."
         ab "It'd be easier if you explained it like a normal person."
-        ab "Just say you think he was dumb, or annoying."
+        ab "Just say you think they were dumb, or annoying."
         ab "Keep it concise."
-        vl "Guess he was naiive, or whatever."
+        vl "Guess they were naiive, or whatever."
         show vera annoyed
-        vl "He'll bite it at some point. I can feel it."
+        vl "They'll bite it at some point. I can feel it."
         show andrea stern
-        ab "'Cause you think he's not prepped properly?"
+        ab "'Cause you think they're not prepped properly?"
         vl "Yeah, that. Also, it's just kinda stupid to think you can be in this line of work without getting your hands dirty."
         show vera sad
         vl "Just annoying."
         "I {i}tap, tap, tap{/i}, my fingers on the wheel."
         ab "That's presumptious."
-        ab "He might get it, he just isn't excited to share with someone he just met."
+        ab "They might get it, maybe they're just not excited to share with someone they  just met."
         show vera annoyed
         vl "You asked."
         "Maybe I {i}should{/i} have just left her to her neuroses."
@@ -4304,31 +3906,461 @@ label wake_vera:
         "Our exit arrives with so little fanfare that I almost miss it."
         "The road cracks and becomes pockmarked with rock as I turn onto it."
         "I vice grip the wheel of our little ship in the night, like it'll do anything."
-        "We pull into the first motel we find. I'm not trusting any rest stop this far out."
+        "We pull into the first place we find. I'm not trusting any rest stop this far out."
+        "This motel is one of the better ones we've hit."
+        "The blankets aren't too scratchy and the AC sputters on without issue."
+        "Quality wouldn't have made much of a difference, tough."
+        "Three days of almost straight driving have congealed with the lingering effects of the fight to weigh down my body like tar."
+        "I'm out like a light."
         label before_husk_hotel :
             
             scene hotel1 at alt_hotel: 
-                blur 3
-                pause 0.6
-                blur 4
-                pause 0.6
+                blur 3.6
+                pause 0.1
+                blur 3.5
+                pause 3.4
+                blur 3.4
+                pause 0.1
+                blur 3.5
+                pause 0.1
+               
                
                 repeat 
-            scene hotel1 at alt_hotel
+            #scene hotel1 at alt_hotel
             "..."
             "Vera's voice drags me out of a dreamless sleep."
             vl "-hey."
-            show vera body shirt3 neutral at vera_spot:
-                blur 1
-            "I groan and turn onto my side."
-            "Three days of almost straight driving have congealed with the lingering effects of the fight to weigh down my body like tar."
-        "This motel is one of the better ones we've hit."
-        "The blankets aren't too scratchy and the AC sputters on without issue."
-        "And there's a coffee machine: the smell in the air tells me Vera put something on."
+
+                
+            show vera body shirt1 neutral2 at vera_spot:
+                blur 2.1
+                pause 0.3
+                blur 2.3
+                pause 0.3
+                blur 2.5
+                pause 0.3
+                blur 2.7
+                pause 0.3
+                blur 2.5
+                pause 0.3
+               
+
+            
+        "I groan and turn onto my side."
+        "The air smells bitter. Vera's probably put the coffee machine to work."
         ab "Give me a sec."
+        "No one's dying, I can spare a few seconds shut eye."
         show vera neutral
         
+        vl "C'mon. Up."
+        "She puts a hand on my shoulder and shakes me."
+        "With some impression of grace, at first-"
+        show layer screens:
+            blur 4
+        vl "Up."
+        show layer screens:
+            blur 0
+        "Then, when I screw my eyes shut tighter."
+        show hotel1 at alt_hotel:
+            blur 0.0
+        show vera body shirt1 neutral2 at vera_spot:
+            blur 0.0
         
+        vl "{i}Up.{/i}"
+        show andrea body annoyed at right:
+            blur 0.0
+        #rustling noise
+        ab "God- I'm up! I'm up."
+        vl "Sorry, you were, like, {i}out.{/i}"
+        "She withdraws her hand and leans back."
+        vl "You're usually all about the bright and early."
+        show andrea neutral
+        ab "I guess the adrenaline finally wore out."
+        "I massage my face and pull my bonnet off."
+        "We {i}should{/i} get into gear."
+        show vera sad
+        vl "{i}Aw{/i}, poor thing."
+        show vera neutral
+        vl "Want me to get you some coffee?"
+        ab "That'd be great, I'm dying here."
+        show andrea happy
+        "I lay my hand on my forehead dramatically."
+        "She rolls her eye and obliges."
+        vl "You're like...a baby bird, or something."
+        "The styrofoam cup she hands me is lukewarm."
+        ab "Way to paint an appealing mental image."
+        "I can taste the exessive amounts of sugar she's put in before the coffee hits my tongue."
+        vl "The town's pretty small, I don't think it'll take too long to look."
+        "I hadn't gotten a good look at the place when we checked in, but that tracks."
+        "The view out the window is to a modest town center."
+        "A couple store fronts, a restaurant."
+        "The beginnings of a residential block extend behind the latter."
+        "At a glance, it's doing a better job at seeming alive than our last locale."
+        show andrea neutral
+        ab "I'm going to try giving Rina a call again."
+        "It's my fourth time since we left Dominic's place."
+        "If we're going to be grilling her, it'd be better to give her a heads up."
+        "I'd rather come off as pushy, instead of catching her off guard."
+        vl "Be my guest."
+        "I type her number up and listen to the {i}ring, ring, ring{/i}."
+        vl "Why do you think she's not answering?"
+        #dial tone
+        "{i}Ring, ring, ring.{/i}"
+        ab "Like Dominic said, it could be she changed numbers."
+        vl "Mmm...wouldn't it say this one was out of service?"
+        ab "Maybe whoever got it doesn't want to answer either."
+        "{i}Ring, ring, ring.{/i}"
+        vl "You'd think they'd get curious after a bunch of missed calls, though."
+        ab "Unless they thought it was spam."
+        show vera neutral2
+        vl "Maybe."
+        "{i}Ring, ring, ring.{/i}"
+        ab "Or she lost her phone. Or broke it or. Whatever."
+        ab "Could be a bunch of other reasons."
+        "The automated voice box recites the same line it's met me with every other time I've called."
+        "She hasn't even set it up."
+        vl "I don't like it, feels like a bad sign."
+        "I sigh and set the phone down."
+        ab "Well, it's what we've got. I'm gonna settle on her just being inattentive."
+        "It saves me some mental real estate."
+        vl "It's just {i}annoying.{/i}"
+        show andrea annoyed
+        ab "All of this is annoying."
+        ab "Just, like, lets take it for now."
+        "Vera sips her drink, mumbling something indistinguishable into it."
+        "I guess the response isn't meant for me, because the only thing I get is a thumbs up."
+        "Whatever her thoughts, we're of the same mind to head out quickly."
+        "My breakfast is the rest of my coffee and some pistachios from the vending machine."
+        "Then, it's into town we go. "
+        scene neighborhood with fade
+        play music "audio/ambience/AmbientCoalesence1.mp3" loop
+        "The neighborhoods are kind of a bitch to navigate."
+        "The suburban sprawl tangles all over itself. One neighborhood twists into another, that leads right back to where we started."
+        "Poplar Lane is the same as Bellview Road is the same as Brighton Drive."
+        "We retrace our steps probably five times over, before we reach {i}'Turnpike Street'.{/i}"
+        "The house is unremarkable. There's not even any yard decorations to seperate it from its fellows."
+        label neighborhood:
+
+            show vera neutral2 body shirt2 at vera_spot 
+        vl "I was half expecting it to be all overgrown and decrepit."
+        vl "Like. {i}Blair Witch{/i} shit."
+        show andrea body neutral at right
+        ab "Why?"
+        "On the contrary, it seems allergic to any signs of life."
+        "Windows curtained shut. Spotless stoop."
+        "If not for the car pulled into driveway, I would've taken it for vacant."
+        vl "Just a hunch."
+        "I make a show of looking down into the sewer grate."
+        ab "Well. No witches here."
+        show vera neutral
+        vl "My hero."
+        vl "{i}Anyway.{/i}"
+        "She takes the lead up the front steps."
+        "We'd tossed around the 'angle' we're coming at this from over the last few days."
+        "It's about the same direction we took with Dominic, just claim intellectual curiosity, then play it by ear from there."
+        "Vera presses the doorbell."
+        "It makes a low, sputtering noise, like some kind of dying animal."
+        "We wait a few seconds."
+        #knock noise
+        show vera annoyed
+        vl "Hey! Anyone around?"
+        "A car rumbles past behind us."
+        #knock again.
+        vl "Hello?"
+        "{i}Could be that she's asleep.{/i} It's afternoon, but early enough that a late riser could still be in bed."
+        ab "Let me try."
+        show vera neutral2
+        vl "What. Can you knock better than me?"
+        "I still give it a shot, maybe adding some rhythm into it makes it sound more approachable."
+        "Nothing."
+        show vera annoyed
+        vl "Fucker better not have given us the wrong address."
+        show andrea annoyed
+        ab "{i}Someone{/i} lives here."
+        "Vera presses her face against the window."
+        vl "I can't see anything in there."
+        "Shit. {i}Shit.{/i}"
+        "I gingerly try the door handle. It doesn't budge"
+        show andrea offput
+        ab "Let's check for a back door."
+        vl "Yeah."
+        #walk noise
+        "Keeping an eye out for any onlookers, I go around the lawn, towards the back of the house."
+        "A glass screen door leads into what I assume is a basement. I can't really make anything out besides a washing machine and some laundry."
+        "I knock, still no answer."
+        "Vera tries the door. Doesn't budge."
+        ab "So-...alright. This sucks."
+        vl "I told you something was gonna be up."
+        show andrea annoyed
+        ab "Yeah, yeah. You're right. Fuck me for being optimistic."
+        show vera angry
+        vl "I didn't mean it like-...ugh, whatever."
+        vl "We've gotta get in somehow."
+        ab "I don't think there's any other doors."
+        vl "Guess we're working with what we have, then."
+        "She pats herself down and fishes her hands into her pockets."
+        show vera neutral
+        vl "Do you have anything thin and pointy on you? Bobby pins, hair clips, needles?"
+        show andrea stern
+        ab "You want to break in?"
+        vl "This is our only lead, we'll say it was, like, an emergency if she finds us."
+        "I pinch the bridge of my nose. We're racking up crimes like its a bingo chart."
+        "Still, I check for anything matching the description."
+        ab "Would this work?"
+        "I offer up a paperclip that's been stowed away in my pants pocket for God knows how long."
+        show vera neutral
+        label vera_unlock:
+            vl "Perfect, thanks Andy."
+        "She bends the clip in half and inserts it into the lock."
+        "With the same  precision she uses to knock her cross bow, she coaxes the ends into place."
+        "For someone who's usually so loose, it's a little enamoring to see how sure her movements are."
+        "Where'd she even pick this up?" 
+        "Now's not the time to ask."
+        "A minute or so later, she pulls the clip out, and tries the handle."
+        #door click
+        show vera happy at sprite_jump
+        vl "There we go."
+        vl "No signs of forced entry either."
+        ab "I hope we don't have to worry about that."
+        show andrea neutral
+        ab "Handy trick, though."
+        #scene inside
+        stop music
+        "We step inside, kicking up a cloud of dust in the process."
+        "It's a maze of taped up boxes and fabric swathed furniture."
+        "As my eyes adjust, I can make out the load of laundry stuffed into the washing machine."
+        "I consider calling out, but hearing voices from the basement isn't going to breed much trust."
+        "We feel our way through the darkness."
+        show vera neutral2
+        vl "No one's down here."
+        "Vera keeps her voice low."
+        ab "Guess we gotta get upstairs."
+        "The further we get, the more the clutter down here seems to press in on me."
+        "Reaching the bottom of the stairs feels like emerging out of some dark tunnel."
+        "I rise onto my tip toes. {i}Keep to the back of each step, they're firmer.{/i}"
+        "I grip the handle and - inch by painstaking inch - turn it, then push."
+        "Dull light catches the dust particles, revealing some kind of study."
+        #show scene living room
+        label husks_livingroom:
+            ab "Reminds me of Dominic's lab."
+        vl "The nerdy types are all the same."
+        "She trains her gaze on the study. I follow it."
+        show vera neutral
+        pause 0.5
+        show andrea stern
+        pause 0.5
+        vl "I mean, there's no one in here."
+        vl "I'm sure she'd appreciate someone admiring her research."
+        ab "Let me just-"
+        "I carefully crack the door open into the next room."
+        "No signs of life."
+        ab "It's clear."
+        "While I've had my back turned, Vera's already beelined for the weapons hanging on the wall."
+        "I sigh. Alright, we've already begun our invasion of privacy. What's some more about friends."
+        #make this an image map
+        label invest_husk:
+            $ weapon_examined = False
+            $ computer_examined = False
+            $ shelf_examined = False
+        menu:
+            "Weapons rack." if weapon_examined == False:
+                jump weapons
+
+            "Computer." if computer_examined == False:
+                jump computer
+
+            "Shelf." if shelf_examined == False:
+                jump shelf
+        
+        label weapons:
+            "I join Vera as she peruses the display."
+            "Her eye glimmers, like a kid on Christmas."
+            show vera neutral
+            vl "I think these are legit."
+            vl "Proper Paragon ones, not just replicas."
+            "She gestures to a machete, with a lattice work of runes trailing down the blade."
+            show andrea neutral
+            ab "You think she made these herself?"
+            vl "{i}Maybe?{/i} Could be that I haven't given her enough credit."
+            vl "She'd have to be pretty strong to take down this many."
+            "As her hand inches closer to it, I shoot her a glance."
+            show andrea stern
+            ab "Don't {i}touch{/i} it, we don't know what any of these can do."
+            "She should know better than me."
+            show vera annoyed
+            vl "I wasn't gonna, I'm not stupid."
+            "Still, she lowers her hand."
+            show vera happy
+            vl "I've got my baby, she's enough for me."
+            "She pats her back, where her crossbow is tucked away."
+            show andrea offput
+            ab "{i}Alright.{/i}"
+            "I turn my attention to the rest of the display."
+            show andrea neutral
+            ab "One's missing."
+            "The rack is narrower than the others."
+            "It could be that it's just never been used, but it's right in the middle of the display."
+            vl "So it {i}is.{/i} We can keep an eye out. If she's been looking at it lately, it could be useful."
+            $ weapon_examined = True
+            jump invest_husk
+        label computer:
+            
+            "A cinderblock of a computer is pushed against the far wall."
+            "Judging by the green light, it's still functional."
+            "{i}Someone's been paying their electrical bills.{/i}"
+            "I click the display on."
+            #show password bit
+            $ password_real = renpy.input ("Password", length = 10)
+            if password_real == "null":
+                "Yes."
+                #insert comp information about knif
+            else: 
+                "No dice."
+                "{i}Two attempts remaining.{/i}"
+                "insert hint."
+                "Maybe I can find some information that'll help me figure this out. Better not to waste information by brute forcing it."
+            $ computer_examined = True
+        label shelf:
+            "It's hard to know where to start. The selection seems arbitrary: shining hard cover next to barely held together journals."
+            "Thin paperback, barely a few pages long, squashed by bloated leather bound tomes."
+            "I opt for something that looks handwritten. It's one of those cheap, moleskin notebooks."
+            #maybe have this on a screen?
+            "Taped near the front is a parchment paper fold out. A sketch of...something, spans across it."
+            "Some sort of Paragon. It's mammalian in appearence. Its body is compact, with four goat like legs sticking out the bottom."
+            "The face is somewhere between a muzzle and a snout: mostly compact, with a curved nose sticking out of it."
+            "Labels make notes of its anatomy and demeanor."
+            "{i}Weakened, possibly split apart recently.{/i}"
+            "{i}Docile, conversational.{/i}"
+            "{i}Signs of desperation.{/i}"
+
+
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+        #"Vera's about to knock a third time - fist drawn back as if she's going to sucker punch the mahogany - before the door creaks open."
+        #creak
+        hk "Hello."
+        #show husk neutral
+        "The woman's voice is smooth. No spikes of surprise or hitches of trepidation."
+        show andrea happy
+        ab "Ah, hi."
+        ab "Sorry to bother you. Are you Ms. Becker?"
+        hk "Yes."
+        ab "My name's Andrea. Dominic sent us your way, he said you two were colleagues."
+        ab "I called you a couple times, just didn't leave a message."
+        show vera neutral2
+        vl "Discretion and all that."
+        ab "Mhm."
+        "Her gaze travels between us languidly, snagging on me before dragging towards Vera."
+        hk "Oh, alright."
+        hk "How can I help you girls?"
+        show andrea neutral
+        ab "We have some questions about one of the projects you were working on."
+        "There isn't anyone around and even if there was, I don't think anything I'm saying will alarm anyone who's not in the business."
+        "It's just a habit to keep things vague in public. Miranda drilled that into me. Vera had too, albeit with less severity."
+        vl "Is it cool if we come in?"
+        hk "Yes."
+        hk "Go ahead."
+        "Rina steps aside, revealing a dimly lit entryway."
+        show andrea happy
+        "I swallow my unease."
+        "I'm not dense, she's weird. All sullen eyes and raspy, drawling voice."
+        "But, I can handle weird."
+        "I'd expected weird."
+        ab "Thanks so much."
+        "I step in. Vera follows suit."
+        scene husk house inside
+        "The inside is a sharp contrast to the exterior."
+        "Traces of life stretch across the hallway and into the living room."
+        "Kitschy paintings, novelty vases, plants wilting in the window sills."
+        show vera neutral body shirt2 at vera_spot
+        vl "Nice place."
+        #show husk body neutral at center
+        hk "Mhm."
+        "She less walks, more wafts into the living room."
+        hk "Dominic sent you?"
+        show andrea body happy at right
+        ab "Yeah, he said you guys were old colleagues."
+        hk "We were."
+        "There's a pause as she settles down onto the couch, kicking up a thin membrane of dust."
+        "I sit down across from her, Vera follows suit."
+        hk "What did you think I could help with?"
+        "As dry as she is, I'm grateful for the directness."
+        "No drawn out ramblings, or anything."
+        show andrea neutral
+        ab "We're researching Paragon human relations- unusual ones, specifically."
+        ab "Ones that are more...docile, I guess. If you can call it that."
+        "I resist the urge to wind the couch fabric around my finger. I don't wanna betray my nerves."
+        show vera neutral2
+        vl "We've been at this for a while, we figure it's time we hit the books."
+        hk "Alright."
+        "A car drives by outside, the furniture creaks."
+        ab "He said you're looking into a case like that."
+        hk "I was, yes."
+        "{i}Was{/i}. She's concluded her research for one reason or another."
+        "I bite my lip despite myself."
+        vl "...Can we get details? You said you were fine to talk."
+        #show husk serious
+        hk "What about? How much do you know?"
+        "For the first time, her voice tightens, like a string finally tuned."
+        "I tell her what sparse details I know."
+        "An understanding with it. A way it could get some sort of fulfillment without constant consumption."
+
+
 
     label examine_done:
         "Looks like we've already found everything here!"
