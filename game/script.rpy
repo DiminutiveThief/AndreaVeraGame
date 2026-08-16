@@ -1,4 +1,4 @@
-# The script of the game goes in t32 file.
+    # The script of the game goes in t32 file.
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
@@ -4159,6 +4159,8 @@ label wake_vera:
         "I sigh. Alright, we've already begun our invasion of privacy. What's some more about friends."
         #make this an image map
         label invest_husk:
+            if shelf_examined == True and weapon_examined == True and shelf_examined == True:
+                jump after_husk
             $ weapon_examined = False
             $ computer_examined = False
             $ shelf_examined = False
@@ -4175,11 +4177,11 @@ label wake_vera:
         label weapons:
             "I join Vera as she peruses the display."
             "Her eye glimmers, like a kid on Christmas."
-            show vera neutral
+            show vera body neutral
             vl "I think these are legit."
             vl "Proper Paragon ones, not just replicas."
             "She gestures to a machete, with a lattice work of runes trailing down the blade."
-            show andrea neutral
+            show andrea body neutral
             ab "You think she made these herself?"
             vl "{i}Maybe?{/i} Could be that I haven't given her enough credit."
             vl "She'd have to be pretty strong to take down this many."
@@ -4224,6 +4226,7 @@ label wake_vera:
             "It's hard to know where to start. The selection seems arbitrary: shining hard cover next to barely held together journals."
             "Thin paperback, barely a few pages long, squashed by bloated leather bound tomes."
             "I opt for something that looks handwritten. It's one of those cheap, moleskin notebooks."
+            "Compared to the other ones I skim, the pencil looks fresher."
             #maybe have this on a screen?
             "Taped near the front is a parchment paper fold out. A sketch of...something, spans across it."
             "Some sort of Paragon. It's mammalian in appearence. Its body is compact, with four goat like legs sticking out the bottom."
@@ -4232,17 +4235,119 @@ label wake_vera:
             "{i}Weakened, possibly split apart recently.{/i}"
             "{i}Docile, conversational.{/i}"
             "{i}Signs of desperation.{/i}"
+            "It continues like that up until the mid point."
+            "The rest is blank."
+            "I take a few moments to log the information, then put it back."
+            $ shelf_examined = True
+            jump invest_husk
+        label after_husk:
+            "We don't find anything else of note between the two of us."
+            show vera neutral2
+            vl "You sure you don't want to at least try one of these guys out?"
+            "She's still lingering by the weapons display."
+            vl "The hammers cool, but- y'know. It can only do so much."
+            show andrea neutral
+            ab "I'm fine with that. I don't want to deal with whatever bells and whistles those things have."
+            "There isn't much uncertainty with a hammer. It goes where you want, as long as you're decisive."
+            "It doesn't care about how many shots it takes to make a circuit or whatever other rituals Vera's crossbow and its ilk demands."
+            show diner:
+                blur 1
+                pause 0.3
+                blur 2
+                pause 0.3
+                blur 3
+                pause 0.3
+                blur 2
+                pause 0.3
+                blur 1
+                pause 0.3
+            "It's as eager to pulverize exoskeleton as it is hide as it is flesh and bone and brain fried with animal fear."
+            "I shove my hand in my pocket."
+            show diner
+            show andrea stern
+            ab "We should check out the rest of the place. I don't think there are many other rooms."
+            vl "Good with me."
+            "I push open the door. No one's magically appeared in the living room in the last twenty minutes."
+            "Compared to the decrepit basement and sterile study, the kitschy paintings and wilting potted plants are a breath of fresh air."
+            vl "I think we're doing this lady a favor."
+            "She runs her finger down a dust soaked coffee table with a grimace. Particles catch in the rays of light that make it through the shutters."
+            vl "It doesn't look like anyone's done, like, {i}anything{/i} here in a while."
+            "This is gradually turning from a home invasion to a wellness check."
+            ab "We can say Dominic was worried about her health."
+            "I almost forget to keep my voice down."
+            "She's around here somewhere."
+            "I uncoil the worry beginning to knot in my chest."
+            "Things are fine until proven otherwise."
+            vl "Well, she's either still in bed, or she fell asleep in the bathtub."
+            "She gestures at the two rooms branching from the end of the hall."
+            ab "{i}Yup.{/i}"
+            "So, which first?"
+            "There isn't a way to tell which is which."
+            menu left_right:
+                "Left.":
+                    jump bathroom
+                "Right.":
+                    jump bedroom
+
+            label bathroom:
+                "I swallow and crack open the door on the left."
+                "Spotless white-tiled floor. A shower enclosed in glass."
+                "Empty."
+                jump left_right
+
+            label bedroom:
+                "I turn the knob- {i}try{/i} to turn it."
+                "It's locked. Locked from the inside."
+                show andrea neutral
+                ab "Someone's in there."
+                "I give a few, soft knocks. This is still a break in. I wouldn't blame her from holing up."
+                ab "Uh, Ms. Becker?"
+                "I keep my voice low and press my ear against the door."
+                "The only sound is the {i}woosh{/i} of a fan."
+                "I knock again, with a bit more force."
+                ab "Dominic sent us, he said you worked together."
+                ab "We wanted to see if everything was okay."
+                "Vera joins me against the door."
+                "When there still isn't a response, she sighs."
+                vl "I think we have to break it."
+                "She points at the knob. It doesn't have a key hole."
+                ab "...Yeah, guess so."
+                "I'll bite the bullet on adding property damage to our list of crimes."
+                "I grab one of the decorations from the living room- some kind of marble orb."
+                vl "Try not to get the knob, aim right next to it."
+                vl "Something about the mechanism."
+                ab "Mhm."
+                "I raise it over my head and slam it into the door. Once, twice."
+                "Behind the grate of metal against thick wood, there's a low click."
+                "The force is enough to push it open."
+                "I step in and-"
+                show andrea offput
+                ab "{i}Jesus Christ.{/i}"
+                #show vera scared
+                show vera sad
+                vl "Shit."
+                "And it's stupid to react like this, right?"
+                "The room shouldn't spin and bile shouldn't be in my throat."
+                "Second time in a week days I've smelled, felt, {i}seen{/i} corpse flesh. And the first one that isn't on my hands."
+                "It's funny, funny, so fucking {i}funny.{/i}"
+                "'Cause isn't your brain supposed to have some kind of safe guards?"
+                "Some curtain of apathy to keep you from breaking at the seams."
+                "Melting into a sweat-soaked, watery-eyed mess of chattering teeth and rapid breaths."
+                "Breaths that taste like meat left out in the Summer sun."
+                "Like a kid diving under a blanket, all I can do is screw my eyes shut."
+                #scene black
+                "{i}Spineless little girl.{/i}"
+                "Vera draws in a sharp sigh. I expect a jab, something dripping with dissapointment."
+                vl "{i}Shit- i'll- let me check it out."
+                "I feel her shuffle past me."
+                "I'll give myself a few seconds to knit back together."
+                "{i}Tyger, tyger.{/i}"
+                "I peel my eyes open."
+                
 
 
-       
-       
-       
-       
-       
-       
-       
-       
-       
+
+
        
        
        
