@@ -190,7 +190,7 @@ default paragon_enabled = False
 default andrea_vera_health = "good"
 
 label start:
-   ## default combat_round = 1
+    ## default combat_round = 1
 
     default blue_btn_selected = False   
     stop music
@@ -509,7 +509,8 @@ label start:
             "The answer comes quickly."
             "For a moment I ignite."
             scene andreaprologuecg
-            "On some preternatural level I begin to burn. I can feel it pass through veins made kindling and out through rapid breaths."
+            "From the palm up and outward, veins are made kindling, and blood into fuel."
+            "It should hurt. If there were any justice in the world it should fry my nerves."
             unknown "Not enough."
             unknown "Never enough."
             unknown "Sated. For now."
@@ -4142,13 +4143,18 @@ label wake_vera:
         "Dull light catches the dust particles, revealing some kind of study."
         #show scene living room
         label husks_livingroom:
-            ab "Reminds me of Dominic's lab."
+            ab "Reminds me of Dominic's lab." 
+        show andrea body neutral
         vl "The nerdy types are all the same."
-        "She trains her gaze on the study. I follow it."
+        show vera body shirt3 neutral2 at vera_spot
+        "She trains her gaze on the study. I follow it." 
+        
         show vera neutral
-        pause 0.5
+        with dissolve
+        pause 0.7
         show andrea stern
-        pause 0.5
+        with dissolve
+        pause 0.9
         vl "I mean, there's no one in here."
         vl "I'm sure she'd appreciate someone admiring her research."
         ab "Let me just-"
@@ -4333,7 +4339,8 @@ label wake_vera:
                 "'Cause isn't your brain supposed to have some kind of safe guards?"
                 "Some curtain of apathy to keep you from breaking at the seams."
                 "Melting into a sweat-soaked, watery-eyed mess of chattering teeth and rapid breaths."
-                "Breaths that taste like meat left out in the Summer sun."
+                "Breaths that taste like meat left out in the summer sun."
+                show andrea offputEC
                 "Like a kid diving under a blanket, all I can do is screw my eyes shut."
                 #scene black
                 "{i}Spineless little girl.{/i}"
@@ -4342,8 +4349,88 @@ label wake_vera:
                 "I feel her shuffle past me."
                 "I'll give myself a few seconds to knit back together."
                 "{i}Tyger, tyger.{/i}"
+                show andrea offput
                 "I peel my eyes open."
+                "Vera crouches by the corpse, her hand hovering over the mark on its chest."
+                vl "Stab wound, I think."
+                vl "Not {i}too{/i} deep."
+                "I keep my back against the wall as I shuffle closer."
+                "If I can't keep my eyes on it, I may as well put them to use."
+                label checking_corpse:
+                    
+                      
+                    $ weapon_check = False
+                    $ pill_check = False
+                    $ chains_check = False
+                    menu corpse_menu:
+                        "Weapon.":
+                            $ weapon_check = True
+                            jump weapon
+                        "Pill Bottle.":
+                            $ pills_check = True
+                            jump pills 
+                        "Chains":
+                            $ chains_check = True
+                            jump chains
+                        "Move on." if weapons_check == True and pills_check == True and chains_check == True:
+                            jump after_check_husk
+
                 
+                label weapon:
+                    "A stab wound. A knife. Icepick. Something like that."
+                    "Nothing sticks out."
+                    "I almost miss it."
+                    "It's shoved a little ways under a night stand."
+                    "Something metallic that just barely catches the light from the window."
+                    "I pull it out: it's the hilt of...something."
+                    "The blade is missing. Clean: like it was never there in the first place."
+                    "Runes wrap all the way around it."
+                    "Maybe I'll compare it to the rack from earlier."
+                    jump corpse_menu
+
+                label pills:
+                    "There. On the nightstand."
+                    "It's a clear bottle with a yellow wrapper: must be OTC."
+                    ab "Melatonin?"
+                    "It's empty."
+                    "I hazard a glance towards the body, just enough to get a glimpse of the face."
+                    "The mouth is ajar. Nothing comes from it."
+                    vl "I don't think it's the stuff that did her in."
+                    vl "Either it wasn't enough, or she got-got before it had a chance."
+                    jump corpse_menu
+                label chains:
+                    "Some kind of spike has been crudely nailed into the wood floor. A metal chain is attached to it."
+                    "It goes halfway across the room - ending in a cuff - that stops just short of the ankle."
+                    "{i}It got in the floor somehow.{/i}"
+                    "A hammer. Nails next to it. Near the corner of the room."
+                    jump corpse_menu
+
+
+                label after_check_husk:
+                    "I relay my findings to Vera."
+                    "She's conducted her grim work in silence."
+                    show vera neutral2
+                    vl "I don't think she's been dead for too long."
+                    "She doesn't sound sure."
+                    show andrea body offput
+                    ab "Shouldn't- you shouldn't-"
+                    ab "Probably shouldn't touch your hair-..after-"
+                    "It's half reprimand, half forced out, grating attempt at humour."
+                    show vera annoyed
+                    vl "I'll shower later."
+                    show vera neutral2
+                    vl "Anyway are you-...do you need to sit out?"
+                    vl "Or something."
+                    ab "I'm good."
+                    show andrea stern
+                    with dissolve
+                    ab "I'm good."
+                    vl "...M'kay."
+                    vl "Well. It looks like she was killed in one."
+                    vl "There were a couple other marks around it, but only one of those went deep enough."
+                    vl "And-"
+                    "With uncharacterstic hesitation."
+
 
 
 
@@ -4398,72 +4485,7 @@ label wake_vera:
        
         #"Vera's about to knock a third time - fist drawn back as if she's going to sucker punch the mahogany - before the door creaks open."
         #creak
-        hk "Hello."
-        #show husk neutral
-        "The woman's voice is smooth. No spikes of surprise or hitches of trepidation."
-        show andrea happy
-        ab "Ah, hi."
-        ab "Sorry to bother you. Are you Ms. Becker?"
-        hk "Yes."
-        ab "My name's Andrea. Dominic sent us your way, he said you two were colleagues."
-        ab "I called you a couple times, just didn't leave a message."
-        show vera neutral2
-        vl "Discretion and all that."
-        ab "Mhm."
-        "Her gaze travels between us languidly, snagging on me before dragging towards Vera."
-        hk "Oh, alright."
-        hk "How can I help you girls?"
-        show andrea neutral
-        ab "We have some questions about one of the projects you were working on."
-        "There isn't anyone around and even if there was, I don't think anything I'm saying will alarm anyone who's not in the business."
-        "It's just a habit to keep things vague in public. Miranda drilled that into me. Vera had too, albeit with less severity."
-        vl "Is it cool if we come in?"
-        hk "Yes."
-        hk "Go ahead."
-        "Rina steps aside, revealing a dimly lit entryway."
-        show andrea happy
-        "I swallow my unease."
-        "I'm not dense, she's weird. All sullen eyes and raspy, drawling voice."
-        "But, I can handle weird."
-        "I'd expected weird."
-        ab "Thanks so much."
-        "I step in. Vera follows suit."
-        scene husk house inside
-        "The inside is a sharp contrast to the exterior."
-        "Traces of life stretch across the hallway and into the living room."
-        "Kitschy paintings, novelty vases, plants wilting in the window sills."
-        show vera neutral body shirt2 at vera_spot
-        vl "Nice place."
-        #show husk body neutral at center
-        hk "Mhm."
-        "She less walks, more wafts into the living room."
-        hk "Dominic sent you?"
-        show andrea body happy at right
-        ab "Yeah, he said you guys were old colleagues."
-        hk "We were."
-        "There's a pause as she settles down onto the couch, kicking up a thin membrane of dust."
-        "I sit down across from her, Vera follows suit."
-        hk "What did you think I could help with?"
-        "As dry as she is, I'm grateful for the directness."
-        "No drawn out ramblings, or anything."
-        show andrea neutral
-        ab "We're researching Paragon human relations- unusual ones, specifically."
-        ab "Ones that are more...docile, I guess. If you can call it that."
-        "I resist the urge to wind the couch fabric around my finger. I don't wanna betray my nerves."
-        show vera neutral2
-        vl "We've been at this for a while, we figure it's time we hit the books."
-        hk "Alright."
-        "A car drives by outside, the furniture creaks."
-        ab "He said you're looking into a case like that."
-        hk "I was, yes."
-        "{i}Was{/i}. She's concluded her research for one reason or another."
-        "I bite my lip despite myself."
-        vl "...Can we get details? You said you were fine to talk."
-        #show husk serious
-        hk "What about? How much do you know?"
-        "For the first time, her voice tightens, like a string finally tuned."
-        "I tell her what sparse details I know."
-        "An understanding with it. A way it could get some sort of fulfillment without constant consumption."
+       
 
 
 
