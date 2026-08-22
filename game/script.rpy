@@ -4430,7 +4430,7 @@ label wake_vera:
                     vl "There were a couple other marks around it, but only one of those went deep enough."
                     vl "And-"
                     "With uncharacterstic hesitation, she lifts up the corpse's shirt."
-                    "A floral pattern winds around her side and "
+                    "A floral pattern winds around her side, all the way across her stomach."
 
 
 
