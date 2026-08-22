@@ -4429,7 +4429,8 @@ label wake_vera:
                     vl "Well. It looks like she was killed in one."
                     vl "There were a couple other marks around it, but only one of those went deep enough."
                     vl "And-"
-                    "With uncharacterstic hesitation."
+                    "With uncharacterstic hesitation, she lifts up the corpse's shirt."
+                    "A floral pattern winds around her side and "
 
 
 
