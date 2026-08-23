@@ -2268,10 +2268,10 @@ label wake_vera:
         show vera neutral
         vl "We've got a plan, then, drive on."
         "I oblige and start driving."
-        "I opt for a populated area near the original site-a strip mall."
+        "I opt for a  area near the original site-a strip mall."
         "Even if this thing's the sneaky kind, if it's been seen at all it'd be somewhere with more eyes on it."
         label stripmall:
-            scene strip mall
+            scene parking lot with fade
         show vera bodyflip shirt3flip neutral2flipped at right
         show andrea body neutral at left
         "It's the afternoon, so it's pretty busy."
@@ -2285,13 +2285,13 @@ label wake_vera:
         "She's already giving the place a cursory glance."
         vl "Can you do the, like, talking to people part?"
         show vera annoyedflip
-        vl "I think talking to Sloane drained me for the last day or two."
-        "That's a surprise. It's not often that Vera latches onto something for so long."
+        vl "I think loane drained me for the last day or two."
+        "That's a surprise. It's rare for Vera to latch onto something for so long."
         "Grudge or not."
         ab "Yeah, just give me a call when you're done."
         show vera neutralflipped
         vl "Right on."
-        hide vera
+        hide vera with  moveoutright
         "With that, she scampers off."
         "I'm left, relatively, on my lonesome."
         "Thinking on it, when {i}was{/i} the last time I spent more than a few hours without Vera over the last few weeks?"
@@ -4165,24 +4165,22 @@ label wake_vera:
         "I sigh. Alright, we've already begun our invasion of privacy. What's some more about friends."
         #make this an image map
         label invest_husk:
-            if shelf_examined == True and weapon_examined == True and shelf_examined == True:
+            if  weapon_examined == True and shelf_examined == True:
                 jump after_husk
             $ weapon_examined = False
-            $ computer_examined = False
+           
             $ shelf_examined = False
         menu:
             "Weapons rack." if weapon_examined == False:
                 jump weapons
 
-            "Computer." if computer_examined == False:
-                jump computer
-
+          
             "Shelf." if shelf_examined == False:
                 jump shelf
         
         label weapons:
             "I join Vera as she peruses the display."
-            "Her eye glimmers, like a kid on Christmas."
+            "Her eye glimmers, like she's a kid on Christmas."
             show vera body neutral
             vl "I think these are legit."
             vl "Proper Paragon ones, not just replicas."
@@ -4211,23 +4209,7 @@ label wake_vera:
             vl "So it {i}is.{/i} We can keep an eye out. If she's been looking at it lately, it could be useful."
             $ weapon_examined = True
             jump invest_husk
-        label computer:
-            
-            "A cinderblock of a computer is pushed against the far wall."
-            "Judging by the green light, it's still functional."
-            "{i}Someone's been paying their electrical bills.{/i}"
-            "I click the display on."
-            #show password bit
-            $ password_real = renpy.input ("Password", length = 10)
-            if password_real == "null":
-                "Yes."
-                #insert comp information about knif
-            else: 
-                "No dice."
-                "{i}Two attempts remaining.{/i}"
-                "insert hint."
-                "Maybe I can find some information that'll help me figure this out. Better not to waste information by brute forcing it."
-            $ computer_examined = True
+        
         label shelf:
             "It's hard to know where to start. The selection seems arbitrary: shining hard cover next to barely held together journals."
             "Thin paperback, barely a few pages long, squashed by bloated leather bound tomes."
@@ -4272,6 +4254,7 @@ label wake_vera:
             show diner
             show andrea stern
             ab "We should check out the rest of the place. I don't think there are many other rooms."
+            ab "We can come back around here later."
             vl "Good with me."
             "I push open the door. No one's magically appeared in the living room in the last twenty minutes."
             "Compared to the decrepit basement and sterile study, the kitschy paintings and wilting potted plants are a breath of fresh air."
@@ -4431,8 +4414,91 @@ label wake_vera:
                     vl "And-"
                     "With uncharacterstic hesitation, she lifts up the corpse's shirt."
                     "A floral pattern winds around her side, all the way across her stomach."
+                    "The skin is raised like a scar and tinted a jaundiced yellowish-green."
+                    "It might've been pleasant once. It's hard to tell with how gaunt her skin's gone."
+                    "I ball my right hand into a fist, then peel off the glove."
+                    "The color is different- deep crimson rather than sickening green- and the harsh lines cluster closer together."
+                    "I dig, dig, {i}dig{/i} my teeth into my cheek to keep my expression in check."
+                    show andrea sad
+                    ab "Same as me."
+                    vl "{i}Yeah.{/i}"
+                    "Vera crosses her arms."
+                    ab "So-...so she was-..."
+                    ab "She was trying to fix it."
+                    "That's the only option."
+                    "This is too much set up for a suicide."
+                    "No signs of a struggle."
+                  
+                    vl "I guess she missed something."
+                    "That's it, right. She missed something."
+                    "Doesn't mean we will. We have time."
+                    show andrea offput
+                    ab "Study. Let's check out the rest of it."
+                    vl "Maybe this'll give us some stuff to chew on."
+                    "I'm already out of there."
+                    "The musty air drives away the sweet decay cling-wrapping the inside of my throat."
+                    scene study
+                    "{i}What now?{/i}"
+                    "What am I looking for?"
+                    "{i}Chew on?{/i}"
+                    "What does one-hundred and however many pounds of dead flesh do for me?"
+                    #maybe make this interactive
+                    $ weapons_2_checked = False
+                    $ shelf_2_checked = False
+                    label invest_husk_2:
+                        if weapons_2_checked == True and shelf_2_checked == True:
+                            jump husk_study_checked_2
+                    menu:
+                        "Weapons." if weapons_2_checked == False:
+                            jump weapons_2
 
+                        "Shelf." if shelf_2_check == False:
+                            jump shelf_2
 
+                label weapons_2:
+                    "I lay the hilt on the empty rack, it slides in easily."
+                    "Based on the distance from the other end, it couldn't have been that big."
+                    "I mumble as much to Vera."
+                    show vera body neutral shirt3 at vera_spot
+                    vl "That tracks. Dagger, hunting knife, in that vein."
+                    show andrea body sad at right
+                    ab "You think it matches the size of the-"
+                    "Vera cuts me off, like she assumes I won't be able to choke it out."
+                    vl "I'm not an expert, but I think it matches the wound."
+                    "{i}Why did she think this could help?{/i}"
+                    "{i}What did she use to make it?{/i}"
+                    $ weapons_2_checked = True
+                    jump invest_husk_2
+                label shelf_2:
+                    "I flip open the journal from earlier."
+                    "{i}Flowers.{/i}"
+                    "Crudely sketched daffodils and chicken scratch daisies decorate the Paragon's body."
+                    show andrea offput at right
+                    ab "This one."
+                    ab "{i}This{/i} is the one."
+                    "The one she let under her skin."
+                    "Desperation?"
+                    "Curiosity?"
+                    show vera body neutral shirt3 at vera_spot
+                    vl "She makes it sound like its a lot less of a nightmare than burn."
+                    ab "Mhm."
+                    $ shelf_2_checked = True
+                    jump invest_husk_2
+                
+                label husk_study_checked_2:
+                    hide vera
+                    hide andrea
+                    "I shove the hilt and the journal into my bag."
+                    "Alright. What next. There's more here."
+                    show vera body neutral2 shirt3 at vera_spot
+                    vl "Hey."
+                    show andrea body neutral at right
+                    ab "Hm?"
+                    "Vera's been lingering behind me."
+                    vl "Are you-...can you do this? Like. Now?"
+                    "Her sentence sounds cobbled together, like each word's been clipped onto the other hastily."
+                    ab "You mean look around?"
+                    
 
 
 
