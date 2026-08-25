@@ -4498,8 +4498,52 @@ label wake_vera:
                     vl "Are you-...can you do this? Like. Now?"
                     "Her sentence sounds cobbled together, like each word's been clipped onto the other hastily."
                     ab "You mean look around?"
+                    show vera sad
+                    vl "I guess. Or put stuff together. Or whatever."
+                    "She rubs her arm."
+                    "I swallow. I've loosened my grip too much- of course I have."
+                    "She doesn't meet my gaze."
+                    "{i}What's pooling in her eye?{/i}"
+                    "Exasperation as I unspool again? Vindication that she's right about me?"
+                    "Some haphazard attempt at sympathy?"
+                    "I shrug."
+                    ab "I'll deal."
+                    "Whatever it is, I don't need to give her more reason to think I can't handle myself."
+                    "Vera lingers in that uncertainty for a moment: brows furrowed, teeth gnawing at her lip."
+                    vl "Cool. Good to know."
+                    show vera neutral
+                    "She claps."
+                    vl "Lets keep going, then."
+                    #play creak sfx
+                    "Whatever part of me haven't tensed to their breaking point go rigid."
+                    show andrea scared
+                    ab "What was that?"
+                    "I whisper."
+                    vl "Dunno."
+                    "It could just be the house settling, but it's been quiet so far."
+                    ab "You think someone saw us get in?"
+                    vl "Maybe. Weird that they wouldn't have called the cops."
+                    "That just tightens the knot in my stomach."
+                    "Don't like the idea of someone comfortable enough to enter on their own."
+                    #play creak again
+                    "My senses are primed enough that I hear it, soft as it is."
+                    "It's closer."
+                    ab "I think we should go."
+                    ab "We can always come back later."
+                    "Better to be paranoid and avoid a fight, than test my luck."
+                    show vera neutral2
+                    vl "Can we?"
+                    "I just narrow my eyes, that's enough for her."
+                    "She gestures at the door- closed, but not locked."
+                    "Then, at the stairs."
+                    "I allow myself one, two, three seconds of consideration."
+                    "The stairs. Speed is our priority."
+                    "I step onto the center of the floorboards as I move towards them."
+                    "Vera follows suit."
+                    "We move past the couch, the desk, the weapons display."
+                    #sfx weapon?
+                    #music
                     
-
 
 
        
