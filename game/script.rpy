@@ -1970,6 +1970,7 @@ label wake_vera:
         vl "Awesome. Thanks a bunch."
         hide avery with dissolve
         scene insidedomhouse with dissolve
+        play music "Music/Ambience/upbeatambient.mp3"
         "They step aside and oblige."
         "The living room we're greeted with doesn't seem to have been prepared for company."
         "There's a suggestion of a couch beneath a layer of discarded clothing. Boxes and various knick knacks litter the floor."
@@ -3297,15 +3298,15 @@ label wake_vera:
     label combat:
         
         scene combat bg grayscale with fade
-     #   default health = 3
-      #  default monster = 3
+    #   default health = 3
+    #  default monster = 3
         
-       # if health == 0:
+    # if health == 0:
         #    "You lose."
         
         #if monster == 0:
 
-         #   "You win."
+        #   "You win."
         $ default_combat_round = 1
         $ enabled = False
         
@@ -3353,7 +3354,7 @@ label wake_vera:
         $ andrea_vera = "combat/av terrible.png"
         window hide 
         pause
-       ## show screen combat
+    ## show screen combat
         window show
         "I'll give you this free one, though."
         $ andrea_vera = "combat/av good.png"
@@ -3374,19 +3375,19 @@ label wake_vera:
 
         
      
- #   label incorrect:
-  #      "Not quite."
-   #     $ green_btn_selected = False
+#   label incorrect:
+#      "Not quite."
+#     $ green_btn_selected = False
     #    $ health -= 1
         
         ##$ combat_round += 1
-     #   jump combat
+    #   jump combat
 
     label correct:
         show screen combat
         $ flour_found = False
         $ paragon_enabled = False
-       ## scene combat comp flour
+    ## scene combat comp flour
         $ flour = False
         $ arwselected = False
         $ flour = False
@@ -3397,17 +3398,17 @@ label wake_vera:
         
         jump combat_roll
         
-      #  $ time = 5
-       # $ timer_range = 5
+    #  $ time = 5
+    # $ timer_range = 5
 
         #$ timer_jump = 'round2'
         hide screen combat
         call screen combat2
-       # show screen countdown
+    # show screen countdown
         
 
     label wrong1:
-      #  scene combat comp invis
+    #  scene combat comp invis
         $ something_selected = False
         $ arwselected = False
         $ flour = False
@@ -3417,7 +3418,7 @@ label wake_vera:
         "As a heads up, next mess up miiight get you busted."
         call screen combat
     label wrong2:
-       # scene combat comp injured
+    # scene combat comp injured
         $ andrea_vera = "av bad"
         $ something_selected = False
         $ arwselected = False
@@ -4543,6 +4544,15 @@ label wake_vera:
                     "We move past the couch, the desk, the weapons display."
                     #sfx weapon?
                     #music
+                    "The door's thrown inward with a screech of wood and metal."
+                    "The knob slams into the drywall with enough force to crack it."
+                    "In it's wake a figure appears: coiled muscle hewn in to a broad frame, swathed in scarlet, and poised for violence."
+                    "Her narrowed eyes betray no anger, just the certainty that she's exactly where she needs to be."
+                    "She clutches a spear in her right hand."
+                    "There's no hesitation, no demand. Just the fluid movement of her arm and whistle of metal through the air."
+                    vl "{i}Move!{/i}"
+                    "End. for now."
+
                     
 
 
