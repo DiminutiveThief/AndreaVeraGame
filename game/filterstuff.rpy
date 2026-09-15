@@ -20,6 +20,9 @@ transform night_filter:
 transform alt_hotel:
     matrixcolor BrightnessMatrix(-0.13) * TintMatrix ("#eac0c0")
 
+transform night_filter_less:
+    matrixcolor BrightnessMatrix(-0.1) * TintMatrix ("#c0c8c9")
+
 transform sprite_jump:
     # Moves up smoothly over 0.15 seconds
     easein 0.15 yoffset -35  

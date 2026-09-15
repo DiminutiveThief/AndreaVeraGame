@@ -4107,17 +4107,18 @@ label wake_vera:
         play sound "audio/SFX/doorbellfail.mp3"
         "It makes a low, sputtering noise, like some kind of dying animal."
         "We wait a few seconds."
-        #knock noise
+        play sound "audio/SFX/DoorKnockNormal.mp3"
         show vera annoyed
         vl "Hey! Anyone around?"
         "A car rumbles past behind us."
-        #knock again.
+        play sound "audio/SFX/KnockLoud.mp3"
         vl "Hello?"
         "{i}Could be that she's asleep.{/i} It's afternoon, but early enough that a late riser could still be in bed."
         ab "Let me try."
         show vera neutral2
         vl "What. Can you knock better than me?"
         "I still give it a shot, maybe adding some rhythm into it makes it sound more approachable."
+        play sound "audio/SFX/RhythmKnock.mp3"
         "Nothing."
         show vera annoyed
         vl "Fucker better not have given us the wrong address."
@@ -4126,13 +4127,16 @@ label wake_vera:
         "Vera presses her face against the window."
         vl "I can't see anything in there."
         "Shit. {i}Shit.{/i}"
+        play sound "audio/SFX/DoorRattle.mp3"
         "I gingerly try the door handle. It doesn't budge"
         show andrea offput
         ab "Let's check for a back door."
+        show andrea neutral2
         vl "Yeah."
         #walk noise
         "Keeping an eye out for any onlookers, I go around the lawn, towards the back of the house."
         "A glass screen door leads into what I assume is a basement. I can't really make anything out besides a washing machine and some laundry."
+        play sound "audio/SFX/GlassKnock.mp3"
         "I knock, still no answer."
         "Vera tries the door. Doesn't budge."
         ab "So-...alright. This sucks."
@@ -4143,6 +4147,7 @@ label wake_vera:
         vl "I didn't mean it like-...ugh, whatever."
         vl "We've gotta get in somehow."
         ab "I don't think there's any other doors."
+        show vera neutral2
         vl "Guess we're working with what we have, then."
         "She pats herself down and fishes her hands into her pockets."
         show vera neutral
@@ -4150,6 +4155,7 @@ label wake_vera:
         show andrea stern
         ab "You want to break in?"
         vl "This is our only lead, we'll say it was, like, an emergency if she finds us."
+        
         "I pinch the bridge of my nose. We're racking up crimes like its a bingo chart."
         "Still, I check for anything matching the description."
         ab "Would this work?"
@@ -4159,27 +4165,30 @@ label wake_vera:
             vl "Perfect, thanks Andy."
         "She bends the clip in half and inserts it into the lock."
         "With the same  precision she uses to knock her cross bow, she coaxes the ends into place."
+        play sound "audio/SFX/LockPickingLoop.mp3" loop
         "For someone who's usually so loose, it's a little enamoring to see how sure her movements are."
         "Where'd she even pick this up?" 
         "Now's not the time to ask."
         "A minute or so later, she pulls the clip out, and tries the handle."
-        #door click
+        play sound "audio/SFX/LockClick.wav" 
         show vera happy at sprite_jump
         vl "There we go."
         vl "No signs of forced entry either."
         ab "I hope we don't have to worry about that."
         show andrea neutral
         ab "Handy trick, though."
-        #scene inside
+        scene basement
+        show layer master at night_filter_less
         stop music
         "We step inside, kicking up a cloud of dust in the process."
         "It's a maze of taped up boxes and fabric swathed furniture."
         "As my eyes adjust, I can make out the load of laundry stuffed into the washing machine."
         "I consider calling out, but hearing voices from the basement isn't going to breed much trust."
         "We feel our way through the darkness."
-        show vera neutral2
+        show vera body shirt3 neutral2 at vera_spot
         vl "No one's down here."
         "Vera keeps her voice low."
+        show andrea body neutral at right
         ab "Guess we gotta get upstairs."
         "The further we get, the more the clutter down here seems to press in on me."
         "Reaching the bottom of the stairs feels like emerging out of some dark tunnel."
