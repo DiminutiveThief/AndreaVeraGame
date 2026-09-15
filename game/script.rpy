@@ -4186,7 +4186,7 @@ label wake_vera:
         "I rise onto my tip toes. {i}Keep to the back of each step, they're firmer.{/i}"
         "I grip the handle and - inch by painstaking inch - turn it, then push."
         "Dull light catches the dust particles, revealing some kind of study."
-        #show scene living room
+        scene livingroomhusk
         label husks_livingroom:
             ab "Reminds me of Dominic's lab." 
         show andrea body neutral
@@ -4207,7 +4207,7 @@ label wake_vera:
         "No signs of life."
         ab "It's clear."
         "While I've had my back turned, Vera's already beelined for the weapons hanging on the wall."
-        "I sigh. Alright, we've already begun our invasion of privacy. What's some more about friends."
+        "I sigh. Alright, we've already begun our invasion of privacy. What's some more among friends."
         #make this an image map
         label invest_husk:
             if  weapon_examined == True and shelf_examined == True:
@@ -4244,8 +4244,7 @@ label wake_vera:
             show vera happy
             vl "I've got my baby, she's enough for me."
             "She pats her back, where her crossbow is tucked away."
-            show andrea offput
-            ab "{i}Alright.{/i}"
+          
             "I turn my attention to the rest of the display."
             show andrea neutral
             ab "One's missing."
@@ -4525,8 +4524,8 @@ label wake_vera:
                     "Desperation?"
                     "Curiosity?"
                     show vera body neutral shirt3 at vera_spot
-                    vl "She makes it sound like its a lot less of a nightmare than burn."
-                    ab "Mhm."
+                    vl "She makes it sound like its a lot less of a nightmare than Burn."
+              
                     $ shelf_2_checked = True
                     jump invest_husk_2
                 
@@ -4538,7 +4537,7 @@ label wake_vera:
                     show vera body neutral2 shirt3 at vera_spot
                     vl "Hey."
                     show andrea body neutral at right
-                    ab "Hm?"
+                    ab "What?"
                     "Vera's been lingering behind me."
                     vl "Are you-...can you do this? Like. Now?"
                     "Her sentence sounds cobbled together, like each word's been clipped onto the other hastily."
