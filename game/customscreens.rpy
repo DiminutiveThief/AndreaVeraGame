@@ -37,17 +37,18 @@ screen theBody2:
         hotspot (326, 509, 258, 131) action [Play ("sound", "Neck.mp3"), Jump ("throat_body")]
         hotspot (587, 799, 454, 257) action [Play ("sound", "BodyTouch.mp3"), Jump ("torso_body")]
 screen combat:
-
+    if hmr_hovered:
+        text "Hiii"
     add "combat/combat bg grayscale.png"
 
 
     add andrea_vera:
         pos (1200, 800)
 
-        
+    "It's gotten wise to my hammer."
     if flour_found:
         imagebutton:
-            sensitive flour_found
+            sensitive flour_active
             pos (0, 50)
             focus_mask True
             idle "combat/combat flr base.png"
@@ -60,6 +61,7 @@ screen combat:
             pos (0, 350)
             focus_mask True
             idle "combat/combat hmr base.png"
+            hovered SetScreenVariable ("hmr_hovered", True)
             hover "combat/combat hmr hl.png"    
             selected_idle "combat/combat hmr hl.png"  
             action [ToggleVariable("hmrselected"), SetVariable("arwselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
@@ -174,33 +176,50 @@ screen combat:
         
 
 screen combat2:
+   
+    
 
+
+   
     add "combat/combat bg grayscale.png"
+    
     add andrea_vera:
         pos (1200, 800)
     
-        
-
-
+    
+  
     imagebutton:
             sensitive enabled
             pos (0, 350)
+           
             focus_mask True
             idle "combat/combat hmr base.png"
             hover "combat/combat hmr hl.png"    
+           
+             
             selected_idle "combat/combat hmr hl.png"  
+            hovered SetScreenVariable("tt", "hi")
             action [ToggleVariable("hmrselected"), SetVariable("arwselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
             selected (hmrselected == True)
-
+            tooltip "hi"
+    $ tooltip = GetTooltip()
+    if tooltip:
+        text "Trusty thing-good for big swings, bad for getting in deep.":
+            pos (300, 370)
     imagebutton:
         sensitive enabled
         pos (0, 650)
         focus_mask True
         idle "combat/combat arw base.png"
-        hover "combat/combat arw hl.png"    
+        hover "combat/combat arw hl.png"  
+        hovered SetVariable("tooltip", "true")  
         selected_idle "combat/combat arw hl.png"  
         action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
         selected (arwselected == True)
+        
+    
+    
+        
 
 
     imagebutton:
@@ -215,7 +234,7 @@ screen combat2:
             hover "combat/paragon head base hl.png"
             selected_idle "combat/paragon head base hl.png"
         if something_selected == True:
-            action Jump ("wrong2")
+            action [SetVariable("head_hit", True),Jump ("wrong2")]
         else:
             action NullAction()
     imagebutton:
@@ -230,7 +249,7 @@ screen combat2:
             hover "combat/paragon torso base hl.png"
             selected_idle "combat/paragon base flour hl.png"
         if something_selected == True:
-           action Jump ("wrong2")
+            action [SetVariable("torso_hit", True),Jump ("wrong2")]
         else:
             action NullAction()
         #if green_btn_selected:
@@ -251,8 +270,8 @@ screen combat2:
                 action Jump("finishedcombat")
             if hmrselected == True and tailhmred == False:
                 action [SetVariable("base_tail", "combat/paragon tail injured.png"), SetVariable ("base_tail_hl", "combat/paragon tail injured hl.png"), SetVariable("tailhmred", True), Jump("hit_tail")]
-        
-      ##  else:
+    
+    ##  else:
         ##    action Jump("wrong2")
         
       

@@ -164,11 +164,14 @@ default next_round = "null"
 default tutorial_done = False
 default blue_red_combine = False
 default flour = False 
+default tt = "hello"
 default based = False
 default head_floured = False
+default hmr_hovered = False
 default torso_floured = False
 default tail_floured = False
 default invisible = True
+default flour_active = False
 default hmrselected = False
 default arwselected = False
 default something_selected = False
@@ -184,10 +187,12 @@ default andrea_vera = "combat/av good.png"
 default flour_found = False
 default full_examined = False
 default enabled = True
+default torso_hit = False
 default examine_button_enabled = False
 default attack_button_enabled = False
 default paragon_enabled = False
 default andrea_vera_health = "good"
+default head_hit = False
 
 label start:
     ## default combat_round = 1
@@ -3446,16 +3451,38 @@ label wake_vera:
         "As a heads up, next mess up miiight get you busted."
         call screen combat
     label wrong2:
-    # scene combat comp injured
-        $ andrea_vera = "av bad"
-        $ something_selected = False
-        $ arwselected = False
-        $ flour = False
-        $ hmrselected = False
-        "{i}That's not it.{/i}"
-        jump combat_roll
+        if arwselected:
+            vl "Ugh, can't get a shot in through the skin."
+            vl "Can you get an opening?"
+            jump combat_var
+        if torso_hit:
+            "I swing forward. It's body less moves, more undulates out of the way."
+            "It's gotten wise to my hammer."
+            $ torso_hit = False
+        if head_hit:
+            "I swing upward. It yanks its head away, leaving me stumbling."
+            "It's gotten wise to my hammer."
+            $ head_hit = False
+        # scene combat comp injured
+        # $ andrea_vera = "av bad"
+        #if arwselected:
+        #  vl "Can't get a shot in-"
+        #  vl "It's skins too tough."
+        #if torso_hit and hmrselected:
+        #   "I aim for its body: a large, winding thing."
+        #   "It coils away."
+        #   "The blow to its tail's taught it some caution when it comes to my hammer."
+            
         
-        call screen combat2
+        label combat_var:
+            $ something_selected = False
+            $ arwselected = False
+            $ flour = False
+            $ hmrselected = False
+            "{i}That's not it.{/i}"
+            jump combat_roll
+            
+            call screen combat2
      
 
     label hit_tail:
@@ -3494,6 +3521,7 @@ label wake_vera:
     label round_1:
         show screen combat
         "Click on the flour object you want to use, then part of the monster."
+        $ flour_active = True
         $ flour_found = True
         $ paragon_enabled = True
         call screen combat
@@ -3518,24 +3546,29 @@ label wake_vera:
             $ andrea_vera_health = "bad"
             hide screen combat
             hide screen combat2
+           
             call screen attack_examine
-            jump combats
+            #jump combats
         elif andrea_vera_health == "bad":
             $ andrea_vera_health = "terrible"
             $ andrea_vera = "combat/av terrible.png"
             hide screen combat
             hide screen combat2
             call screen attack_examine
-            jump combats
+            #jump combats
         elif andrea_vera_health == "terrible":
             jump game_over
     label not_attacked:
         "The thing misses, best to get it over with, still."
+        hide screen combat2
+        hide screen combat
         if tutorial_done == False:
             $ default_combat_round +=1
-            jump combats
+            call screen attack_examine
+            #jump combats
         else: 
-            jump post_tutorial_combat
+            call screen attack_examine
+            #sjump post_tutorial_combat
     label round_2:
         
         show screen combat2
