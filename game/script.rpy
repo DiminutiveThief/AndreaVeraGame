@@ -193,6 +193,8 @@ default attack_button_enabled = False
 default paragon_enabled = False
 default andrea_vera_health = "good"
 default head_hit = False
+default tooltip_posx = 0
+default tooltip_posy = 0
 
 label start:
     ## default combat_round = 1
@@ -2014,7 +2016,7 @@ label wake_vera:
         vl "You know, the car's not nearly as bad as this."
         show andrea neutral:
             xzoom 1.0
-        ab "I was just trying to pacify him. It'd suck if he was on edge the whole time."
+        ab "I was just trying to pacify them. It'd suck if they were on edge the whole time."
         "She leans back."
         vl "It's kinda weird for an academic type to have an apprentice."
         vl "Not like {i}bad{/i} weird, I just haven't heard about it much."
@@ -3593,7 +3595,8 @@ label wake_vera:
         call screen combat2
     label finishedcombat:
         "Vera's bolt hits true."
-        "Electricity crackles through the creatures thing."
+        play sound "audio/SFX/ArrowHitFlesh.mp3"
+        "Electricity crackles through the creatures body."
         "From its pooling blood up into what passes through its' veins"
         "Its lumbering form becomes a thrashing, screeching circuit board."
         "It {i}reeks{/i}. A biting mix of ozone and freezer burn."
@@ -3654,319 +3657,341 @@ label wake_vera:
         "We just barely cram all the bags in the back."
         "I was right, they do smell, even with the AC cranked all the way up."
         scene car bg aznight with fade
-        "I don't bother with the radio this time, fiddling around for a station is going to be annoying."
-        "I zone out without its assistance, so the drive goes by quickly."
-        "The only interruption is Vera's occasional check in to inform me that the body hasn't eaten through the trash bags."
-        "Twenty minutes feels more like five."
-        "I park close to the house, it'll make it easier to carry everyting in."
-        #sfx knock
-        scene outside neighborhood with fade
-        show vera body annoyed shirt3 at left
-        vl "I hope at least one of them's around."
-        vl "Otherwise I'm just dumping everything in the backyard."
-        show andrea body neutral at right
-        ab "So you think Avery is staying here?"
-        vl "Could be. Maybe they're a bit of a stray."
-        "Our question is answered pretty quickly."
-        #sfx door open
-        show avery body neutral at center
-        al "Oh! That was...-early?"
-        "They look around."
-        al "...Late?"
-        vl "It's only, like, nine."
-        show vera neutral2
-        vl "Can you help us get all of it in?"
-        vl "It was a big one."
-        ab "Do you have a place to store it?"
-        show avery body thinking
-        al "The garage should be fine."
-        "They step out of the house and I gesture them towards the car."
-        al "It wasn't too bad, was it?"
-        al "Not that I'm doubting your capabilities - it doesn't look like you two are too beat up. I just wanted to make sure."
-        show andrea happy   
-        "I flash a thumbs up over my shoulder."
-        ab "It was all good. The worst part was clean up."
-        show andrea neutral
-        show vera neutral   
-        vl "It's kind of acidic. I hope you have something for that."
-        show avery body worried
-        al "Ah-"
-        show andrea happy   
-        ab "It's not that bad, don't worry. A couple of trash bags did the trick."
-        show avery body thinking
-        al "We shoooould have gear for that? I know Dominic has worked with some real nasty ones."
-        "I open the back and fight off a cringe. Even when dispersed by the night air, it's rancid."
-        "Avery's a little less succesful. There's a brief, but harrowing, moment where I'm worried they'll throw up."
-        "They steel themself, though."
-        show avery body embarrassed
-        al "Yeah, {i}whew{/i}, it {i}is{/i} big."
-        show vera neutral2
-        vl "Is Dom-...your boss up?"
-        "They nod."
-        show avery body neutral
-        al "I think he's finishing something up. You came right in the nick of time."
-        vl "Uh-huh."
-        vl "Do you...do you live here?"
-        vl "Dunno if it's my business. I'm just curious about the arrangement."
-        al "Nah, I just stay over sometimes. When he needs an extra hand and stuff."
-        "They set down their bag and awkwardly shuffle past it to the door."
-        #scene lab with fade
-        "We're greeted with the same mess from before, for the most part."
-        "I think a few shirts may be folded, rather than thrown onto the ground."
-        show vera body neutral2 at left 
-        vl "What kind of stuff does he even have you do?"
-        vl "I haven't heard of any mentees being lab assistants."
-        show avery body happy
-        al "Sometimes it's stuff like this- y'know, just being an extra hand. But mostly it's taking notes and reviewing his work."
-        al "It's pretty interesting."
-        al "Lets me put that 'general sciences' degree to good use and I'm not much of a fighter anyway."
-        vl "{i}Mmm...{/i}"
-        vl "You should probably pick up at least a little bit of combat stuff."
-        vl "Has Dominic never even tried to show you the ropes?"
-        show avery neutral
-        al "We've talked about it, but it's better for me to build a baseline in understanding how Paragons work, first."
-        "There's a stiffness in his tone, right at the end. Like he's parroting someone."
-        ab "Makes sense. I get that."
-        "It's better to cut off Vera before she starts grilling him."
-        show vera body neutral
-        vl "Maybe you can show him how to swing around a hammer."
-        "She nudges me. There's a {i}squelch{/i} as the bag over her shoulder shifts."
-        show avery body embarrassed
-        al "Oh."
-        al "Thanks!"
-        al "Maybe later."
-        show andrea offput
-        ab "Mhm, yeah. Where should we put those guys down?"
-        show avery body neutral two
-        al "Heeeere works."
-        "They plop their trash bag in the hall."
-        al "Let me get Dominic, then we can haul the rest in."
-        "They skamper off towards the lab."
-        hide avery
-        "Vera snorts under her breath when they're out of sight."
-        show vera happy
-        vl "What a character."
-        show andrea neutral
-        ab "C'mon, they just seem new."
-        show vera neutral2
-        vl "I'm not saying it's bad. Kind of endearing, honestly."
+        label back_to_dom:
+            "I don't bother with the radio this time, fiddling around for a station is going to be annoying."
+            "I zone out without its assistance, so the drive goes by quickly."
+            "The only interruption is Vera's occasional check in to inform me that the body hasn't eaten through the trash bags."
+            "Twenty minutes feels more like five."
+            "I park close to the house, it'll make it easier to carry everyting in."
+            play sound "audio/SFX/DoorKnockNormal.mp3"
+            scene outside neighborhood with fade
+            show vera body annoyed shirt3 at left
+            vl "I hope at least one of them's around."
+            vl "Otherwise I'm just dumping everything in the backyard."
+            show andrea body neutral at right
+            ab "So you think Avery is staying here?"
+            vl "Could be. Maybe they're a bit of a stray."
+            "Our question is answered pretty quickly."
+            #sfx door open
+            show avery body neutral at center
+            al "Oh! That was...-early?"
+            "They look around."
+            show avery body thinking
+            al "...Late?"
+            vl "It's only, like, nine."
+            show vera neutral2
+            vl "Can you help us get all of it in?"
+            vl "It was a big one."
+            ab "Do you have a place to store it?"
+            show avery body neutral
+            al "The garage should be fine."
+            "They step out of the house and I gesture towards the car."
+            al "It wasn't too bad, was it?"
+            show avery body embarrassed
+            al "Not that I'm doubting your capabilities - it doesn't look like you two are too beat up. I just wanted to make sure."
+            show andrea happy   
+            "I flash a thumbs up over my shoulder."
+            ab "It was all good. The worst part was clean up."
+            show andrea neutral
+            show vera neutral   
+            vl "It's kind of acidic. I hope you have something for that."
+            show avery body worried
+            al "Ah-"
+            show andrea happy   
+            ab "It's not that bad, don't worry. A couple of trash bags did the trick."
+            show avery body thinking
+            al "We shoooould have gear for that? I know Dominic has worked with some real nasty ones."
+            "I open the back and fight off a cringe. Even when dispersed by the night air, it's rancid."
+            "Avery's a little less succesful. There's a brief, but harrowing, moment where I'm worried they'll throw up."
+            "They steel themself, though."
+            show avery body embarrassed
+            al "Yeah, {i}whew{/i}, it {i}is{/i} big."
+            show vera neutral2
+            vl "Is Dom-...your boss up?"
+            "They nod."
+            show avery body neutral
+            al "I think he's finishing something up. You came right in the nick of time."
+            vl "Uh-huh."
+            vl "Do you...do you live here?"
+            vl "Dunno if it's my business. I'm just curious about the arrangement."
+            al "Nah, I just stay over sometimes. When he needs an extra hand and stuff."
+            "They set down their bag and awkwardly shuffle past it to the door."
+            #scene lab with fade
+            "We're greeted with the same mess from before, for the most part."
+            "I think a few shirts may be folded, rather than thrown onto the ground."
+            show vera body neutral2 at left 
+            vl "What kind of stuff does he even have you do?"
+            vl "I haven't heard of any mentees being lab assistants."
+            show avery body happy
+            al "Sometimes it's stuff like this- y'know, just being an extra hand. But mostly it's taking notes and reviewing his work."
+            al "It's pretty interesting."
+            al "Lets me put that 'general sciences' degree to good use and I'm not much of a fighter anyway."
+            vl "{i}Mmm...{/i}"
+            vl "You should probably pick up at least a little bit of combat stuff."
+            vl "Has Dominic never even tried to show you the ropes?"
+            show avery neutral
+            al "We've talked about it, but it's better for me to build a baseline in understanding how Paragons work, first."
+            "There's a stiffness in their tone, right at the end. Like they're parroting someone."
+            ab "Makes sense. I get that."
+            "It's better to cut off Vera before she starts grilling them."
+            show vera body neutral
+            vl "Maybe you can them him how to swing around a hammer."
+            "She nudges me. There's a {i}squelch{/i} as the bag over her shoulder shifts."
+            show avery body embarrassed
+            al "Oh."
+            al "Thanks!"
+            show avery body thinking
+            al "Maybe later."
+            show andrea offput
+            ab "Mhm, yeah. Where should we put those guys down?"
+            show avery body neutral2
+            al "Heeeere works."
+            play sound "audio/SFX/WetTrashBag.mp3"
+            "They plop their trash bag in the hall."
+            al "Let me get Dominic, then we can haul the rest in."
+            
+            "They skamper off towards the lab."
+            play sound "SFX/FootSteps2.mp3"
+            hide avery with moveinoutdissolve
+            
+            "Vera snorts under her breath when they're out of sight."
+            show vera happy
+            vl "What a character."
+            show andrea neutral
+            ab "C'mon, they just seem new."
+            show vera neutral2
+            vl "I'm not saying it's bad. Kind of endearing, honestly."
 
-        ab "{i}Alright.{/i}"
-        dm "You can bring it here!"
-        "His voice cuts off my train of thought before it can get too turbulent."
-        show vera annoyed
-        vl "{i}Can't even bother helping?{/i}"
-        "We haul our quarry over to where they've cleared a space."
-        scene lab with fade
-        show andrea body neutral:
-            xalign 0
-            xzoom -1.0
-            yalign 1.0
-        show vera body shirt3 neutral2:
-            xalign 2
-            yalign 1.0
-        show dominic body happy:
-                xpos 0.45
+            ab "{i}Alright.{/i}"
+            dm "You can bring it here!"
+            "His voice cuts off my train of thought before it can get too turbulent."
+            show vera annoyed
+            vl "{i}Can't even bother helping?{/i}"
+            "We haul our quarry over to where they've cleared a space."
+        label back_to_lab:
+            scene lab with fade
+            show andrea body neutral:
+                xalign 0
+                xzoom -1.0
                 yalign 1.0
-        dm "You were right- quite large, this one is."
-        "Avery offers a thumbs up from their spot in the corner."
-        show vera neutral 
-        vl "Careful, it's-"
-        dm "Acidic! Yes. I can smell it."
-        show vera neutral2
-        vl "{i}Let me finish, god damn.{/i}"
-        show andrea stern
-        "I give her a warning glance."
-        "She rolls her eye."
-        ab "It's not too bad, the bags handled it fine."
-        "He's already busied himself with retrieving his gloves."
-        vl "Do you need us here for this?"
-        vl "You owe us that info."
-        show dominic body thinking
-        dm "Oh? Yes! Correct."
-        "Dominic doesn't pause, just begins scrounging through the first bag."
-        "He produces a smaller chunk - I think it's part of the tail - and plops it on the table."
-        dm "Again, you weren't all that specific, but I picked out what I could."
-        dm "Paragons being on better terms with humans isn't as uncommon as you'd think."
-        dm "I heard about one that took a liking to interior design, did you know that?"
-        vl "No."
-        ab "That's interesting, not really...what we're looking for, though."
-        "He grabs a scalpel from his drawer and begins cutting."
-        "I'm desensitized enough to the smell and far enough away from it to get the brunt."
-        "He never specified what he's hoping to learn from it."
-        "Age? Diet?"
-        "These things internal make up is too inscrutable for me to guess."
-        show dominic body neutral
-        dm "Right. Right."
-        dm "What {i}could{/i} interest you, is an old colleague of mine."
-        dm "We did some work together- she specialized in Paragon behaviour."
-        dm "A dangerous gambit."
-        "His brows furrow as he peels the sample like its an orange."
-        dm "Last I heard, she came across one that she built an actual rapport with."
-        show dominic body sad
-        dm "She was trying to come to...some sort of understanding. An attempt to sate its hunger without it hollowing her out."
-        dm "Give it a taste of humanity."
-        show andrea stern
-        "I feel myself straighten up."
-        ab "Do you think there was anything to it?"
-        "He shrugs."
-        show dominic body excited
-        dm "Possibly! It could be hubris!"
-        dm "I haven't heard from her in some time. Not promising."
-        show dominic body neutral
-        dm "But, she was always cagey. I think she was worried folks would take chagrin with her theory."
-        "I allow the sliver of relief his words give me to relax my muscles and steady my breathing."
-        ab "Where is she now?"
-        dm "Last I heard, she was up in Nevada-"
-        "A few days drive if we gun it."
-        dm "-I should have her number and address, somewhere. I can get those."
-        show vera neutral
-        vl "Can you do it now?"
-        "She glances at the sheen of viscera coating his gloves."
-        vl "Or maybe you could, Avery?"
-        dm "You heard the nice lady."
-        dm "It should be in the cabinet there-"
-        dm "Rina Becker was her name."
-        al "On it."
-        "Avery slips off the chair with their usual urgency."
-        hide dominic with dissolve
-        "As we wait, Vera joins me against the wall."
-        show vera body shirt3 neutral2 with MoveTransition(0.3):
-            xoffset 20
-        "She leans against my side and sighs."
-        vl "The drives gonna be a pain."
-        "She mutters."
-        vl "I hope the lady gives us more than another goose chase."
-        show andrea neutral
-        "I lean against her in turn."
-        ab "C'mon, it's something."
-        show vera annoyed
-        vl "{i}Hmrgh...{/i}"
-        show vera neutral2
-        vl "I'm just tired of running around."
-        vl "And just normal-tired."
-        ab "Same."
-        "It's like being reminded of your breathing. I only register it now that Vera has pointed it out."
-        "My eyes sit heavy in my sockets and a dull ache pulses through my muscles."
-        ab "Wanna sleep in the car?"
-        vl "Yeah. Don't wanna bother flagging down a motel."
-        show avery body neutral at right:
-            xoffset 200
-        al "This should be it."
-        "Avery appears in front of us, a scrap of paper in hand."
-        show andrea happy
-        ab "{i}Nice.{/i}"
-        "A phone number with an unfamiliar area code is scribbled on it, beneath an address."
-        show vera annoyed
-        vl "This better still be good."
-        #show dominic happy
-        dm "Here's to hoping!"
-        "{i}Squelch{/i}. He's moved on to another chunk of the Paragon. This one is bulkier than the other one."
-        "It looks like a fleshy layer cake from the side."
-        vl "Awesome. Thanks a bunch you two. Let's go."
-        "She's already moving out the door."
-        al "Ah- good luck out there,"
-        ab "Thanks."
-        dm "Tell Sloane hello for me!"
-        ab "For sure."
-        "Vera doesn't respond, just picks up the pace."
-        scene car bg aznight with fade
-        show vera bodyflip shirt3flip neutral2flipped at vera_car
-        vl "Glad I don't have to deal with those two anymore."
-        show andrea body neutral at andrea_car
-        ab "Really? I couldn't tell."
-        ab "Dominic was helpful but, y'know, I get it. He was kinda- {i}eh{/i}."
-        ab "But, what did Avery do?"
-        show vera angryflipped
-        vl "It's just, like-"
-        "She throws her hands in the air."
-        vl "{i}You know?{/i}"
-        ab "Not really."
-        vl "It's like...like- when you see a hamster, or a mouse, just some kinda tiny animal."
-        show vera annoyedflip
-        vl "And they just kinda stare up at you? And you know you can squish 'em so easy."
-        show vera neutral2flipped
-        vl "And you know you shouldn't, but also you just kinda wanna-"
-        #show 
-        "She clasps her hands together."
-        show vera angryflipped
-        vl "And it's {i}so{/i} annoying, 'cause they're sitting there, and they don't even know."
-        ab "Uh-huh."
-        "I nod slowly."
-        show vera neutral2flipped
-        vl "You think I'm being an asshole."
-        ab "No-well-"
-        show andrea stern
-        ab "Kind of-"
-        show andrea offput
-        ab "But not-"
-        
-        ab "Just weird. You have to know that too."
-        "She leans in her seat."
-        vl "I know. I didn't think you'd get it."
-        "I resist the urge to roll my eyes."
-        "This again."
-        show andrea neutral
-        ab "It'd be easier if you explained it like a normal person."
-        ab "Just say you think they were dumb, or annoying."
-        ab "Keep it concise."
-        vl "Guess they were naiive, or whatever."
-        show vera annoyedflip
-        vl "They'll bite it at some point. I can feel it."
-        show andrea stern
-        ab "'Cause you think they're not prepped properly?"
-        vl "Yeah, that. Also, it's just kinda stupid to think you can be in this line of work without getting your hands dirty."
-        show vera sadflipped
-        vl "Just annoying."
-        "I {i}tap, tap, tap{/i}, my fingers on the wheel."
-        ab "That's presumptious."
-        ab "They might get it, maybe they're just not excited to share with someone they  just met."
-        show vera annoyedflip
-        vl "You asked."
-        "Maybe I {i}should{/i} have just left her to her neuroses."
-        "Getting Vera to change her mind about anything once she's set on it is like pulling teeth."
-        ab "I know, I know."
-        "I don't want to agree just to pacify her, but I'm not about to lecture her, either."
-        show andrea neutral
-        ab "...Let's just take what we can get. Neither of them are your problem anymore."
-        "She presses her hands into her eyes."
-        vl "Mhm, yeah."
-        vl "You're right."
-        show vera neutral2flipped
-        vl "We should probably park somewhere else."
-        vl "We'll get weird looks if we stay here over night."
-        "We're of the same mind- I'm already starting the car."
-        #show menu, music?
-        "I drive for a bit - half an hour - then pull into the first rest stop I see."
-        "Vera passes out a few minutes after I stop."
-        "For a light sleeper, she can pass out basically anywhere."
-        hide vera with dissolve
-        "I let the car run a little longer, trying to make as much use of the AC as I can, then turn it off."
-        "Its death leaves me with nothing besides the buzz of cicadas and Vera's breathing for company."
-        "As tired as I am, you'd think it'd be easier to fall asleep."
-        "I should practice what I told Vera and just let this lead give me some peace of mind."
-        "Even if it's self-delusion, it's not too bad in small doses."
-        "But, I'm restless."
-        "We're at the whims of some weirdo again."
-        "We could just be sent on another errand run before we get anything useful."
-        "It wouldn't as bad if I didn't have that {i}thing{/i} pacing around the back of my mind."
-        "I don't know when Burn's better nature will rear its head again."
-        "Every delay is another invitation for it to demand tribute."
-        "I'm lucky it hasn't taken my attempts to seperate us as a slight."
-        "Maybe it has that little faith in me."
-        "I lean the car seat back as far as I can."
-        show andrea sad
-        "I'll prove it wrong- I {i}have{/i} to."
-        show andrea offputEC
-        "{i}Thick, pooling blood. Stinking corpse flesh. The last gasps of air spasming through the body in a death rattle.{/i}"
-        "I won't let Vera throw some poor idiot in front of me like she's a cat depositing roadkill on their door step, then wondering why they aren't eating."
-        "This won't be a dead end."
-        "I'll get something out of Rina."
-        show andrea neutral
-        "I stop my train of thought at that."
-        "Nothing past that is worth mulling over."
-        "{i}Tiger, Tiger, burning bright.{/i}"
-        #add driving dsfx
+            show vera body shirt3 neutral2:
+                xalign 2
+                yalign 1.0
+            show dominic body happy:
+                    xpos 0.45
+                    yalign 1.0
+            dm "You were right- quite large, this one is."
+            "Avery offers a thumbs up from their spot in the corner."
+            show vera neutral 
+            vl "Careful, it's-"
+            dm "Acidic! Yes. I can smell it."
+            show vera neutral2
+            vl "{i}Let me finish, god damn.{/i}"
+            show andrea stern
+            "I give her a warning glance."
+            "She rolls her eye."
+            ab "It's not too bad, the bags handled it fine."
+            "He's already busied himself with retrieving his gloves."
+            vl "Do you need us here for this?"
+            vl "You owe us that info."
+            show dominic body thinking
+            dm "Oh? Yes! Correct."
+            "Dominic doesn't pause, just begins scrounging through the first bag."
+            "He produces a smaller chunk - I think it's part of the tail - and plops it on the table."
+            dm "Again, you weren't all that specific, but I picked out what I could."
+            dm "Paragons being on better terms with humans isn't as uncommon as you'd think."
+            dm "I heard about one that took a liking to interior design, did you know that?"
+            vl "No."
+            ab "That's interesting, not really...what we're looking for, though."
+            "He grabs a scalpel from his drawer and begins cutting."
+            play sound "audio/SFX/CuttingBody.wav"
+            "I'm desensitized enough to the smell and far enough away from it to get the brunt."
+            "He never specified what he's hoping to learn from it."
+            "Age? Diet?"
+            "These things internal make up is too inscrutable for me to guess."
+            show dominic body neutral
+            dm "Right. Right."
+            dm "What {i}could{/i} interest you, is an old colleague of mine."
+            show dominic body thinking
+            dm "We did some work together- she specialized in Paragon behaviour."
+            dm "A dangerous gambit."
+            play sound "audio/SFX/PeelParagon.mp3"
+            "His brows furrow as he peels the sample like its an orange."
+            dm "Last I heard, she came across one that she built an actual rapport with."
+            show dominic body sad
+            dm "She was trying to come to...some sort of understanding. An attempt to sate its hunger without it hollowing her out."
+            dm "Give it a taste of humanity."
+            show andrea stern
+            "I feel myself straighten up."
+            ab "Do you think there was anything to it?"
+            "He shrugs."
+            show dominic body excited
+            dm "Possibly! It could be hubris!"
+            dm "I haven't heard from her in some time. Not promising."
+            show dominic body neutral
+            dm "But, she was always cagey. I think she was worried folks would take chagrin with her theory."
+            "I allow the sliver of relief his words give me to relax my muscles and steady my breathing."
+            ab "Where is she now?"
+            show dominic body thinking
+            dm "Last I heard, she was up in Nevada-"
+            "A few days drive if we gun it."
+            dm "-I should have her number and address, somewhere. I can get those."
+            show vera neutral
+            vl "Can you do it now?"
+            "She glances at the sheen of viscera coating his gloves."
+            vl "Or maybe you could, Avery?"
+            dm "You heard the nice lady."
+            dm "It should be in the cabinet there-"
+            dm "Rina Becker was her name."
+            al "On it."
+            "Avery slips off the chair with their usual urgency."
+            hide dominic with dissolve
+            "As we wait, Vera joins me against the wall."
+            show vera body shirt3 neutral2 with MoveTransition(0.7):
+                xoffset 20
+            "She leans against my side and sighs."
+            vl "The drives gonna be a pain."
+            "She mutters."
+            vl "I hope the lady gives us more than another goose chase."
+            show andrea neutral
+            "I lean against her in turn."
+            ab "C'mon, it's something."
+            show vera annoyed
+            vl "{i}Hmrgh...{/i}"
+            show vera neutral2
+            vl "I'm just tired of running around."
+            vl "And just normal-tired."
+            ab "Same."
+            "It's like being reminded of your breathing. I only register it now that Vera has pointed it out."
+            "My eyes sit heavy in my sockets and a dull ache pulses through my muscles."
+            ab "Wanna sleep in the car?"
+            vl "Yeah. Don't wanna bother flagging down a motel."
+            show avery body neutral at right:
+                xoffset 200
+            al "This should be it."
+            "Avery appears in front of us, a scrap of paper in hand."
+            show andrea happy
+            ab "{i}Nice.{/i}"
+            "A phone number with an unfamiliar area code is scribbled on it, beneath an address."
+            show vera annoyed
+            vl "This better still be good."
+            
+            dm "Here's to hoping!"
+            play sound "audio/SFX/WetNoise.mp3"
+            "{i}Squelch{/i}. He's moved on to another chunk of the Paragon. This one is bulkier than the other one."
+            "It looks like a fleshy layer cake from the side."
+            vl "Awesome. Thanks a bunch you two. Let's go."
+            show vera body shirt3 annoyed with MoveTransition(0.2):
+                xoffset -40
+            "She's already moving out the door."
+            al "Ah- good luck out there,"
+            ab "Thanks."
+            dm "Tell Sloane hello for me!"
+            
+            ab "For sure."
+            "Vera doesn't respond, just picks up the pace."
+            play sound "audio/SFX/FastFootsteps.mp3"
+            hide vera with moveoutleft
+            pause 0.3
+            scene car bg aznight with fade
+            
+         
+            show vera bodyflip shirt3flip neutral2flipped at vera_car
+            vl "Glad I don't have to deal with those two anymore."
+            show andrea body neutral at andrea_car
+            ab "Really? I couldn't tell."
+            ab "Dominic was helpful but, y'know, I get it. He was kinda- {i}eh{/i}."
+            ab "But, what did Avery do?"
+            show vera angryflipped
+            vl "It's just, like-"
+            "She throws her hands in the air."
+            vl "{i}You know?{/i}"
+            ab "Not really."
+            vl "It's like...like- when you see a hamster, or a mouse, just some kinda tiny animal."
+            show vera annoyedflip
+            vl "And they just kinda stare up at you? And you know you can squish 'em so easy."
+            show vera neutral2flipped
+            vl "And you know you shouldn't, but also you just kinda wanna-"
+            #show 
+            "She clasps her hands together."
+            show vera angryflipped
+            vl "And it's {i}so{/i} annoying, 'cause they're sitting there, and they don't even know."
+            ab "Uh-huh."
+            "I nod slowly."
+            show vera neutral2flipped
+            vl "You think I'm being an asshole."
+            ab "No-well-"
+            show andrea stern
+            ab "Kind of-"
+            show andrea offput
+            ab "But not-"
+            
+            ab "Just weird. You have to know that too."
+            "She leans in her seat."
+            vl "I know. I didn't think you'd get it."
+            "I resist the urge to roll my eyes."
+            "This again."
+            show andrea neutral
+            ab "It'd be easier if you explained it like a normal person."
+            ab "Just say you think they were dumb, or annoying."
+            ab "Keep it concise."
+            vl "Guess they were naiive, or whatever."
+            show vera annoyedflip
+            vl "They'll bite it at some point. I can feel it."
+            show andrea stern
+            ab "'Cause you think they're not prepped properly?"
+            vl "Yeah, that. Also, it's just kinda stupid to think you can be in this line of work without getting your hands dirty."
+            show vera sadflipped
+            vl "Just annoying."
+            "I {i}tap, tap, tap{/i}, my fingers on the wheel."
+            ab "That's presumptious."
+            ab "They might get it, maybe they're just not excited to share with someone they  just met."
+            show vera annoyedflip
+            vl "You asked."
+            "Maybe I {i}should{/i} have just left her to her neuroses."
+            "Getting Vera to change her mind about anything once she's set on it is like pulling teeth."
+            ab "I know, I know."
+            "I don't want to agree just to pacify her, but I'm not about to lecture her, either."
+            show andrea neutral
+            ab "...Let's just take what we can get. Neither of them are your problem anymore."
+            "She presses her hands into her eyes."
+            vl "Mhm, yeah."
+            vl "You're right."
+            show vera neutral2flipped
+            vl "We should probably park somewhere else."
+            vl "We'll get weird looks if we stay here over night."
+            "We're of the same mind- I'm already starting the car."
+            #show menu, music?
+            "I drive for a bit - half an hour - then pull into the first rest stop I see."
+            "Vera passes out a few minutes after I stop."
+            "For a light sleeper, she can pass out basically anywhere."
+            hide vera with dissolve
+            "I let the car run a little longer, trying to make as much use of the AC as I can, then turn it off."
+            "Its death leaves me with nothing besides the buzz of cicadas and Vera's breathing for company."
+            "As tired as I am, you'd think it'd be easier to fall asleep."
+            "I should practice what I told Vera and just let this lead give me some peace of mind."
+            "Even if it's self-delusion, it's not too bad in small doses."
+            "But, I'm restless."
+            "We're at the whims of some weirdo again."
+            "We could just be sent on another errand run before we get anything useful."
+            "It wouldn't as bad if I didn't have that {i}thing{/i} pacing around the back of my mind."
+            "I don't know when Burn's better nature will rear its head again."
+            "Every delay is another invitation for it to demand tribute."
+            "I'm lucky it hasn't taken my attempts to seperate us as a slight."
+            "Maybe it has that little faith in me."
+            "I lean the car seat back as far as I can."
+            show andrea sad
+            "I'll prove it wrong- I {i}have{/i} to."
+            show andrea offputEC
+            "{i}Thick, pooling blood. Stinking corpse flesh. The last gasps of air spasming through the body in a death rattle.{/i}"
+            "I won't let Vera throw some poor idiot in front of me like she's a cat depositing roadkill on their door step, then wondering why they aren't eating."
+            "This won't be a dead end."
+            "I'll get something out of Rina."
+            show andrea neutral
+            "I stop my train of thought at that."
+            "Nothing past that is worth mulling over."
+            "{i}Tiger, Tiger, burning bright.{/i}"
+        play sound "audio/CarAmbient.mp3"
         scene carbgazday with fade
         show andrea body neutral at left 
         "The next day goes by quickly, so does the day after that."

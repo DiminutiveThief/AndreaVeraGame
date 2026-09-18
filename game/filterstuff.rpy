@@ -22,7 +22,12 @@ transform alt_hotel:
 
 transform night_filter_less:
     matrixcolor BrightnessMatrix(-0.1) * TintMatrix ("#c0c8c9")
-
+transform fade_in:
+    alpha 0.0
+    linear 0.5 alpha 1.0
+define moving_out_left= MoveTransition(0.8, leave=offscreenleft)
+define moving_out_right= MoveTransition(0.8, leave=offscreenright)
+define moveinoutdissolve = ComposeTransition(Dissolve(0.7), before=moving_out_left, after=moving_out_right)
 transform sprite_jump:
     # Moves up smoothly over 0.15 seconds
     easein 0.15 yoffset -35  

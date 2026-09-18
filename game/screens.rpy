@@ -27,7 +27,12 @@ style gui_text:
 
 style button:
     properties gui.button_properties("button")
+    activate_sound ("audio/ClickSound.mp3")
+    hover_sound ("audio/HoverSound.mp3")
 
+style image_button:
+    activate_sound ("audio/ClickSound.mp3")
+    hover_sound ("audio/HoverSound.mp3")
 style button_text is gui_text:
     properties gui.text_properties("button")
     yalign 0.5
@@ -1774,3 +1779,6 @@ style slider_vbox:
 style slider_slider:
     variant "small"
     xsize 900
+style custom_frame:
+    background Frame("images/ui/frame2.png")
+    

@@ -1,6 +1,5 @@
 screen tips_screen:
     text "Ohh the creature."
-
 screen attack_examine:
     imagebutton:
         sensitive examine_button_enabled 
@@ -171,15 +170,11 @@ screen combat:
                 
             #   if green_btn_selected:
             #      action Jump("incorrect")
-                
-            
-        
-
 screen combat2:
    
     
 
-
+   
    
     add "combat/combat bg grayscale.png"
     
@@ -198,25 +193,28 @@ screen combat2:
            
              
             selected_idle "combat/combat hmr hl.png"  
-            hovered SetScreenVariable("tt", "hi")
+            hovered [SetVariable("tooltip_posx", 400), SetVariable("tooltip_posy", 360)]
             action [ToggleVariable("hmrselected"), SetVariable("arwselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
             selected (hmrselected == True)
-            tooltip "hi"
-    $ tooltip = GetTooltip()
-    if tooltip:
-        text "Trusty thing-good for big swings, bad for getting in deep.":
-            pos (300, 370)
+            tooltip "A trusty thing. Not great at getting in precise shots, but good for caving in dense material."
+    
+ 
     imagebutton:
         sensitive enabled
         pos (0, 650)
         focus_mask True
         idle "combat/combat arw base.png"
         hover "combat/combat arw hl.png"  
-        hovered SetVariable("tooltip", "true")  
+        hovered [SetVariable("tooltip_posx", 400), SetVariable("tooltip_posy", 660)]
         selected_idle "combat/combat arw hl.png"  
         action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
         selected (arwselected == True)
-        
+        tooltip "Vera's cross bow. She made it from the remains of some sort of Paragon. It creates a shock if it strikes true, but isn't great at piercing dense armor."
+    
+    
+
+   
+            
     
     
         
@@ -270,26 +268,29 @@ screen combat2:
                 action Jump("finishedcombat")
             if hmrselected == True and tailhmred == False:
                 action [SetVariable("base_tail", "combat/paragon tail injured.png"), SetVariable ("base_tail_hl", "combat/paragon tail injured hl.png"), SetVariable("tailhmred", True), Jump("hit_tail")]
+    $ tooltip = GetTooltip()
     
-    ##  else:
-        ##    action Jump("wrong2")
-        
-      
+    if tooltip:
+        frame:
+            at fade_in
+            style "custom_frame" 
             
-
-            
-
-            
-
+            padding(40, 40, 40, 40)
+            xpos(tooltip_posx)
+            ypos(tooltip_posy)
+            text "[tooltip]":
+                size 30
+                xmaximum 400
+                line_spacing 10
                 
             
-
+    ##  else:
+        ##    action Jump("wrong2")
 screen bathroomintro:
     imagemap:
         ground "Background/Bathroom/bathroom body items final.png"
         hover "Background/Bathroom/bathroom body hl hammer no hl tint.png"
         hotspot (508, 502, 361, 217) action Jump ("test_body")
-
 screen bathroom1:
     imagemap:
         ground "Background/BathRoom/bathroom body items final.png"
@@ -346,10 +347,7 @@ screen crossword:
         idle "Background/CrossWord/Across1(1).png"
         hover "Background/CrossWord/AcrossHover.png"
         insensitive "Background/CrossWord/AcrossFilled.png"
-        action [SetVariable("correctAnswer", "throwup"), Jump("type_in")]
-    
-    
-        
+        action [SetVariable("correctAnswer", "throwup"), Jump("type_in")]       
 screen cleaning_time:
     add "Background/BathRoom/full br no body no highlight final.png"
     if brush_grabbed == False:
@@ -369,8 +367,7 @@ screen cleaning_time:
             focus_mask True
             idle "Background/BathroomClean/towel map.png"
             hover "Background/BathroomClean/towel map hl.png"
-            action Jump ("towels_grab")
-       
+            action Jump ("towels_grab")     
 screen hit_body:
     add "Background/BathRoom/bathroom body no hammer.png"
     if hammer_grabbed == False:
@@ -383,7 +380,6 @@ init:
             $ timer_range = 0
             $ timer_jump = 0
             $ time = 0
-
 transform alpha_dissolve:
     alpha 0.0
     linear 0.5 alpha 1.0
@@ -392,8 +388,6 @@ transform alpha_dissolve:
 screen countdown:
     timer 0.01 repeat True action If(time>0, true=SetVariable('time', time -0.01), false=[Hide('countdown'), Jump(timer_jump)])
     bar value time range timer_range xalign 0.5 yalign 0.1 xmaximum  300 at alpha_dissolve
-
-
 screen kill_him:
     imagemap:
         ground "Background/BathRoom/bathroom body no hammer.png"
