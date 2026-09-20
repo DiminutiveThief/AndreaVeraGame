@@ -3327,6 +3327,8 @@ label wake_vera:
 
     
     label combat:
+        stop sound
+        play music "audio/Music/BattleThemeCoalesence.mp3" loop
         $ head_floured = False
         $ tail_floured_floured = False
         $ torso_floured = False
@@ -3455,14 +3457,18 @@ label wake_vera:
         call screen combat
     label wrong2:
         if arwselected:
+            play sound "audio/SFX/HitMiss.mp3"
             vl "Ugh, can't get a shot in through the skin."
             vl "Can you get an opening?"
             jump combat_var
         if torso_hit:
+            play sound "audio/SFX/HitMiss.mp3"
             "I swing forward. It's body less moves, more undulates out of the way."
             "It's gotten wise to my hammer."
             $ torso_hit = False
         if head_hit:
+            play sound "audio/SFX/HitMiss.mp3"
+
             "I swing upward. It yanks its head away, leaving me stumbling."
             "It's gotten wise to my hammer."
             $ head_hit = False
@@ -3540,9 +3546,11 @@ label wake_vera:
             jump not_attacked
 
     label attacked:
-       
+        play sound "audio/SFX/HitDamage.mp3"
        
         "The thing rears up, raking its claws across your chest."
+        
+      
         $ default_combat_round +=1
         if andrea_vera_health == "good":
             $ andrea_vera = "combat/av bad.png"
@@ -3562,6 +3570,7 @@ label wake_vera:
         elif andrea_vera_health == "terrible":
             jump game_over
     label not_attacked:
+        play sound "audio/SFX/HitMiss.mp3"
         "The thing misses, best to get it over with, still."
         hide screen combat2
         hide screen combat
@@ -3600,6 +3609,7 @@ label wake_vera:
         "Electricity crackles through the creatures body."
         "From its pooling blood up into what passes through its' veins"
         "Its lumbering form becomes a thrashing, screeching circuit board."
+
         "It {i}reeks{/i}. A biting mix of ozone and freezer burn."
         "And I wish it was just disgust that flared to life in time with my pounding heart."
         "I wish I didn't feel Burn's satisfaction lapping at the edge of my brain."
@@ -3622,8 +3632,7 @@ label wake_vera:
         show vera neutral
         vl "Gives us time to clean up."
         show vera annoyed
-        vl "And figure out how to transport this."
-        ab "You want to try and cram it in the van? What are we even going to cut it with?"
+        vl "And figure out how to cram this in the van."
         vl "There's enough kitchen supplies here that we can probably figure something out. And you can probably pound it pretty well."
         "She gestures to my hammer."
         "In retrospect, we should've come up with a disposal plan beforehand."
@@ -3632,15 +3641,15 @@ label wake_vera:
         vl "We can just air it out."
         ab "What about the acid?"
         "It's already beginning to bleach the floor."
-        vl "We'll be careful."
+        vl "Mmm..tripple bag it?"
         "..."
         "..."
         "..."
-        vl "You have a better idea."
+        vl "Do you have a better idea?"
         show andrea stern
         ab "...Alright, let's start cutting."
         "It's not too different from deboning a chicken."
-        "Just a lot larger. And more acidic."
+        "Just a lot larger and pungent."
         "We have to triple layer the plastic gloves we find behind the counter and swap them out every five minutes."
         "By the end of it, we've decimated their pantry. There's barely any knives left that haven't been at least half disolved."
         "We manage to get it into small enough pieces that a few garbage bags do the job."
@@ -4670,14 +4679,13 @@ label wake_vera:
 
 
 
-    label examine_done:
-        "Looks like we've already found everything here!"
-        call screen attack_examine
+    
 
 label game_over:
     "Shit-{i}shit{/i}."
     "Maybe I'm too slow, or Vera's too reckless. Could be we're just unlucky."
     "Doesn't matter- scrambling claws wrap around me all the same."
+    $ andrea_vera_health = "good"
     jump combat
     "hi"
         
@@ -4685,4 +4693,6 @@ label game_over:
 
         #return
         
-        
+label examine_done:
+        "Looks like we've already found everything here!"
+        call screen attack_examine       
