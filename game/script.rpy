@@ -3327,7 +3327,11 @@ label wake_vera:
 
     
     label combat:
-        
+        $ head_floured = False
+        $ tail_floured_floured = False
+        $ torso_floured = False
+        $ tail_floured_floured = False
+        $ tailhmred = False
         scene combat bg grayscale with fade
     #   default health = 3
     #  default monster = 3
@@ -3424,6 +3428,7 @@ label wake_vera:
         $ flour = False
         $ hmrselected = False
         $ something_selected = False
+        $ andrea_vera_health = "good"
         "There we go."
         "Now, it'll take its turn for realsies."
         
@@ -4658,57 +4663,6 @@ label wake_vera:
                     "There's no hesitation, no demand. Just the fluid movement of her arm and whistle of metal through the air."
                     vl "{i}Move!{/i}"
                     "End. for now."
-
-                    
-
-
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
        
         #"Vera's about to knock a third time - fist drawn back as if she's going to sucker punch the mahogany - before the door creaks open."
         #creak
@@ -4720,11 +4674,15 @@ label wake_vera:
         "Looks like we've already found everything here!"
         call screen attack_examine
 
-    label game_over:
-        "Wahuh."
-        "man."
+label game_over:
+    "Shit-{i}shit{/i}."
+    "Maybe I'm too slow, or Vera's too reckless. Could be we're just unlucky."
+    "Doesn't matter- scrambling claws wrap around me all the same."
+    jump combat
+    "hi"
+        
 
 
-    return
+        #return
         
         
