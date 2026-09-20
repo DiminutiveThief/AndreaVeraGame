@@ -8,7 +8,8 @@ init offset = -1
 ################################################################################
 ## Styles
 ################################################################################
-
+style flour_buttons:
+    activate_sound ("audio/SFX/FlourHit.mp3")
 style default:
     properties gui.text_properties()
     language gui.language

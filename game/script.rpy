@@ -1811,8 +1811,8 @@ label wake_vera:
             "I rub the sleep from my eyes."
             show andrea body sad at right
             ab "Hey."
-            #play sound "audio/morningambience.mp3"loop
-            play sound "audio/SFX/ClothFlap.wav"
+            play music "audio/SFX/AmbientHotel.wav"loop
+            play sound "audio/SFX/ClothFlap.mp3"
             "I ruffle through my bag to pick out my clothes. I take longer than I really need."
             hide vera with Dissolve(0.3)
             "Vera's eyes boring into my back don't help."
@@ -1824,7 +1824,7 @@ label wake_vera:
             vl "Mostly."
             vl "Air conditioner kept me up for a bit."
             ab "Sounds like a pain."
-            play sound "audio/SFX/ClothesPutOn.wav"
+            play sound "audio/SFX/ClothesPutOn.mp3"
             "I pause to change into my clothes for the day."
             show andrea sad
             ab "We really know how to pick these places, huh?"
@@ -3105,7 +3105,7 @@ label wake_vera:
         
 
         label back_room:
-                
+            
             ab "I can take the back."
             "Maybe the quiet will be nice."
         
@@ -3120,8 +3120,10 @@ label wake_vera:
             hide vera
             with moveinoutfade
             "I head to the back."
-            scene combat bg grayscale with fade
-            show andrea body neutral at center
+            scene combat bg grayscale flour with fade
+            
+            show andrea body neutral at center with dissolve
+           
             "It's a little offputting."
             "Rows and rows of frozen hot dogs and gas station snacks and unlabeled boxes."
             "The offensive scent of whatever they use to wipe this place down."
@@ -3334,7 +3336,7 @@ label wake_vera:
         $ torso_floured = False
         $ tail_floured_floured = False
         $ tailhmred = False
-        scene combat bg grayscale with fade
+        scene combat bg grayscale flour with fade
     #   default health = 3
     #  default monster = 3
         
@@ -3361,18 +3363,21 @@ label wake_vera:
         
             
     label examine_first:
-        scene combat bg grayscale
+        show screen combat_flour_examine
+        $ enabled = False
         "Hm, what could be around here?"
+        $ enabled = True
+        call screen combat_flour_examine
+
         
-        menu:
-            "flour":
-                jump label_flour
-
-
+       
+       
     label label_flour:
         
+        $ enabled = False
         $ attackChance = renpy.random.randint(1,2)
         $ full_examined = True
+        scene combat bg grayscale
         "I'll give you this one for free, maybe it'll be useful."
         
         "Now lets use it."
@@ -3641,7 +3646,7 @@ label wake_vera:
         vl "We can just air it out."
         ab "What about the acid?"
         "It's already beginning to bleach the floor."
-        vl "Mmm..tripple bag it?"
+        vl "Mmm...quadruple bag it?"
         "..."
         "..."
         "..."
@@ -3664,8 +3669,8 @@ label wake_vera:
         "All things considered we made good time."
         show andrea annoyed
         scene parkinglot with fade
-        "We just barely cram all the bags in the back."
-        "I was right, they do smell, even with the AC cranked all the way up."
+        "We barely cram all the bags in the back."
+        "They reek even with the AC cranked all the way up."
         scene car bg aznight with fade
         label back_to_dom:
             "I don't bother with the radio this time, fiddling around for a station is going to be annoying."
@@ -3674,15 +3679,15 @@ label wake_vera:
             "Twenty minutes feels more like five."
             "I park close to the house, it'll make it easier to carry everyting in."
             play sound "audio/SFX/DoorKnockNormal.mp3"
-            scene outside neighborhood with fade
-            show vera body annoyed shirt3 at left
+            
+            show vera body annoyed shirt3 at vera_car
             vl "I hope at least one of them's around."
             vl "Otherwise I'm just dumping everything in the backyard."
-            show andrea body neutral at right
+            show andrea body neutral at andrea_car
             ab "So you think Avery is staying here?"
             vl "Could be. Maybe they're a bit of a stray."
             "Our question is answered pretty quickly."
-            #sfx door open
+            play sound "DoorOpen.mp3"
             show avery body neutral at center
             al "Oh! That was...-early?"
             "They look around."
@@ -3726,7 +3731,7 @@ label wake_vera:
             vl "Dunno if it's my business. I'm just curious about the arrangement."
             al "Nah, I just stay over sometimes. When he needs an extra hand and stuff."
             "They set down their bag and awkwardly shuffle past it to the door."
-            #scene lab with fade
+            scene livingroomdom with fade
             "We're greeted with the same mess from before, for the most part."
             "I think a few shirts may be folded, rather than thrown onto the ground."
             show vera body neutral2 at left 
@@ -4262,15 +4267,17 @@ label wake_vera:
         "Reaching the bottom of the stairs feels like emerging out of some dark tunnel."
         "I rise onto my tip toes. {i}Keep to the back of each step, they're firmer.{/i}"
         "I grip the handle and - inch by painstaking inch - turn it, then push."
+
+        scene livingroomhuskim with fade
         "Dull light catches the dust particles, revealing some kind of study."
-        scene livingroomhusk
+        
         label husks_livingroom:
             ab "Reminds me of Dominic's lab." 
         show andrea body neutral
         vl "The nerdy types are all the same."
         show vera body shirt3 neutral2 at vera_spot
-        "She trains her gaze on the study. I follow it." 
-        
+        "She tracks her gaze across the room. I follow it." 
+        "Empty."
         show vera neutral
         with dissolve
         pause 0.7

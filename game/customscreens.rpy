@@ -45,16 +45,11 @@ screen combat:
         pos (1200, 800)
 
     "It's gotten wise to my hammer."
-    if flour_found:
-        imagebutton:
-            sensitive flour_active
-            pos (0, 50)
-            focus_mask True
-            idle "combat/combat flr base.png"
-            hover "combat/combat flr hl.png"
-            selected_idle "combat/combat flr hl.png"
-            selected (flour == True)
-            action [ToggleVariable("flour"), SetVariable("arwselected", False), SetVariable("hmrselected", False), ToggleVariable ("something_selected")]
+    
+    
+    
+    $ tooltip = GetTooltip()
+
     imagebutton:
             sensitive enabled
             pos (0, 350)
@@ -76,13 +71,10 @@ screen combat:
         action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
         selected (arwselected == True)
 
-
-
-
     imagebutton:
         sensitive paragon_enabled
         focus_mask True
-
+        style "flour_buttons"
         if invisible == False:
             if head_floured == True:
                 idle "combat/paragon head flour.png"
@@ -106,6 +98,7 @@ screen combat:
             action NullAction()
     imagebutton:
         sensitive paragon_enabled
+        style "flour_buttons"
         focus_mask True
         if invisible == False:
             if torso_floured == True:
@@ -135,6 +128,7 @@ screen combat:
             #       action Jump("incorrect")    
 
     imagebutton:
+            style "flour_buttons"
             sensitive paragon_enabled
             focus_mask True
             ##action NullAction()
@@ -161,7 +155,19 @@ screen combat:
                 action NullAction()
 
                 
-            
+    if flour_found:
+        imagebutton:
+
+            tooltip "A heavy bag of flour, begging to be chucked."
+            sensitive flour_active
+            hovered [SetVariable("tooltip_posx", 400), SetVariable("tooltip_posy", 60)]
+            pos (0, 50)
+            focus_mask True
+            idle "combat/combat flr base.png"
+            hover "combat/combat flr hl.png"
+            selected_idle "combat/combat flr hl.png"
+            selected (flour == True)
+            action [ToggleVariable("flour"), SetVariable("arwselected", False), SetVariable("hmrselected", False), ToggleVariable ("something_selected")]
             
             ## else:
                 ##   action NullAction()
@@ -170,19 +176,26 @@ screen combat:
                 
             #   if green_btn_selected:
             #      action Jump("incorrect")
-screen combat2:
-   
     
+    if tooltip:
+        frame:
+            at fade_in
+            style "custom_frame" 
+            
+            padding(40, 40, 40, 40)
+            xpos(tooltip_posx)
+            ypos(tooltip_posy)
+            text "[tooltip]":
+                size 30
+                xmaximum 400
+                line_spacing 10
+screen combat2:
 
-   
-   
     add "combat/combat bg grayscale.png"
     
     add andrea_vera:
         pos (1200, 800)
     
-    
-  
     imagebutton:
             sensitive enabled
             pos (0, 350)
@@ -393,5 +406,16 @@ screen kill_him:
         ground "Background/BathRoom/bathroom body no hammer.png"
         hover "Background/BathRoom/bathroom bg only body hl no hammer.png"
         hotspot (508, 502, 361, 217) action Jump ("smash_head")
+default active =True
 
+screen combat_flour_examine():
+    
+    add "combat/combat bg grayscale.png"
+    if active == True:
+        imagebutton: 
+            sensitive enabled
+            focus_mask True
+            idle "combat/flour bg.png"
+            hover "combat/flour bg hl.png"
+            action [SetVariable("active", "False"),Jump("label_flour")]
 ####### VARIABLES
