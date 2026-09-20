@@ -267,7 +267,7 @@ screen combat2:
             if arwselected == True and tailhmred == True:
                 action Jump("finishedcombat")
             if hmrselected == True and tailhmred == False:
-                action [SetVariable("base_tail", "combat/paragon tail injured.png"), SetVariable ("base_tail_hl", "combat/paragon tail injured hl.png"), SetVariable("tailhmred", True), Jump("hit_tail")]
+                action [Play("sound", "audio/SFX/SmashParagon.mp3"), SetVariable("base_tail", "combat/paragon tail injured.png"), SetVariable("tailhmred", True), Jump("hit_tail")]
     $ tooltip = GetTooltip()
     
     if tooltip:
