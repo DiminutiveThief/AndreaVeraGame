@@ -179,7 +179,6 @@ screen combat:
     
     if tooltip:
         frame:
-            at fade_in
             style "custom_frame" 
             
             padding(40, 40, 40, 40)
@@ -222,7 +221,7 @@ screen combat2:
         selected_idle "combat/combat arw hl.png"  
         action [ToggleVariable("arwselected"), SetVariable("hmrselected", False), SetVariable("flour", False), ToggleVariable ("something_selected")]
         selected (arwselected == True)
-        tooltip "Vera's cross bow. She made it from the remains of some sort of Paragon. It creates a shock if it strikes true, but isn't great at piercing dense armor."
+        tooltip "Vera's crossbow. She made it from the remains of some sort of Paragon. It creates a shock if it strikes true, but isn't great at piercing dense armor." #crossbow is one word
     
     
 
@@ -285,7 +284,6 @@ screen combat2:
     
     if tooltip:
         frame:
-            at fade_in
             style "custom_frame" 
             
             padding(40, 40, 40, 40)
