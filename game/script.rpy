@@ -2728,7 +2728,7 @@ label wake_vera:
         "I wrack my brain for possibilities."   
         ab "Do you think this is part of it? Could've gotten snagged off."
         vl "Mmm-"
-        "She puts a finger up, indicating she'll respond after swallowing her mouthful." #little confusing on the posistioning of Vera's hands here. I'm imagining they're just holding their food, but if Vera's holding her food in one hand and holding the bottle in the other, how is extending a single finger? Like is she just raising it off the sandwich or is the action supposed to read clearer than that?
+        "She raises a finger, indicating she'll respond after swallowing her mouthful." #little confusing on the posistioning of Vera's hands here. I'm imagining they're just holding their food, but if Vera's holding her food in one hand and holding the bottle in the other, how is extending a single finger? Like is she just raising it off the sandwich or is the action supposed to read clearer than that?
         vl "That's my best guess. I think this part is too dinky to reform all the way."
         vl "Probably just got caught on a tree branch, this thing seems all...gelatinous and shit."
         ab "It matches up with what Dominic said, he thinks its trying to piece itself back together."
@@ -2985,7 +2985,7 @@ label wake_vera:
             vl "Maybe we can say we're actually undercover cops."
             vl "It's a double lie, after the whole 'college student report' thing."
             ab "You'd probably have more luck with that."
-            "I'm hesitant to let her take the wheel, but she hasn't been seen yet. And the girl doesn't seem eager to stick around." #I'm assuming 'the girl' is meant to refer to the teen here but since its a vague desc it feels like its referring to vera a bit
+            "I'm hesitant to let her take the wheel, but she hasn't been seen yet. And the cashier doesn't seem eager to stick around." #I'm assuming 'the girl' is meant to refer to the teen here but since its a vague desc it feels like its referring to vera a bit
             show vera neutral
             vl "Sure. Just leave it to me."
             show andrea neutral
@@ -3836,7 +3836,7 @@ label wake_vera:
             "I'm desensitized enough to the smell and far enough away from it to get the brunt."
             "He never specified what he's hoping to learn from it."
             "Age? Diet?"
-            "These things internal make up is too inscrutable for me to guess." #add apostrophe to 'things'
+            "These thing's internal make up is too inscrutable for me to guess." #add apostrophe to 'things'
             show dominic body neutral
             dm "Right. Right."
             dm "What {i}could{/i} interest you, is an old colleague of mine."
@@ -4020,7 +4020,7 @@ label wake_vera:
             "Nothing past that is worth mulling over."
             "{i}Tiger, Tiger, burning bright.{/i}"
             stop music
-        play sound "audio/CarAmbient.mp3" #dominic music is still playing here. Prolly should keep scene silent
+        play sound "audio/CarAmbient.mp3" loop #dominic music is still playing here. Prolly should keep scene silent
         scene carbgazday with fade
         show andrea body neutral at andrea_car
         "The next day goes by quickly, so does the day after that."
@@ -4292,12 +4292,7 @@ label wake_vera:
         show vera body shirt3 neutral2 at vera_spot
         "She tracks her gaze across the room. I follow it." 
         "Empty."
-        show vera neutral #I didn't actively go and cut it but I'd get rid of this part. Good bit but the pacing is awkward and confusing esp since smth like it hasn't happened before
-        with dissolve
-        pause 0.7
-        show andrea stern
-        with dissolve
-        pause 0.9
+        
         vl "I mean, there's no one in here."
         vl "I'm sure she'd appreciate someone admiring her research."
         ab "Let me just-"
