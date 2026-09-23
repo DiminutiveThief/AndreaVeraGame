@@ -4288,42 +4288,12 @@ label wake_vera:
             
             
             ab "Reminds me of Dominic's lab." 
-<<<<<<< Updated upstream
-        show andrea body neutral at right
-        vl "The nerdy types are all the same."
-        show vera body shirt3 neutral2 at vera_spot
-        "She tracks her gaze across the room. I follow it." 
-        "Empty."
-        show vera neutral #I didn't actively go and cut it but I'd get rid of this part. Good bit but the pacing is awkward and confusing esp since smth like it hasn't happened before
-        with dissolve
-        pause 0.7
-        show andrea stern
-        with dissolve
-        pause 0.9
-        vl "I mean, there's no one in here."
-        vl "I'm sure she'd appreciate someone admiring her research."
-        ab "Let me just-"
-        "I carefully crack the door open into the next room."
-        "No signs of life."
-        ab "It's clear."
-        "While I've had my back turned, Vera's already beelined for the weapons hanging on the wall."
-        "I sigh. Alright, we've already begun our invasion of privacy. What's some more among friends."
-        #make this an image map
-        label invest_husk: #there's an error message here, I assume it's cuz the image map isn't completed but still is of note
-            if  weapon_examined == True and shelf_examined == True:
-                jump after_husk
-=======
             show andrea body neutral
             vl "The nerdy types are all the same."
             show vera body shirt3 neutral2 at vera_spot
             "She tracks her gaze across the room. I follow it." 
             "Empty."
-            show vera neutral
-            with dissolve
-            pause 0.7
-            show andrea stern
-            with dissolve
-            pause 0.9
+           
             vl "I mean, there's no one in here."
             vl "I'm sure she'd appreciate someone admiring her research."
             ab "Let me just-"
@@ -4332,7 +4302,6 @@ label wake_vera:
             ab "It's clear."
             "While I've had my back turned, Vera's already beelined for the weapons hanging on the wall."
             "I sigh. Alright, we've already begun our invasion of privacy. What's some more among friends."
->>>>>>> Stashed changes
             $ weapon_examined = False
            
             $ shelf_examined = False
@@ -4405,13 +4374,8 @@ label wake_vera:
             "The rest is blank."
             "I take a few moments to log the information, then put it back."
             $ shelf_examined = True
-<<<<<<< Updated upstream
             jump after_husk
 
-=======
-            jump invest_husk
-        
->>>>>>> Stashed changes
         label after_husk:
             $ husk_checked = True
             "We don't find anything else of note between the two of us."
@@ -4423,16 +4387,8 @@ label wake_vera:
             ab "I'm fine with that. I don't want to deal with whatever bells and whistles those things have."
             "There isn't much uncertainty with a hammer. It goes where you want, as long as you're decisive."
             "It doesn't care about how many shots it takes to make a circuit or whatever other rituals Vera's crossbow and its ilk demands."
-<<<<<<< Updated upstream
             "It's as eager to pulverize exoskeleton as it is hide as it is flesh and bone and brain fried with animal fear."
             "I shove my hand in my pocket."
-=======
-         
-          
-            "It's as eager to pulverize exoskeleton as it is hide as it is flesh and bone and brain fried with animal fear."
-            "I shove my hand in my pocket."
-           
->>>>>>> Stashed changes
             show andrea stern
             ab "We should check out the rest of the place. I don't think there are many other rooms."
             ab "We can come back around here later."
@@ -4624,11 +4580,7 @@ label wake_vera:
                     vl "Maybe this'll give us some stuff to chew on."
                     "I'm already out of there."
                     "The musty air drives away the sweet decay cling-wrapping the inside of my throat."
-<<<<<<< Updated upstream
                     scene livingroomhuskim #add msuic here
-=======
-                    scene livingroomhuskim
->>>>>>> Stashed changes
                     "{i}What now?{/i}"
                     "What am I looking for?"
                     "{i}Chew on?{/i}"
@@ -4749,7 +4701,12 @@ label wake_vera:
                     "She clutches a spear in her right hand."
                     "There's no hesitation, no demand. Just the fluid movement of her arm and whistle of metal through the air."
                     vl "{i}Move!{/i}"
-                    "End. for now." #I would maybe add a black screen before the end card. Otherwise it just feels kinda weird to have it while you can see all the characters
+                    "..."
+                    "...."
+                    scene black
+                    "Thank you for playing chapter one of Coalesence!"
+                    "We look forward to sharing more with you soon."
+                    #I would maybe add a black screen before the end card. Otherwise it just feels kinda weird to have it while you can see all the characters
        
         #"Vera's about to knock a third time - fist drawn back as if she's going to sucker punch the mahogany - before the door creaks open."
         #creak
