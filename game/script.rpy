@@ -4281,12 +4281,14 @@ label wake_vera:
         "Reaching the bottom of the stairs feels like emerging out of some dark tunnel."
         "I rise onto my tip toes. {i}Keep to the back of each step, they're firmer.{/i}"
         "I grip the handle and - inch by painstaking inch - turn it, then push."
-
-        scene livingroomhuskim with fade
-        "Dull light catches the dust particles, revealing some kind of study."
-        
         label husks_livingroom:
+            $ husk_checked = False
+            scene livingroomhuskim with fade
+            "Dull light catches the dust particles, revealing some kind of study."
+            
+            
             ab "Reminds me of Dominic's lab." 
+<<<<<<< Updated upstream
         show andrea body neutral at right
         vl "The nerdy types are all the same."
         show vera body shirt3 neutral2 at vera_spot
@@ -4310,18 +4312,51 @@ label wake_vera:
         label invest_husk: #there's an error message here, I assume it's cuz the image map isn't completed but still is of note
             if  weapon_examined == True and shelf_examined == True:
                 jump after_husk
+=======
+            show andrea body neutral
+            vl "The nerdy types are all the same."
+            show vera body shirt3 neutral2 at vera_spot
+            "She tracks her gaze across the room. I follow it." 
+            "Empty."
+            show vera neutral
+            with dissolve
+            pause 0.7
+            show andrea stern
+            with dissolve
+            pause 0.9
+            vl "I mean, there's no one in here."
+            vl "I'm sure she'd appreciate someone admiring her research."
+            ab "Let me just-"
+            "I carefully crack the door open into the next room."
+            "No signs of life."
+            ab "It's clear."
+            "While I've had my back turned, Vera's already beelined for the weapons hanging on the wall."
+            "I sigh. Alright, we've already begun our invasion of privacy. What's some more among friends."
+>>>>>>> Stashed changes
             $ weapon_examined = False
            
             $ shelf_examined = False
-        menu:
-            "Weapons rack." if weapon_examined == False:
-                jump weapons
+            label invest_husk:
+                if  weapon_examined == True and shelf_examined == True:
+                    jump after_husk
+                else:
+                    call screen husks_living_map
+            #make this an image map
+        #label invest_husk:
+            
+            #$ weapon_examined = False
+           
+            #$ shelf_examined = False
+        #menu:
+            #"Weapons rack." if weapon_examined == False:
+                #jump weapons
 
           
-            "Shelf." if shelf_examined == False:
-                jump shelf
+            #"Shelf." if shelf_examined == False:
+                #jump shelf
         
         label weapons:
+            hide screen husks_living_map
             "I join Vera as she peruses the display."
             "Her eye glimmers, like she's a kid on Christmas."
             show vera body neutral
@@ -4353,9 +4388,11 @@ label wake_vera:
             jump after_husk
         
         label shelf:
+            hide screen husks_living_map
             "It's hard to know where to start. The selection seems arbitrary: shining hard cover next to barely held together journals."
             "Thin paperback, barely a few pages long, squashed by bloated leather bound tomes."
             "I opt for something that looks handwritten. It's one of those cheap, moleskin notebooks."
+            play sound "audio/SFX/FlipPage.mp3"
             "Compared to the other ones I skim, the pencil looks fresher."
             "Taped near the front is a parchment paper fold out. A sketch of...something, spans across it."
             "Some sort of Paragon. It's mammalian in appearence. Its body is compact, with four goat like legs sticking out the bottom."
@@ -4368,9 +4405,15 @@ label wake_vera:
             "The rest is blank."
             "I take a few moments to log the information, then put it back."
             $ shelf_examined = True
+<<<<<<< Updated upstream
             jump after_husk
 
+=======
+            jump invest_husk
+        
+>>>>>>> Stashed changes
         label after_husk:
+            $ husk_checked = True
             "We don't find anything else of note between the two of us."
             show vera neutral2
             vl "You sure you don't want to at least try one of these guys out?"
@@ -4380,15 +4423,22 @@ label wake_vera:
             ab "I'm fine with that. I don't want to deal with whatever bells and whistles those things have."
             "There isn't much uncertainty with a hammer. It goes where you want, as long as you're decisive."
             "It doesn't care about how many shots it takes to make a circuit or whatever other rituals Vera's crossbow and its ilk demands."
+<<<<<<< Updated upstream
             "It's as eager to pulverize exoskeleton as it is hide as it is flesh and bone and brain fried with animal fear."
             "I shove my hand in my pocket."
+=======
+         
+          
+            "It's as eager to pulverize exoskeleton as it is hide as it is flesh and bone and brain fried with animal fear."
+            "I shove my hand in my pocket."
+           
+>>>>>>> Stashed changes
             show andrea stern
             ab "We should check out the rest of the place. I don't think there are many other rooms."
             ab "We can come back around here later."
             vl "Good with me."
-            "I push open the door. No one's magically appeared in the living room in the last twenty minutes."
-            "Compared to the decrepit basement and sterile study, the kitschy paintings and wilting potted plants are a breath of fresh air."
-            vl "I think we're doing this lady a favor."
+            "I push open the door. No one's magically appeared in hall in the last twenty minutes."
+          
             "She runs her finger down a dust soaked coffee table with a grimace. Particles catch in the rays of light that make it through the shutters."
             vl "It doesn't look like anyone's done, like, {i}anything{/i} here in a while."
             "This is gradually turning from a home invasion to a wellness check."
@@ -4423,7 +4473,9 @@ label wake_vera:
                 ab "Uh, Ms. Becker?"
                 "I keep my voice low and press my ear against the door."
                 "The only sound is the {i}woosh{/i} of a fan."
+                play music "SFX/CeilingFan.mp3" loop
                 "I knock again, with a bit more force."
+                play sound "SFX/KnockDoorHard.mp3" 
                 ab "Dominic sent us, he said you worked together."
                 ab "We wanted to see if everything was okay."
                 "Vera joins me against the door."
@@ -4437,9 +4489,11 @@ label wake_vera:
                 vl "Something about the mechanism."
                 ab "Mhm."
                 "I raise it over my head and slam it into the door. Once, twice."
+                play sound "audio/SFX/HitDoorKnob.mp3"
                 "Behind the grate of metal against thick wood, there's a low click."
                 "The force is enough to push it open."
                 "I step in and-"
+                play music "<loop 19.20>BodyFindWhole.mp3"
                 show andrea offput
                 ab "{i}Jesus Christ.{/i}"
                 #husk discovery music needs to be added
@@ -4456,14 +4510,16 @@ label wake_vera:
                 "Breaths that taste like meat left out in the summer sun."
                 show andrea offputEC
                 "Like a kid diving under a blanket, all I can do is screw my eyes shut."
-                #scene black
+                scene black
                 "{i}Spineless little girl.{/i}"
                 "Vera draws in a sharp sigh. I expect a jab, something dripping with dissapointment."
                 vl "{i}Shit- i'll- let me check it out."
                 "I feel her shuffle past me."
                 "I'll give myself a few seconds to knit back together."
                 "{i}Tyger, tyger.{/i}"
-                show andrea offput
+                scene back_at_corpse
+                show andrea body offput at right
+                show vera body shirt3 neutral2 at vera_spot
                 "I peel my eyes open."
                 "Vera crouches by the corpse, her hand hovering over the mark on its chest."
                 vl "Stab wound, I think."
@@ -4473,7 +4529,7 @@ label wake_vera:
                 label checking_corpse: #error pops up for this whole segment, prolly due to lack of image map. Still noting anyways
                     
                       
-                    $ weapon_check = False
+                    $ weapons_check = False
                     $ pill_check = False
                     $ chains_check = False
                     menu corpse_menu:
@@ -4496,6 +4552,7 @@ label wake_vera:
                     "I almost miss it."
                     "It's shoved a little ways under a night stand."
                     "Something metallic that just barely catches the light from the window."
+                    play sound "audio/SFX/MetalSlide.mp3"
                     "I pull it out: it's the hilt of...something."
                     "The blade is missing. Clean: like it was never there in the first place."
                     "Runes wrap all the way around it."
@@ -4567,26 +4624,37 @@ label wake_vera:
                     vl "Maybe this'll give us some stuff to chew on."
                     "I'm already out of there."
                     "The musty air drives away the sweet decay cling-wrapping the inside of my throat."
+<<<<<<< Updated upstream
                     scene livingroomhuskim #add msuic here
+=======
+                    scene livingroomhuskim
+>>>>>>> Stashed changes
                     "{i}What now?{/i}"
                     "What am I looking for?"
                     "{i}Chew on?{/i}"
                     "What does one-hundred and however many pounds of dead flesh do for me?"
-                    #maybe make this interactive
                     $ weapons_2_checked = False
                     $ shelf_2_checked = False
+                    
+                    
                     label invest_husk_2:
                         if weapons_2_checked == True and shelf_2_checked == True:
                             jump husk_study_checked_2
-                    menu:
-                        "Weapons." if weapons_2_checked == False:
-                            jump weapons_2
+                        else:
+                            call screen husks_living_map
+                   #     if weapons_2_checked == True and shelf_2_checked == True:
+                    #        jump husk_study_checked_2
+                    #menu:
+                     #   "Weapons." if weapons_2_checked == False:
+                      #      jump weapons_2
 
-                        "Shelf." if shelf_2_check == False:
-                            jump shelf_2
+                       # "Shelf." if shelf_2_check == False:
+                        #    jump shelf_2
 
                 label weapons_2:
+                    play sound "audio/SFX/MetalClick.mp3"
                     "I lay the hilt on the empty rack, it slides in easily."
+
                     "Based on the distance from the other end, it couldn't have been that big."
                     "I mumble as much to Vera."
                     show vera body neutral shirt3 at vera_spot
@@ -4594,6 +4662,7 @@ label wake_vera:
                     show andrea body sad at right
                     ab "You think it matches the size of the-"
                     "Vera cuts me off, like she assumes I won't be able to choke it out."
+                    show vera neutral2
                     vl "I'm not an expert, but I think it matches the wound."
                     "{i}Why did she think this could help?{/i}"
                     "{i}What did she use to make it?{/i}"
@@ -4603,13 +4672,13 @@ label wake_vera:
                     "I flip open the journal from earlier."
                     "{i}Flowers.{/i}"
                     "Crudely sketched daffodils and chicken scratch daisies decorate the Paragon's body."
-                    show andrea offput at right
+                    show andrea body offput at right
                     ab "This one."
                     ab "{i}This{/i} is the one."
                     "The one she let under her skin."
                     "Desperation?"
                     "Curiosity?"
-                    show vera body neutral shirt3 at vera_spot
+                    show vera body neutral2 shirt3 at vera_spot
                     vl "She makes it sound like its a lot less of a nightmare than Burn."
               
                     $ shelf_2_checked = True
@@ -4644,7 +4713,7 @@ label wake_vera:
                     show vera neutral
                     "She claps."
                     vl "Lets keep going, then."
-                    #play creak sfx
+                    play sound "audio/SFX/FootstepSingle.mp3"
                     "Whatever part of me haven't tensed to their breaking point go rigid."
                     show andrea scared
                     ab "What was that?"
@@ -4655,7 +4724,7 @@ label wake_vera:
                     vl "Maybe. Weird that they wouldn't have called the cops."
                     "That just tightens the knot in my stomach."
                     "Don't like the idea of someone comfortable enough to enter on their own."
-                    #play creak again
+                    play sound "audio/SFX/FootstepSingle2.mp3"
                     "My senses are primed enough that I hear it, soft as it is."
                     "It's closer."
                     ab "I think we should go."

@@ -13,6 +13,8 @@ style flour_buttons:
 style default:
     properties gui.text_properties()
     language gui.language
+    activate_sound ("audio/ClickSound.mp3")
+    hover_sound ("audio/HoverSound.mp3")
 
 style input:
     properties gui.text_properties("input", accent=True)
@@ -34,6 +36,7 @@ style button:
 style image_button:
     activate_sound ("audio/ClickSound.mp3")
     hover_sound ("audio/HoverSound.mp3")
+
 style button_text is gui_text:
     properties gui.text_properties("button")
     yalign 0.5

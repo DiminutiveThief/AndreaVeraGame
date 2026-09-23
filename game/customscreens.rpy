@@ -416,4 +416,23 @@ screen combat_flour_examine():
             idle "combat/flour bg.png"
             hover "combat/flour bg hl.png"
             action [SetVariable("active", "False"),Jump("label_flour")]
+
+screen husks_living_map:
+    imagemap:
+            ground "Background/livingroomhuskim.png"
+            hover "Background/livingroomhuskimhl.png"
+            hotspot (623, 103, 402, 447):
+                if husk_checked == False: 
+                    action Jump ("shelf")
+                else: 
+                    action Jump("shelf_2")
+            
+            hotspot (1662, 139, 251, 234) action Jump ("weapons"):
+                if husk_checked == False: 
+                    action Jump ("weapons")
+                else: 
+                    action Jump("weapons_2")
+            
+
+
 ####### VARIABLES
