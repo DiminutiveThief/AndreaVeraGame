@@ -163,6 +163,10 @@ default attackChance = 0
 default next_round = "null"
 default tutorial_done = False
 default blue_red_combine = False
+default knife_check = False
+default pills_check = False
+default chains_check = False
+                        
 default flour = False 
 default tt = "hello"
 default based = False
@@ -2707,6 +2711,7 @@ label wake_vera:
         "She hangs up before I can get a response in."
         "{i}Ugh{/i}. Better head over to see if her better nature has won over."
         label reuniteandy: #add music here
+            play music "audio/Music/Ambience/Ambience3.mp3"
             scene parking lot with fade
             show andrea body neutral at right
             "It takes a few minutes for Vera to get around the back."
@@ -3188,19 +3193,7 @@ label wake_vera:
                 
                 ab "Shit!"
                 show andrea body scared 
-                define quick_time = True
-                if quick_time == True:
-                    $ timer_range = 3
-                    $ timer_jump = 'fend_it_off_bad'
-                    $ time = 3
-                    show screen countdown
-                    menu:
-                        "Block with the hammer.":
-                            jump fend_it_off
-                else:
-                    jump fend_it_off
-            label fend_it_off:
-                hide screen countdown
+               
                 "The rush of air is coming from above."
                 play sound "audio/SFX/HammerPressure.mp3"
                 "I grab onto the handle of my hammer with both arms and force it up."
@@ -3211,16 +3204,7 @@ label wake_vera:
                 "Between my yell and the sound of its myriad footsteps, there's no way she doesn't hear."
                 "She's got the keener ear between the pair of us."
                 "My attention's torn away from her as there's another shove from above."
-                if quick_time == True:
-                    $ timer_range = 3
-                    $ timer_jump = 'push_down_bad'
-                    $ time = 3
-                    show screen countdown
-                    menu:
-                        "Move out of the way":
-                            jump dodge_out
-            label dodge_out:
-                hide screen countdown
+               
                 "I stumble away before it succeeds in pressing me all the way down."
                 show andrea offput
                 play sound "audio/SFX/Thud.wav"
@@ -4447,8 +4431,10 @@ label wake_vera:
                 "I raise it over my head and slam it into the door. Once, twice."
                 play sound "audio/SFX/HitDoorKnob.mp3"
                 "Behind the grate of metal against thick wood, there's a low click."
+                
                 "The force is enough to push it open."
                 "I step in and-"
+                scene huskdeath
                 play music "<loop 19.20>BodyFindWhole.mp3"
                 show andrea offput
                 ab "{i}Jesus Christ.{/i}"
@@ -4473,7 +4459,7 @@ label wake_vera:
                 "I feel her shuffle past me."
                 "I'll give myself a few seconds to knit back together."
                 "{i}Tyger, tyger.{/i}"
-                scene back_at_corpse
+                scene huskdeath
                 show andrea body offput at right
                 show vera body shirt3 neutral2 at vera_spot
                 "I peel my eyes open."
@@ -4484,25 +4470,15 @@ label wake_vera:
                 "If I can't keep my eyes on it, I may as well put them to use."
                 label checking_corpse: #error pops up for this whole segment, prolly due to lack of image map. Still noting anyways
                     
-                      
-                    $ weapons_check = False
-                    $ pill_check = False
-                    $ chains_check = False
-                    menu corpse_menu:
-                        "Weapon.":
-                            $ weapon_check = True
-                            jump weapon
-                        "Pill Bottle.":
-                            $ pills_check = True
-                            jump pills 
-                        "Chains":
-                            $ chains_check = True
-                            jump chains
-                        "Move on." if weapons_check == True and pills_check == True and chains_check == True:
-                            jump after_check_husk
+                    if knife_check == True and pills_check == True and chains_check == True:
+                        jump after_check_husk
+                    else:
+                        call screen husks_body_map
+                                
 
                 
-                label weapon:
+                label knife_hilt:
+                    $ knife_check = True
                     "A stab wound. A knife. Icepick. Something like that."
                     "Nothing sticks out."
                     "I almost miss it."
@@ -4513,9 +4489,10 @@ label wake_vera:
                     "The blade is missing. Clean: like it was never there in the first place."
                     "Runes wrap all the way around it."
                     "Maybe I'll compare it to the rack from earlier."
-                    jump corpse_menu
+                    jump checking_corpse
 
                 label pills:
+                    $ pills_check = True
                     "There. On the nightstand."
                     "It's a clear bottle with a yellow wrapper: must be OTC."
                     ab "Melatonin?" #is this actually melatonin or just andrea's guess? cuz there is literally no way melatonin can knock u out that bad. I have taken like. 6 gummies at a time and have just tanked that shit before idk much you'd have to take to pass out and not notice yourself dying
@@ -4524,13 +4501,14 @@ label wake_vera:
                     "The mouth is ajar. Nothing comes from it."
                     vl "I don't think it's the stuff that did her in."
                     vl "Either it wasn't enough, or she got-got before it had a chance."
-                    jump corpse_menu
+                    jump checking_corpse
                 label chains:
+                    $ chains_check = True
                     "Some kind of spike has been crudely nailed into the wood floor. A metal chain is attached to it."
                     "It goes halfway across the room - ending in a cuff - that stops just short of the ankle."
                     "{i}It got in the floor somehow.{/i}"
                     "A hammer. Nails next to it. Near the corner of the room."
-                    jump corpse_menu
+                    jump checking_corpse
 
 
                 label after_check_husk:

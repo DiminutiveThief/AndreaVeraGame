@@ -433,6 +433,17 @@ screen husks_living_map:
                 else: 
                     action Jump("weapons_2")
             
+screen husks_body_map:
+    imagemap:
+        ground "Background/huskdeath.png"
+        hover  "Background/huskdeathhl.png"
+        hotspot(840, 234, 89, 105):
+            action Jump("pills")
 
+        hotspot(5, 856, 468, 165):
+            action Jump("chains")
+        hotspot(655, 672, 104, 81):
+            action Jump("knife_hilt")
+        
 
 ####### VARIABLES
