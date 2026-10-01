@@ -235,7 +235,7 @@ style choice_vbox:
     xalign 0.5
     ypos 405
     yanchor 0.5
-
+    
     spacing gui.choice_spacing
 
 style choice_button is default:

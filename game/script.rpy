@@ -14,7 +14,7 @@ define unknown2 = Character("???", callback=name_callback, cb_name = "???", colo
 define dm = Character("Dominic", callback = name_callback, cb_name = "dominic", color="#d63e0c")
 define hk = Character("Rina", callback = name_callback, cb_name = "rina", color="#51408e")
 
-define tn = Character("Teen")
+define tn = Character("Teen", color="#3a5d37")
 ##image vera happy = At('testvera', sprite_highlight('vera'))
 ##image andrea happy = At('testandrea', sprite_highlight('andrea'))
 define al = Character("Avery", callback = name_callback, cb_name = "avery")
@@ -226,21 +226,26 @@ label start:
     $ boxesFilled = 0
     $ grabbedBlue = False
 
+    menu:
+        "Skip to chapter 1?":
+            jump chapter_1
+        "Keep going.":
+            jump demo
+    label demo:
+        play sound  "WaterDripHotel.mp3" loop
+        "..."
+        "..."
     
-    play sound  "WaterDripHotel.mp3" loop
-    "..."
-    "..."
- 
-    call screen bathroomintro
-    
-    label test_body:
+        call screen bathroomintro
         
-        hide screen bathroomintro
-        scene body bg sc1
+        label test_body:
+            
+            hide screen bathroomintro
+            scene body bg sc1
 
-        if seenEyes == True and seenThroat == True and seenTorso == True:
-            jump examinedBody
-        call screen theBody2
+            if seenEyes == True and seenThroat == True and seenTorso == True:
+                jump examinedBody
+            call screen theBody2
     
 
     
@@ -1082,7 +1087,7 @@ label wake_vera:
     "I roll my eyes, but oblige."
     play sound "audio/phonering.mp3"
     show andrea neutral
-    unknown "Andrea?"
+    unknown2 "Andrea?"
     stop sound
     "If Sloane's surprised at all, it doesn't show."
     "It's a talent of hers. She makes it sound as if she's already worked whatever conversation you're having into her schedule."
@@ -1705,7 +1710,7 @@ label wake_vera:
             ab "I can still smell it. Taste it."
             "Gristle and muscle rendered into ash; food for the overeager air conditioning."
             show andrea body scared
-            ab "It's been a day-{i}less{/i}than a day."
+            ab "It's been a day-{i}less{/i} than a day."
             ab "I don't know how you expect me to-what?-walk it off."
             show andrea body angry
             ab "At least pretend to care."
@@ -1783,6 +1788,7 @@ label wake_vera:
             "A stalemate is the closest thing to an admission of guilt I'll get from her."
             play sound "audio/CarStartSFX.mp3"
             "I put the car into reverse and she doesn't stop me, this time."
+            play sound "CarAmbient.mp3" loop
             ab "Hope this guy actually has something useful."
             "She doesn't respond. Anything else I'll say's just going to sound like I'm desperate to break the tension."
             "The realization that it's not a hope, but a {i}need{/i} that we get something creeps up steadily with the rumble of asphalt."
@@ -1802,7 +1808,7 @@ label wake_vera:
             "I pay the front desk. We get the keys."
             "The room's fine, but not particularly clean."
             "We go to bed early."
-            scene hotel1 with fade
+            scene hotel1 with Fade(0.5, 0.5, 0.5)
             "I don't dream."
             "Neither of us thinks to set an alarm, so it's the sun that wakes me."
             "Six in the morning it looks like: crack of dawn."
@@ -1837,11 +1843,15 @@ label wake_vera:
             "Her voice is soft. It's not apologetic, but there's a weak attempt to lift the octave into some sort of joke."
             ab "I'll let you pick the next one, then."
             ab "You can pay for it, too."
-            show andrea body happy
-            "I take the fall to be the first to break a smile."
-            "The tension drops from her frame."
+            show andrea neutral
+            "I can't manage a smile. The most I can do is tug the corners of my mouth upwards."
+            "It's still enough for tension to drop from her frame."
+            "Vera isn't needy."
+            "She'll be fine as long as I'm not seething for too long."
             show vera body shirt3 neutral at vera_spot
             vl "Nevermind. You should consider a job in real estate after all this."
+            "I swallow whatever venom I have left in me. It only burns a little on the way down."
+            "{i}It's a peace offering between us{/i}, I tell myself. Not a surrender."
             "And that's that."
             hide vera
             hide andrea
@@ -1864,7 +1874,8 @@ label wake_vera:
             scene carbgazday with fade
             show vera bodyflip shirt3flip neutral2flipped at vera_car
             show andrea body neutral at andrea_car
-            "The heaviness from last night hangs in the air for a moment, then dissipates into the rumbling of the road."
+            "The traces of last night still linger in the car, but get lost in the rumbling of the road quickly enough."
+        
             vl "...Got any tunes?"
             "One of the few things Vera relents on is my ownership of the radio."
             ab "Let me see."
@@ -1910,7 +1921,7 @@ label wake_vera:
         vl "Long as it's not Waffle Home..."
         show andrea body happy
         ab "Of course."
-        "It's not long before we spot an exit promising amenities along the way."
+        "It's not long before we spot an exit promising amenities."
         "Neither of us are looking for anything in particular, so we just pull over into the first burger joint we encounter."
         "I'm keenly aware of Vera glancing at me all the way through ordering, to when we park to eat."
         "I've just opted for a slider, while she's gotten a shake and some fries."
@@ -1928,6 +1939,8 @@ label wake_vera:
         vl "I know, I know."
         show vera happyflipped
         vl "Just missed a spot."
+        show vera happyflipped with MoveTransition(0.4):
+            xoffset -80
         "She puts a finger to my chin and brushes her thumb against my bottom lip, wiping away whatever food scrap was left over."
         "Vera keeps it there a few seconds longer. Her skin's rough, a product of years spent carving callouses into it."
         show andrea body neutral
@@ -1960,6 +1973,7 @@ label wake_vera:
         
         ab "Better do it curbside."
         "I pull over nearby then head out, Vera following suit."
+        play sound "audio/SFX/DingDong.mp3"
         "I ring the doorbell once, twice, before I get an answer."
         label doms_place:
             play sound "DoorOpen.mp3"
@@ -1988,7 +2002,7 @@ label wake_vera:
        
         "The living room we're greeted with doesn't seem to have been prepared for company."
         "There's a suggestion of a couch beneath a layer of discarded clothing. Boxes and various knick knacks litter the floor."
-        "No food or anything else organic, though-thank God."
+        
         "Avery clicks their tongue."
         show avery body embarrassed:
             xalign 1.3
@@ -2027,11 +2041,11 @@ label wake_vera:
         "Vera has had her skin in the game longer than me. Even if we both went through the whole mentorship process, I'm not sure of the nitty-gritty of it."
         vl "Yeah, I mean. Maybe Dominic's one of those...sleeper nerds."
         ab "{i}Huh?{/i}"
-        "Maybe it's some terminology I haven't heard."
+      
         show vera angry
         vl "Like, guys who seem  whimpy, but have got something real nasty under the surface."
         ab "I've literally never heard anyone call it that."
-        vl "Whatever. {i}Anyway.{/i} He probably isn't- gonna leave poor Avery floundering when they deal with a real nasty Paragon." # add 'he's' after isn't. The isn't on its own is confusing and makes it look like she's saying Dominic wouldn't leave Avery to die
+        vl "Whatever. {i}Anyway.{/i} He probably isn't. Might leave poor Avery floundering when they deal with a real nasty Paragon." # add 'he's' after isn't. The isn't on its own is confusing and makes it look like she's saying Dominic wouldn't leave Avery to die
         ab "That's sort of presumptious."
         ab "We've seen them for maybe two seconds and we haven't even met Dominic."
         show vera neutral2
@@ -2064,9 +2078,9 @@ label wake_vera:
         ab "Pleased to meet you."
         show vera neutral
         vl "Likewise!"
-        dm "It's just more efficient that way." # remove just as a filler word
+        dm "It's more efficient that way." # remove just as a filler word
         "He explains once we're done."
-        "I can just make out Avery lingering in the doorway behind him, not quite sure what to do with themself."
+        "I can make out Avery lingering in the doorway behind him, not quite sure what to do with themself."
         dm "I only set aside ten minutes for introductions, you know? Already wasted five so far, but as long as you follow me we'll get ahead of schedule." # I would also take out 'ya know' here. If he's trying to be efficient he'd be more to the point
         "He heads back the way he came, not bothering to check whether or not we're following."
         "Vera and I exchange glances. She just shrugs and beckons me forward."
@@ -2110,20 +2124,23 @@ label wake_vera:
         show andrea stern
         ab "So, th-"
         show dominic body excited
+        
         dm "The assignment, yes."
-
+       
 
         "He shuffles past me to a corkboard pinned to a door and pulls off a small sheet of stapled papers pinned to it."
         show dominic body neutral
         play sound "SFX/PaperRustles.mp3"
-        dm "Usually I don't bother with things of this sort, you see." #I'd place the 'usually' after 'I don't.' Not a big deal just my preference 
+        dm "I don't bother with things of this sort, you see. Usually!" #I'd place the 'usually' after 'I don't.' Not a big deal just my preference 
         dm "The types that just pick off one or two folks aren't anything special - it's tragic! Terrible! - but not unique enough to be worth the trifle."
         dm "But! This one's right in my backyard."
         dm "I figured I may as well, it's been a while since I've gotten to poke around one of those bugger's insides."
+        dm "It isn't good for the soul to go too long without a proper dissection."
         ab "{i}Mhm.{/i}"
         "In my experience, the best way to deal with these types is to nod and make noises of affirmation."
         ab "In terms of new-"
         dm "New information?"
+        show dominic body happy
         dm "Glad you asked!"
         show andrea annoyed 
         "Yeah, okay."
@@ -2135,14 +2152,14 @@ label wake_vera:
         "It's some kind of report. The format isn't one I've seen before, I don't know if it's a standard in this field of work."
         "There's a date of the last sighting, observations taken from the morgue, and a couple theories."
         "They range from 'some sort of goo thing' to 'big monster the size of a small monster'."
-        "I can piece it together well enough though: based on the injuries, it might emit or have a second skin of some sort of corrosive material."
+        "Victims were found with some kind of rash or burn on them."
         "The last known location of the victim was in a town nearby."
         "It's not that bulky and it seems to have an ambush hunting style."
         "So, either it's  naturally on the smaller side, or it's trying to reform."
         dm "Make sense?"
         "He leans over, just from the side of us."
         show vera neutral2
-        vl "Yup! Moist, acid monster. Can't be that big."
+        vl "Yup! Moist, not huge."
         vl "Does it have any preference of victims?"
         dm "There haven't been enough cases to tell."
         "Some Paragons are like that. They have a taste for certain kinds of people."
@@ -2177,19 +2194,24 @@ label wake_vera:
         "She nudges me in a not-so subtle motion that she wants to evacuate the situation as quickly as possible."
         ab "Mhm, unless there's anything else-"
         dm "Do try and not completely pulverize it. Get some samples, if you can."
+        dm "I know how it is with younger folks today and their pulverizations."
         vl "Totally. We're masters of finesse."
         "She grabs my hand."
+       
         vl "C'mon."
+        hide vera with ComposeTransition(Dissolve(0.6), moveoutleft)
+        play sound "audio/SFX/FootSteps1.mp3"
         "She moves with such urgency that I barely catch the thumbs up Dominic throws me, followed by Avery's apologetic 'good luck'."
-        play sound "SFX/CarDoor.mp3" # I would maybe change music to different ambient track here if we have options. If not here then when the next scene starts
         scene carbgazday with fade
+        play sound "SFX/CarDoor.mp3" # I would maybe change music to different ambient track here if we have options. If not here then when the next scene starts
+        play music "audio/morningambience.mp3"
         "When we're past the doorstep, Vera sighs."
         show vera bodyflip annoyedflip shirt3flip at vera_car      
         vl "Man, that guy sucked."   
         "Vera doesn't like most people, but I'll give her this one."
         show andrea body annoyed at andrea_car
         ab "He's really trying to make the most of the five seconds it'd take us to respond."
-        ab "Kinda weird about Avery too. Like, condescending."
+        ab "Condescending too. Least that's what I got from him."
         ab "At least it was quick."
         vl "I guess."
         show andrea neutral
@@ -2328,6 +2350,7 @@ label wake_vera:
         vl "Awesome!"
         show vera neutralflipped
         vl "We've got a plan, then, drive on."
+        play sound ("audio/CarStartSfx.mp3")
         "I oblige and start driving."
         "I opt for a  area near the original site-a strip mall."
         play sound "audio/SFX/CarStop.mp3"
@@ -2356,11 +2379,11 @@ label wake_vera:
         show vera neutral
         vl "Right on."
         play sound "audio/SFX/FootStepRoad.mp3"
-        hide vera  with moveinoutfade
+        hide vera  with ComposeTransition(Dissolve(0.6), moveoutleft)
         "With that, she scampers off."
         "I'm left, relatively, on my lonesome."
         "Thinking on it, when {i}was{/i} the last time I spent more than a few hours without Vera over the last few days?"
-        "We've been traveling in pretty close quarters."
+      
         "A break would be good-Vera probably feels the same."
         "'Break' is a bit of an exaggheration, I'm within five minutes of her and it's not really down time."
         "But, I'm alone in my thoughts, for better or worse."
@@ -2378,10 +2401,10 @@ label wake_vera:
                 jump UuaUuas
 
         label UuaUuas:
-            stop music
+        
             scene uuauua with fade
-            show andrea body neutral at right
             play sound "SFX/UuaUuaBell.mp3" #add music for this section, silence is awkward
+            play music "audio/Music/Ambience/upbeat ambient_2.mp3"
             "It's identical to every other one I've been to."
             "Bunch of shelves, a place to eat near the back."
             "It's manned by a beleagured, hooded-eye teenager."
@@ -2448,6 +2471,8 @@ label wake_vera:
                 tn "Like a raccoon?"
                 show andrea body stern
                 ab "I was thinking more like a coyote."
+                pause 0.2
+                show andrea neutral
                 ab "...Have you seen any particularly big raccoons around?"
                 tn "No."
                 ab "So, no animals?"
@@ -2498,11 +2523,14 @@ label wake_vera:
                 tn "I think the garbage has been fine."
                 tn "But I think Tammy-that's my manager-"
                 if askedanimal == True:
+                    show andrea stern
                     ab "Yup, you said."
                     tn "Oh, right."
+                    show andrea neutral
                 tn "Tammy said that there was some kind of...oil spill? Dunno, some kind of thing...spilled."
                 tn "It stained the pavement near the back exit."
                 tn "She was annoyed, 'cause we might need to get it painted."
+                show andrea neutral
                 ab "You think I could check it out?"
                 tn "I mean. I can't stop you from going in the back."
                 tn "It's not, like. Blood."
@@ -2534,28 +2562,30 @@ label wake_vera:
                 play sound "audio/SFX/PhoneDial.mp3"
                 "{i}Beep, boop, beep, boop, ring-ring.{/i}"
         label switch_vera_pov:
-            scene parking lot with Fade(0.5, 0.5, 1.0) #Probably add new music for this section as well
-            show vera body shirt3 neutral2 at center
+            scene parking lot with fade #Probably add new music for this section as well
+            play music "audio/Music/ominousambient.mp3"
             "I watch Andrea walk off further into the strip mall."
+            show vera body shirt3 neutral2 at center
             "I'm glad she agreed to do the personal account portion of investigating."   
             "It's a pain in the ass trying to pry info out of people."
             "They always pry back, or start freaking out, or get pissy."
             "Especially if they aren't in the loop."
             "'Cause they have some kinda sense that you're not telling them the whole truth, but can't pin it."
-            "Defenses go up. And now you're playing deescalator." #add hiphen between 'de' and 'escaltor'
-            "Not that my part in this is gonna be a cakewalk, either. The fucking wacko didn't give us much to work with in terms of where the Paragon could be buckling down." # use of 'fucking' feels unnecessary here
+            "Defenses go up. And now you're playing de-escalator." #add hiphen between 'de' and 'escaltor'
+            "Not that my part in this is gonna be a cakewalk, either. The  wacko didn't give us much to work with in terms of where the Paragon could be buckling down." # use of 'fucking' feels unnecessary here
             "Would it have been so hard for him to get his ass down here to give it a once-maybe even a twice over?"
             "Whatever. I doubt this one's gonna be too rough to handle."
-            "And it's kinda nice to be back in action-properly." 
+            "And it's kinda nice to be back in action in earnest." 
             "We've been stuck in stasis over the last few weeks."
             "Bar-guy didn't count. There was too much {i}mess{/i} with him, right till the end." #maybe add more of a transistion between thoughts here? I thought she was just talking more abt bar guy after before realizing she went back to discussing the paragon
-            "It doesn't feel ballsy enough to stay in its hunting ground too long, so I stick to the outside of the shopping center."
+            "Paragons are less complicated."
+            "This one doesn't seem ballsy enough to stay in its hunting ground too long, so I stick to the outside of the shopping center."
             "This place is beginning to die. It's not super obvious-just a few signs declaring closing sales and one too many empty lots-but when you see it, you can't unsee it."
             "It's a pretty solid choice to find folks that won't be missed. Dunno if our target's smart enough to think of that, though."
             "We didn't get much about the lady that went missing. If they found anything of her's, they didn't mention it in the news articles."
             "Could be that the cops just haven't disclosed all the info."
             "I'm not exactly sure what I'm looking for it's more of a 'I'll know it when I see it' deal."
-            "Paragons are pretty finnicky like that."
+          
             "It's hard not to let my mind wander a little."
             menu thinking:
                 "Think about Andrea":
@@ -2656,14 +2686,14 @@ label wake_vera:
         vl "Fuck!"
         "There's a bizarre moment where I think it might've bitten me. But, no, it's {i}burning{/i}."
         "It's like I got lemon juice poured on a cut."
-        "I pull my sleeve over my hand and tear it off before it can get any worse." #unclear what Vera is tearing off here. I assume the purple substance but bc her hands and sleeves were mentioned before, it looks like she's tryna reference them
+        "I pull my sleeve over my hand and tear the substance off before it can get any worse." #unclear what Vera is tearing off here. I assume the purple substance but bc her hands and sleeves were mentioned before, it looks like she's tryna reference them
         "Shit, I need somewhere to put it."
         "I awkwardly fumble my free hand along the litter on the ground."
         vl "Gotcha."
         "It finds purchase on what I realize is an empty soda bottle, which I grab onto, then jam whatever evil-goo-thing this is into it."
         "It takes some manuevering with sleeves over both my hands, but I manage to before it can do any more damage."
         "At least to my skin. The tips of my sleeves have little holes burnt into them."
-        "Ugh. Later Vera problem."
+    
         "I examine the little bastard through the plastic."
         "It's more solid than I first gave it credit for."
         "The slime  is more of an exterior (exoskeleton? Not really, 'cause it's not hard) coat."
@@ -2671,8 +2701,9 @@ label wake_vera:
         show vera body shirt3 neutral at center
         "{i}Nice{/i}. I've actually got something good here."
         "There isn't anyway to close the bottle, so I just scrunch in the top so it creates some sort of seal."
+        play sound "audio/SFX/PhoneCall.mp3"
         "{i}Ring, ring.{/i}"
-        "A buzzing from my pocket interrupts my thoughts."
+        "A sound from my pocket interrupts my thoughts."
         "Right on time. I answer it."
         vl "Hey Andy."
         ab "Hey, what's up? How's searching going?"
@@ -2751,8 +2782,7 @@ label wake_vera:
         vl "{i}Nice{/i}, so we have some sort of trail."
         "She makes a vague gesture from where I assume she went, to back here."
         vl "Gooey, acidic"
-        "This is less treading new ground and more confirming what we already suspected."
-        "It's still reassuring. And having some possible attack pattern is good."
+      
         show vera neutral2
         vl "Any idea why the janitor guy didn't get attacked?"
         ab "No clue. Could be a preference of victim."
@@ -2856,6 +2886,7 @@ label wake_vera:
         vl "{i}Shit.{/i}"
         "She begins doing her rounds around the lot."
         "I don't feel that bad-she'd pick something just as banal."
+        show vera neutral
         vl "Oh! Ladybug."
         "It takes me a second to realize what she's pointing at."
         show andrea annoyed
@@ -2920,7 +2951,7 @@ label wake_vera:
         vl "It's a fair guess! You're always staring at me so, like-"
         "She throws her hands in the air."
         ab "I don't, that's weird."
-        show neutral2
+        show vera neutral2
         vl "{i}Yeah, okay.{/i}"
         show vera neutral
         "Now it's {i}her{/i} who stares at me for a good, few moments."
@@ -2953,14 +2984,14 @@ label wake_vera:
         label bio:
             show andrea neutral
             ab "Biology, maybe a higher level."
-            vl "That makes sense. I think."
+            vl "That tracks."
             vl "What do you even {i}do{/i} in bio though?"
             vl "I keep hearing it's hard."
             ab "Vera, we took the same class on it."
             show vera neutral2
             vl "Ohh...yeah, huh."
             vl "Proves my point."
-            ab "Not medical, probably, something more outdoorsy."
+            ab "Not medical, something more outdoorsy."
             "I think I've had enough of being cooped up in the last few weeks to last a lifetime."
             vl "Make that a goalpost, then. Once we get all this done and over with, you can go turn over logs and scrounge around." #mmm...not an important thought but it may be fun to let these girls go to a swamp later they deserve it
             ab "Good call."
@@ -2998,6 +3029,7 @@ label wake_vera:
             "I gesture towards the front entrance of the UuaUua's and she obliges."
             scene uuauua with fade
             play sound "audio/SFX/UuaUuaBell.mp3" #add music later
+            play music "audio/Music/Ambience/upbeat ambient_2.mp3"
             "It's still empty, aside from the cashier. Lucky us."
             show vera bodyflip shirt3flip neutralflipped:
                 xalign 0.5
@@ -3052,10 +3084,10 @@ label wake_vera:
             ab "Police car."
             vl "Mhm."
             tn "...Okay."
-            play sound "audio/SFX/UuaUuaBell.mp3" volume 0.1
+            play sound "audio/SFX/UuaUuaBell.mp3" 
             "And, with a jingle of the door, she's gone."
             "She even does the courtesy of flipping the sign from 'open' to 'closed'."
-            "Based on the clud of dust it kicks up, it hasn't been used for a while."
+            "Based on the cloud of dust it kicks up, it hasn't been used for a while."
             "I wait for her figure to disappear from view."
             ab "That's gonna be a problem later."
             show vera body shirt3 neutral2
@@ -3101,19 +3133,7 @@ label wake_vera:
             "-Not that it'd matter to her. She's already fed up with my reservations."
             vl "Okay, got it."
             "She's eager as ever to avoid the topic."
-            vl "Wanna take the back, or the front?"
-            define moveinoutfade = ComposeTransition(dissolve, before=moveoutleft, after=moveinright)  
-            menu: 
-                "Back":
-                    jump back_room
-                "Front":
-                    jump front_room
-
-
-
-        
-
-        label back_room:
+           
             
             ab "I can take the back."
             "Maybe the quiet will be nice."
@@ -3125,14 +3145,11 @@ label wake_vera:
             show andrea neutral
             ab "You do that."
             
-            "With a wave, she's off."
-            hide vera
-            with moveinoutfade
+
             "I head to the back."
             scene combat bg grayscale flour with fade
             
-            show andrea body neutral at center with dissolve
-           
+            play music "audio/Music/AmbientBuzz.mp3" loop
             "It's a little offputting."
             "Rows and rows of frozen hot dogs and gas station snacks and unlabeled boxes."
             "The offensive scent of whatever they use to wipe this place down."
@@ -3153,13 +3170,16 @@ label wake_vera:
                     jump yell
 
             label food_container:
+                
                 "Paragons don't usually care for human food."
                 "But, noise is noise."
+                show andrea body neutral at center
                 "I grab for the closest thing around me, which is a container of fries."
                 "I throw it, full force, into the dark."
                 "I wait with baited breath for any kind of reaction."
                 jump after_outside
             label yell:
+                show andrea body neutral at center
                 "I cup my hands to my mouth and yell:"
                 python:
                     yell = renpy.input("What do I yell?", length=32)
@@ -3232,86 +3252,10 @@ label wake_vera:
                 ab "Let's do something about it."
                 jump combat
                 
-            label fend_it_off_bad:
-                "Bleh."
-            label push_down_bad:
-                "Bleh." #there is so specified jump from Andrea getting injured to her getting to vera. I would think maybe this is supposed to jump to after_inside, but the actions don't totally line up and there's not another line it makes sense to jump to? Also both 'push down bad' and 'fend it off bad' lines play even if Andrea's only failed one action which feels unintentional
-
-            label front_room:
+          
+            
                 
-                ab "I can take the front."
-                "It'll be good to keep an eye out on if anyone parks."
-                vl "M'kay!"
-                vl "I'll scream if it gets me."
-                vl "Or if the cops come."
-                show andrea neutral
-                ab "You do that."
-                show vera neutralflipped
-                "With a wave, she's off."
-                hide vera
-                with moveinoutfade
-                "I prop open the door with a shopping basket and stand in the doorway."
-                "The dry heat has faded into a welcome reprieve from the store's stale air."
-                "The Arizona summer isn't in full swing yet. There's still the last remnants of spring holding on desperately."
-                "It does a little to calm my nerves. Not enough to kill the urge to reach for a cigarette."
-                "My fingers make it all the way to my pocket before I decide against it."
-                "I can wait for {i}after{/i} the fight."
-                "Instead, I focus all my attention on the quiet."
-                "There's just the sound of the distant road and the occasional bird call."
-                "Nothing out of the ordinary."
-                "Especially since I don't even know what I'll be listening out for."
-                "We know it's...wet. Gooey. In that general direction."
-                "And that it has some amount of legs."
-                "Maybe I should do something to get it's attention. If it's out there somewhere."
-                
-            menu:
-                "Throw a food container.":
-                    jump food_container2
-                "Yell.":
-                    jump yell2
-
-            label food_container2:
-                "Paragons don't usually care for human food."
-                "But, noise is noise."
-                "I grab for the closest thing around me, which is a container of fries."
-                "I throw it, full force, into the dark."
-                "I wait with baited breath for any kind of reaction."
-                jump after_inside
-            label yell2:
-                "I cup my hands to my mouth and yell:"
-                python:
-                    yell = renpy.input("What do I yell?", length=32)
-                "[yell]!"
-                "The night air swallows my voice eagerly."
-                "I lean forward to hear if anything caught it."
-                "..."
-                
-                jump after_inside
-
-            label after_inside:
-                "Nothing."
-                "Maybe we misjudged it's hunting grounds, or it doesn't care."
-                vl "{i}Here{/i}!"
-                "I stand corrected."
-                show andrea body offput 
-                ab "Coming!"
-                "I turn on my heel and bound towards the back."
-                scene combat bg grayscale
-                show andrea body offput at right
-                "Rows and rows of food storage stand silent sentinel around me."
-                "Whatever eerie peace the sight implies is shattered by the clatter of boxes and the sound of {i}something{/i}."
-                show vera bodyflip shirt3flip annoyedflip at left
-                vl "It's-{i}shit{/i}-"
-                "My eyes adjust in time to see Vera backed up against the wall, her crossbow drawn."
-                "There's no sign of the thing. Just the nails-on-chalk board of something dragging against linoleum."
-                "And something hitting the ground."
-                vl "Got some-camoflage."
-                "From a glance, it doesn't look like she's injured."
-                "A bit of tension fades from my shoulders."
-                show andrea stern
-                ab "Let's do something about it then."
-                
-                jump combat
+             
             
 
 
@@ -3576,11 +3520,14 @@ label wake_vera:
             call screen attack_examine
             #sjump post_tutorial_combat
     label round_2:
-        
+        $ tailhmred = False
         show screen combat2
+
+       
         $ paragon_enabled = False
         $ enabled = False
         $ flour_found = False
+        $ tail_floured = True
         $ examine_button_enabled = True
         "Rough one, right?"
         "You should probably try going for it, just my hint."
@@ -3678,7 +3625,8 @@ label wake_vera:
             vl "Could be. Maybe they're a bit of a stray."
             "Our question is answered pretty quickly."
             play sound "DoorOpen.mp3"
-            show avery body neutral at center
+            show avery body neutral at center:
+                xoffset 20
             al "Oh! That was...-early?"
             "They look around."
             show avery body thinking
@@ -3747,7 +3695,7 @@ label wake_vera:
             ab "Makes sense. I get that."
             "It's better to cut off Vera before she starts grilling them."
             show vera body neutral
-            vl "Maybe you can them him how to swing around a hammer."
+            vl "Maybe you can teach them him how to swing around a hammer."
             "She nudges me. There's a {i}squelch{/i} as the bag over her shoulder shifts."
             show avery body embarrassed
             al "Oh."
@@ -3865,7 +3813,8 @@ label wake_vera:
             vl "The drives gonna be a pain."
             "She mutters."
             vl "I hope the lady gives us more than another goose chase."
-            show andrea neutral
+            show andrea neutral:
+                xzoom -1.0
             "I lean against her in turn."
             ab "C'mon, it's something."
             show vera annoyed
@@ -3909,6 +3858,7 @@ label wake_vera:
             
          
             show vera bodyflip shirt3flip neutral2flipped at vera_car
+            play music "audio/SFX/NightCricket.wav" loop
             vl "Glad I don't have to deal with those two anymore."
             show andrea body neutral at andrea_car
             ab "Really? I couldn't tell."
@@ -3972,6 +3922,7 @@ label wake_vera:
             show vera neutral2flipped
             vl "We should probably park somewhere else."
             vl "We'll get weird looks if we stay here over night."
+            play sound "audio/CarStartSfx.mp3"
             "We're of the same mind- I'm already starting the car."
             #show menu, music?
             "I drive for a bit - half an hour - then pull into the first rest stop I see."
@@ -4028,7 +3979,7 @@ label wake_vera:
         "Three days of almost straight driving have congealed with the lingering effects of the fight to weigh down my body like tar."
         "I'm out like a light."
         label before_husk_hotel :
-            
+            stop music
             scene hotel1 at alt_hotel: 
                 blur 3.6
                 pause 0.1
@@ -4098,7 +4049,7 @@ label wake_vera:
         show vera neutral
         vl "Want me to get you some coffee?"
         ab "That'd be great, I'm dying here."
-        show andrea happy
+      
         "I lay my hand on my forehead dramatically."
         "She rolls her eye and obliges."
         vl "You're like...a baby bird, or something."
@@ -4141,21 +4092,22 @@ label wake_vera:
         "It saves me some mental real estate."
         vl "It's just {i}annoying.{/i}"
         show andrea annoyed
-        ab "You've made that clear"
+        ab "You've made that clear."
         ab "All of this is annoying."
         "Vera sips her drink, mumbling something indistinguishable into it."
         "I guess the response isn't meant for me, because the only thing I get is a thumbs up."
         "Whatever her thoughts, we're of the same mind to head out quickly."
         "My breakfast is the rest of my coffee and some pistachios from the vending machine."
-        "Then, it's into town we go. "
-        scene parking lot with fade #not drawing a neighborhood so just assigned this to a parking lot since it fills the closest niche
-        play music "audio/Music/Ambience/ominousambient.mp3" loop
-        "The neighborhoods are kind of a bitch to navigate."
-        "The suburban sprawl tangles all over itself. One neighborhood twists into another, that leads right back to where we started."
-        "Poplar Lane is the same as Bellview Road is the same as Brighton Drive."
-        "We retrace our steps probably five times over, before we reach {i}'Turnpike Street'.{/i}"
-        "The house is unremarkable. There's not even any yard decorations to seperate it from its fellows."
         label neighborhood:
+            "Then, it's into town we go. "
+            scene parking lot at neighborhood_filter  with fade 
+            play music "audio/Music/Ambience/ominousambient.mp3" loop
+            "The neighborhoods are kind of a bitch to navigate."
+            "The suburban sprawl tangles all over itself. One neighborhood twists into another, that leads right back to where we started."
+            "Poplar Lane is the same as Bellview Road is the same as Brighton Drive."
+            "We retrace our steps probably five times over, before we reach {i}'Turnpike Street'.{/i}"
+            "The house is unremarkable. There's not even any yard decorations to seperate it from its fellows."
+        
 
             show vera neutral body shirt2 at vera_spot
         vl "I was half expecting it to be all overgrown and decrepit."
@@ -4216,6 +4168,7 @@ label wake_vera:
         ab "Yeah, yeah. You're right. Fuck me for being optimistic."
         show vera angry
         vl "I didn't mean it like-...ugh, whatever."
+        show vera neutral2
         vl "We've gotta get in somehow."
         ab "I don't think there's any other doors."
         show vera neutral2
@@ -4248,7 +4201,7 @@ label wake_vera:
         ab "I hope we don't have to worry about that."
         show andrea neutral
         ab "Handy trick, though."
-        scene basement
+        scene basement with fade
         show layer master at night_filter_less
         stop music
         "We step inside, kicking up a cloud of dust in the process."
@@ -4266,6 +4219,7 @@ label wake_vera:
         "I rise onto my tip toes. {i}Keep to the back of each step, they're firmer.{/i}"
         "I grip the handle and - inch by painstaking inch - turn it, then push."
         label husks_livingroom:
+            play music "audio/Music/Ambience/Ambience3.mp3"
             $ husk_checked = False
             scene livingroomhuskim with fade
             "Dull light catches the dust particles, revealing some kind of study."
@@ -4338,7 +4292,7 @@ label wake_vera:
             "It could be that it's just never been used, but it's right in the middle of the display."
             vl "So it {i}is.{/i} We can keep an eye out. If she's been looking at it lately, it could be useful."
             $ weapon_examined = True
-            jump after_husk
+            jump invest_husk
         
         label shelf:
             hide screen husks_living_map
@@ -4358,7 +4312,7 @@ label wake_vera:
             "The rest is blank."
             "I take a few moments to log the information, then put it back."
             $ shelf_examined = True
-            jump after_husk
+            jump invest_husk
 
         label after_husk:
             $ husk_checked = True
@@ -4436,11 +4390,11 @@ label wake_vera:
                 "I step in and-"
                 scene huskdeath
                 play music "<loop 19.20>BodyFindWhole.mp3"
-                show andrea offput
+              
                 ab "{i}Jesus Christ.{/i}"
                 #husk discovery music needs to be added
                 #show vera scared
-                show vera sad
+               # show vera sad
                 vl "Shit."
                 "And it's stupid to react like this, right?"
                 "The room shouldn't spin and bile shouldn't be in my throat."
@@ -4450,7 +4404,7 @@ label wake_vera:
                 "Some curtain of apathy to keep you from breaking at the seams."
                 "Melting into a sweat-soaked, watery-eyed mess of chattering teeth and rapid breaths."
                 "Breaths that taste like meat left out in the summer sun."
-                show andrea offputEC
+                #show andrea offputEC
                 "Like a kid diving under a blanket, all I can do is screw my eyes shut."
                 scene black
                 "{i}Spineless little girl.{/i}"
@@ -4460,8 +4414,8 @@ label wake_vera:
                 "I'll give myself a few seconds to knit back together."
                 "{i}Tyger, tyger.{/i}"
                 scene huskdeath
-                show andrea body offput at right
-                show vera body shirt3 neutral2 at vera_spot
+               
+               
                 "I peel my eyes open."
                 "Vera crouches by the corpse, her hand hovering over the mark on its chest."
                 vl "Stab wound, I think."
@@ -4514,7 +4468,7 @@ label wake_vera:
                 label after_check_husk:
                     "I relay my findings to Vera."
                     "She's conducted her grim work in silence."
-                    show vera neutral2
+                    show vera body neutral2
                     vl "I don't think she's been dead for too long."
                     "She doesn't sound sure."
                     show andrea body offput
@@ -4648,6 +4602,7 @@ label wake_vera:
                     show andrea scared
                     ab "What was that?"
                     "I whisper."
+                    show vera neutral2
                     vl "Dunno."
                     "It could just be the house settling, but it's been quiet so far."
                     ab "You think someone saw us get in?"
@@ -4695,11 +4650,19 @@ label wake_vera:
     
 
 label game_over:
+    
     "Shit-{i}shit{/i}."
     "Maybe I'm too slow, or Vera's too reckless. Could be we're just unlucky."
     "Doesn't matter- scrambling claws wrap around me all the same."
     $ andrea_vera_health = "good"
-    jump combat
+    $ head_floured = False
+    $ tail_floured = False
+   
+    $ torso_floured = False
+    $ tail_floured_floured = False
+    $ tailhmred = False
+    
+    jump round_2
     "hi"
         
 

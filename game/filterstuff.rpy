@@ -20,6 +20,9 @@ transform night_filter:
 transform alt_hotel:
     matrixcolor BrightnessMatrix(-0.13) * TintMatrix ("#eac0c0")
 
+transform neighborhood_filter:
+    matrixcolor BrightnessMatrix(-0.1) * TintMatrix ("#849eae")
+
 transform night_filter_less:
     matrixcolor BrightnessMatrix(-0.1) * TintMatrix ("#c0c8c9")
 transform fade_in:

@@ -225,13 +225,6 @@ screen combat2:
     
     
 
-   
-            
-    
-    
-        
-
-
     imagebutton:
         focus_mask True
         sensitive paragon_enabled
@@ -278,8 +271,10 @@ screen combat2:
         if something_selected == True:
             if arwselected == True and tailhmred == True:
                 action Jump("finishedcombat")
+            if arwselected == True and tailhmred == False:
+                action Jump("wrong2")
             if hmrselected == True and tailhmred == False:
-                action [Play("sound", "audio/SFX/SmashParagon.mp3"), SetVariable("base_tail", "combat/paragon tail injured.png"), SetVariable("tailhmred", True), Jump("hit_tail")]
+                action [Play("sound", "audio/SFX/SmashParagon.mp3"), SetVariable("base_tail_hl", "combat/paragon tail injured hl.png"),SetVariable("base_tail", "combat/paragon tail injured.png"), SetVariable("tailhmred", True), Jump("hit_tail")]
     $ tooltip = GetTooltip()
     
     if tooltip:
